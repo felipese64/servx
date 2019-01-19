@@ -14,8 +14,19 @@ class Products_dao
     public function createProduct(Product $product)
     {
 
+        $objDb = new db();
+        $link = $objDb->conecta_mysql();
 
-        $sql = "INSERT INTO `servx`.`tbprodutos` (`nome_prod`, `grupo_prod`, `desc_prod`, `marca_prod`, `custo_prod`, `margem_prod`, `preco_prod`, `unidade_prod`) VALUES ('$product->setNome_prod()', '$product->setDesc_prod()', '$product->setGrupo_prod()', '$product->setMarca_prod()', '$product->setCusto_prod()', '$product->setMargem_prod()', '$product->setPreco_prod()', '$product->setUnidade_prod()')";
+        $nome_prod = $product->getNome_prod();
+        $desc_prod = $product->getDesc_prod();
+        $grupo_prod = $product->getGrupo_prod();
+        $marca_prod = $product->getMarca_prod();
+        $custo_prod = $product->getCusto_prod();
+        $margem_prod = $product->getMargem_prod();
+        $preco_prod = $product->getPreco_prod();
+        $unidade_prod = $product->getUnidade_prod();
+
+        $sql = "INSERT INTO `servx`.`tbprodutos` (`nome_prod`, `grupo_prod`, `desc_prod`, `marca_prod`, `custo_prod`, `margem_prod`, `preco_prod`, `unidade_prod`) VALUES ('$nome_prod', '$grupo_prod', '$desc_prod', '$marca_prod', '$custo_prod', '$margem_prod', '$preco_prod', '$unidade_prod')";
 
         $rs = mysqli_query($link, $sql);
         //$registro = mysqli_fetch_array($rs, MYSQLI_ASSOC);
