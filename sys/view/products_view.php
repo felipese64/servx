@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
     <title>Home</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
@@ -28,7 +27,6 @@
     </script>
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js">
     </script>
-
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js">
     </script>
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js">
@@ -37,64 +35,12 @@
     </script>
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js">
     </script>
-
-
-
-
-
-    <script type="text/javascript" language="javascript">
-    function double_to_real(n) {
-        return n.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
-    }
-
-    function real_to_double(n) {
-
-        var x = n.replace(/[.]/g, "").replace(",", "");
-        var z = x.length;
-        if (z > 1) {
-
-            var x1 = x.substring(0, z - 2);
-            var x2 = x.substring(z - 2, z);
-            var x3 = x1 + "." + x2;
-        } else {
-            x3 = "0.0" + x;
-        }
-
-        return x3;
-
-    }
-
-    function isFloat(n) {
-        return parseFloat(n) == n && n != 0;
-    }
-    </script>
-
-
-
-    <script src="products_view.js">
-    </script>
-
-
-
+    <script src="../../apps/js/brl_float_brl.js"></script>
+    <script src="products_view.js"></script>
 
 </head>
 
 <body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
@@ -412,7 +358,8 @@
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="modal_close_update_product_success_message"
+                        data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
@@ -432,7 +379,8 @@
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="modal_close_create_product_success_message"
+                        data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
