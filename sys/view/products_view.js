@@ -7,9 +7,9 @@
     arrumar design entre navbar e body
     navbar collapse
     mostrar % da margem na datatable
-    autocomplete ajustar
     fazer regEXP p/ real->double
     usar int ao inves de double
+    sequencia marca e grupo diferente na tabela/form
 
     ******************************************************************************************************************/
 
@@ -144,6 +144,8 @@ $(document).ready(function () {
 
         //alert(data_form_prod.toString());
         //console.log(data_form_prod);
+        autocomplete_product_groups('grupo_prod');
+        autocomplete_product_brands('marca_prod');
 
         var id_prod = $('#id_prod').val();
 
@@ -215,7 +217,7 @@ $(document).ready(function () {
                         validate_unidade_prod);
                     */
 
-
+                    clean_modal_edit_product();
                     $('#modal_confirm_update_product').modal('show');
 
 
@@ -230,6 +232,11 @@ $(document).ready(function () {
         });
 
 
+    });
+
+    $("#modal_edit_product").on('shown.bs.modal', function () {
+        autocomplete_product_groups('grupo_prod');
+        autocomplete_product_brands('marca_prod');
     });
 
 
@@ -712,6 +719,17 @@ $(document).ready(function () {
 
     });
 
+    function clean_modal_edit_product() {
+
+        document.getElementById('nome_prod').style.boxShadow = "0px 0px";
+        document.getElementById('marca_prod').style.boxShadow = "0px 0px";
+        document.getElementById('grupo_prod').style.boxShadow = "0px 0px";
+        document.getElementById('custo_prod').style.boxShadow = "0px 0px";
+        document.getElementById('margem_prod').style.boxShadow = "0px 0px";
+        document.getElementById('preco_prod').style.boxShadow = "0px 0px";
+        document.getElementById('unidade_prod').style.boxShadow = "0px 0px";
+    };
+
     function clean_modal_create_product() {
         $('#nome_prod_create').val('');
         $('#marca_prod_create').val('');
@@ -731,9 +749,54 @@ $(document).ready(function () {
         document.getElementById('unidade_prod_create').style.boxShadow = "0px 0px";
     };
 
+
+    function autocomplete_product_groups(input) {
+        $.ajax({
+
+            url: '../controller/read_product_groups.php',
+            method: 'post',
+            success: function (data) {
+
+                var groups = JSON.parse(data);
+
+                for (var i = 0; i < groups.length; i++) {
+                    groups[i] = groups[i].toString();
+                }
+                autocomplete(document.getElementById(input), groups);
+            }
+        });
+    };
+
+    function autocomplete_product_brands(input) {
+        $.ajax({
+
+            url: '../controller/read_product_brands.php',
+            method: 'post',
+            success: function (data) {
+
+                var brands = JSON.parse(data);
+
+                for (var i = 0; i < brands.length; i++) {
+                    brands[i] = brands[i].toString();
+                }
+                autocomplete(document.getElementById(input), brands);
+            }
+        });
+    };
+
     $("#modal_create_product").on('hidden.bs.modal', function () {
         clean_modal_create_product();
+        autocomplete_product_groups('grupo_prod_create');
+        autocomplete_product_brands('marca_prod_create');
+
     });
+
+    $("#modal_create_product").on('shown.bs.modal', function () {
+        autocomplete_product_groups('grupo_prod_create');
+        autocomplete_product_brands('marca_prod_create');
+    });
+
+
 
 
     $("#btn_create_product").click(function () {
@@ -904,101 +967,8 @@ $(document).ready(function () {
 
             }
         });
+
         $('#modal_confirm_delete').modal('show');
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    $('#grupo_prod_create').click(function () {
-
-        var countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla",
-            "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria",
-            "Azerbaijan",
-            "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize",
-            "Benin",
-            "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil",
-            "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi",
-            "Cambodia",
-            "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic",
-            "Chad",
-            "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica",
-            "Cote D Ivoire", "Croatia",
-            "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica",
-            "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea",
-            "Eritrea",
-            "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland",
-            "France",
-            "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany",
-            "Ghana",
-            "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey",
-            "Guinea",
-            "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland",
-            "India",
-            "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica",
-            "Japan",
-            "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait",
-            "Kyrgyzstan", "Laos",
-            "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania",
-            "Luxembourg",
-            "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali",
-            "Malta",
-            "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova",
-            "Monaco",
-            "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar",
-            "Namibia", "Nauro",
-            "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand",
-            "Nicaragua",
-            "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau",
-            "Palestine", "Panama",
-            "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal",
-            "Puerto Rico",
-            "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre &amp; Miquelon",
-            "Samoa",
-            "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia",
-            "Seychelles",
-            "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia",
-            "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka",
-            "St Kitts &amp; Nevis",
-            "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland",
-            "Syria",
-            "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga",
-            "Trinidad &amp; Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks &amp; Caicos",
-            "Tuvalu",
-            "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom",
-            "United States of America",
-            "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam",
-            "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"
-        ];
-
-        autocomplete(document.getElementById("grupo_prod_create"), countries);
-
-
-
     });
 
 

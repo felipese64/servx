@@ -7,8 +7,8 @@
 
     <title>Home</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
@@ -173,19 +173,21 @@
                             <div class="row">
                                 <div class="col-md-6"><label for="nome_prod">Nome </label><input id="nome_prod_create"
                                         name="nome_prod" type="text" class="form-control"></div>
-                                <div class="col-md-3 autocomplete"><label for="marca_prod">Marca </label><input id="marca_prod_create"
-                                        name="marca_prod" type="text" class="form-control"></div>
-                                <div class="col-md-3"><label for="grupo_prod">Grupo </label><input id="grupo_prod_create"
-                                        name="grupo_prod" type="text" class="form-control"></div>
+                                <div class="col-md-3 autocomplete"><label for="marca_prod">Marca </label><input
+                                        id="marca_prod_create" name="marca_prod" type="text" class="form-control"></div>
+                                <div class="col-md-3"><label for="grupo_prod">Grupo </label><input
+                                        id="grupo_prod_create" name="grupo_prod" type="text" class="form-control"></div>
                             </div>
 
 
 
                             <div class="row">
                                 <div class="col-md-3"><label for="custo_prod">Custo (R$) </label><input value="0,00"
-                                        style="" id="custo_prod_create" name="custo_prod" type="text" class="form-control"></div>
-                                <div class="col-md-3"><label for="margem_prod">Margem (%) </label><input value="60" id="margem_prod_create"
-                                        name="margem_prod" type="text" class="form-control"></div>
+                                        style="" id="custo_prod_create" name="custo_prod" type="text"
+                                        class="form-control"></div>
+                                <div class="col-md-3"><label for="margem_prod">Margem (%) </label><input value="60"
+                                        id="margem_prod_create" name="margem_prod" type="text" class="form-control">
+                                </div>
                                 <div class="col-md-3"> <label for="preco_prod">Preço (R$) </label><input value="0,00"
                                         id="preco_prod_create" name="preco_prod" type="text" class="form-control"></div>
                                 <div class="col-md-3"> <label for="unidade_prod">Unidade</label>
@@ -200,8 +202,9 @@
 
 
                             <div class="row">
-                                <div class="col-md-12"><label for="desc_prod">Descrição </label><textarea rows="3" name="desc_prod"
-                                        id="desc_prod_create" cols="30" rows="10" class="form-control"></textarea></div>
+                                <div class="col-md-12"><label for="desc_prod">Descrição </label><textarea rows="3"
+                                        name="desc_prod" id="desc_prod_create" cols="30" rows="10"
+                                        class="form-control"></textarea></div>
                             </div>
 
 
@@ -214,7 +217,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-danger mr-auto" id="btn_exit_create_product">Sair</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger mr-auto"
+                        id="btn_exit_create_product">Sair</button>
                     <button type="button" class="btn btn-primary" id="btn_create_product">Salvar</button>
                 </div>
             </div>
@@ -234,7 +238,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Editar</h5>
-                    <button type="button" class="close" id="btn_close_product_edition" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" id="btn_close_product_edition" data-dismiss="modal"
+                        aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -248,21 +253,21 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6"><label for="nome_prod">Nome </label><input id="nome_prod" name="nome_prod"
-                                        type="text" class="form-control"></div>
-                                <div class="col-md-3"><label for="marca_prod">Marca </label><input id="marca_prod" name="marca_prod"
-                                        type="text" class="form-control"></div>
-                                <div class="col-md-3"><label for="grupo_prod">Grupo </label><input id="grupo_prod" name="grupo_prod"
-                                        type="text" class="form-control"></div>
+                                <div class="col-md-6"><label for="nome_prod">Nome </label><input id="nome_prod"
+                                        name="nome_prod" type="text" class="form-control"></div>
+                                <div class="col-md-3"><label for="marca_prod">Marca </label><input id="marca_prod"
+                                        name="marca_prod" type="text" class="form-control"></div>
+                                <div class="col-md-3"><label for="grupo_prod">Grupo </label><input id="grupo_prod"
+                                        name="grupo_prod" type="text" class="form-control"></div>
                             </div>
 
 
 
                             <div class="row">
-                                <div class="col-md-3"><label for="custo_prod">Custo (R$) </label><input style="" id="custo_prod"
-                                        name="custo_prod" type="text" class="form-control"></div>
-                                <div class="col-md-3"><label for="margem_prod">Margem (%) </label><input id="margem_prod"
-                                        name="margem_prod" type="text" class="form-control"></div>
+                                <div class="col-md-3"><label for="custo_prod">Custo (R$) </label><input style=""
+                                        id="custo_prod" name="custo_prod" type="text" class="form-control"></div>
+                                <div class="col-md-3"><label for="margem_prod">Margem (%) </label><input
+                                        id="margem_prod" name="margem_prod" type="text" class="form-control"></div>
                                 <div class="col-md-3"> <label for="preco_prod">Preço (R$) </label><input id="preco_prod"
                                         name="preco_prod" type="text" class="form-control"></div>
                                 <div class="col-md-3"> <label for="unidade_prod">Unidade</label>
@@ -277,8 +282,9 @@
 
 
                             <div class="row">
-                                <div class="col-md-12"><label for="desc_prod">Descrição </label><textarea rows="3" name="desc_prod"
-                                        id="desc_prod" cols="30" rows="10" class="form-control"></textarea></div>
+                                <div class="col-md-12"><label for="desc_prod">Descrição </label><textarea rows="3"
+                                        name="desc_prod" id="desc_prod" cols="30" rows="10"
+                                        class="form-control"></textarea></div>
                             </div>
 
 
@@ -306,7 +312,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Excluir Produto</h5>
-                    <button type="button" class="close btn_cancel_product_deletion" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close btn_cancel_product_deletion" data-dismiss="modal"
+                        aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -315,7 +322,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" id="btn_confirm_product_deletion">Excluir</button>
-                    <button type="button" class="btn btn-primary btn_cancel_product_deletion" data-dismiss="modal">Voltar</button>
+                    <button type="button" class="btn btn-primary btn_cancel_product_deletion"
+                        data-dismiss="modal">Voltar</button>
                 </div>
             </div>
         </div>
@@ -388,10 +396,12 @@
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
 
 
 

@@ -73,7 +73,37 @@ class Products_dao
     }
 
 
+    public function readGroups()
+    {
 
+        $objDb = new db();
+        $link = $objDb->conecta_mysql();
+        $i = 0;
+
+        $sql = "select grupo_prod from tbprodutos group by grupo_prod";
+        $rs = mysqli_query($link, $sql);
+        while ($registro = mysqli_fetch_array($rs, MYSQLI_NUM)) {
+            $group[$i] = $registro;
+            $i++;
+        }
+        return $group;
+    }
+
+    public function readBrands()
+    {
+
+        $objDb = new db();
+        $link = $objDb->conecta_mysql();
+        $i = 0;
+
+        $sql = "select marca_prod from tbprodutos group by marca_prod";
+        $rs = mysqli_query($link, $sql);
+        while ($registro = mysqli_fetch_array($rs, MYSQLI_NUM)) {
+            $brands[$i] = $registro;
+            $i++;
+        }
+        return $brands;
+    }
 
     public function updateProduct(Product $product)
     {
