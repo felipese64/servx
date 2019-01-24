@@ -10,12 +10,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+
+
+    <link href="../../apps/css/autocomplete.css" rel="stylesheet">
+    <link href="../../apps/css/datatable-custom.css" rel="stylesheet">
+    <!--
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">    
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
     <link href="../../apps/css/jquery-ui.min.css" rel="stylesheet">
     <link href="../../apps/css/jquery-ui.structure.min.css" rel="stylesheet">
     <link href="../../apps/css/jquery-ui.theme.min.css" rel="stylesheet">
-    <link href="../../apps/css/autocomplete.css" rel="stylesheet">
+
+-->
     <link href="../../apps/css/style.css" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js">
@@ -129,13 +136,13 @@
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
-                        <th>Descrição</th>
-                        <th>Grupo</th>
+                        <th>Unidade</th>
                         <th>Marca</th>
+                        <th>Grupo</th>
                         <th>Custo</th>
                         <th>Margem</th>
                         <th>Preço</th>
-                        <th>Unidade</th>
+
 
                     </tr>
                 </thead>
@@ -171,8 +178,9 @@
                             <br />
 
                             <div class="row">
-                                <div class="col-md-6"><label for="nome_prod">Nome </label><input id="nome_prod_create"
-                                        name="nome_prod" type="text" class="form-control"></div>
+                                <div class="col-md-6"><label for="nome_prod">Nome
+                                    </label><input id="nome_prod_create" name="nome_prod" type="text"
+                                        class="form-control"></div>
                                 <div class="col-md-3 autocomplete"><label for="marca_prod">Marca </label><input
                                         id="marca_prod_create" name="marca_prod" type="text" class="form-control"></div>
                                 <div class="col-md-3"><label for="grupo_prod">Grupo </label><input
@@ -344,8 +352,8 @@
                     <p id="txt_update_product">Deseja salvar as alterações?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" id="btn_confirm_product_update">Salvar</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Sair</button>
+                    <button type="button" class="btn btn-primary" id="btn_confirm_product_update">Salvar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
                 </div>
             </div>
         </div>

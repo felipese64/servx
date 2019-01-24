@@ -18,13 +18,13 @@ $columns = array(
 
 	0 => 'id_prod',
 	1 => 'nome_prod',
-	2 => 'desc_prod',
-	3 => 'grupo_prod',
-	4 => 'marca_prod',
+	2 => 'unidade_prod',
+	3 => 'marca_prod',
+	4 => 'grupo_prod',
 	5 => 'custo_prod',
 	6 => 'margem_prod',
-	7 => 'preco_prod',
-	8 => 'unidade_prod'
+	7 => 'preco_prod'
+
 
 );
 
@@ -56,15 +56,16 @@ while ($row_usuarios = mysqli_fetch_array($resultado_usuarios)) {
 	$dado = array();
 	$dado[] = $row_usuarios["id_prod"];
 	$dado[] = $row_usuarios["nome_prod"];
-	$dado[] = $row_usuarios["desc_prod"];
-	$dado[] = $row_usuarios["grupo_prod"];
+	$dado[] = $row_usuarios["unidade_prod"];
+	//$dado[] = $row_usuarios["desc_prod"];
 	$dado[] = $row_usuarios["marca_prod"];
+	$dado[] = $row_usuarios["grupo_prod"];
 	//$dado[] = $row_usuarios["custo_prod"];
 	$dado[] = number_format($row_usuarios["custo_prod"], 2, ',', '.');
 	$dado[] = $row_usuarios["margem_prod"];
 	//$dado[] = $row_usuarios["preco_prod"];
 	$dado[] = number_format($row_usuarios["preco_prod"], 2, ',', '.');
-	$dado[] = $row_usuarios["unidade_prod"];
+
 
 
 

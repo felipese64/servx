@@ -1,15 +1,13 @@
 /********************************************CORRIGIR************************************************************* 
 
     modal window se desloca p/ esquerda por causa da barra de rolagem
-    textos/labels selecionaveis
     Corrigir *** Criar objeto DB em todas as funcoes do DAO
-    tirar descricao do produto da datatable
     arrumar design entre navbar e body
     navbar collapse
     mostrar % da margem na datatable
     fazer regEXP p/ real->double
     usar int ao inves de double
-    sequencia marca e grupo diferente na tabela/form
+    database e variaveis em ingles
 
     ******************************************************************************************************************/
 
