@@ -7,13 +7,14 @@
 
     <title>Home</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
     <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
 
     <link href="../../apps/css/autocomplete.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="../../apps/css/datatable-custom.css" rel="stylesheet">
     <!--
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">    
@@ -23,8 +24,8 @@
     <link href="../../apps/css/jquery-ui.theme.min.css" rel="stylesheet">
 
 -->
-    <link href="../../apps/css/style.css" rel="stylesheet">
 
+    <link href="../../apps/css/style.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js">
     </script>
     <script src="../../apps/js/autocomplete.js"></script>
@@ -48,9 +49,10 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
+
+
 
             <h1 class="logo">Serv<span class="x_logo">X</span></h1>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -139,9 +141,9 @@
                         <th>Unidade</th>
                         <th>Marca</th>
                         <th>Grupo</th>
-                        <th>Custo</th>
-                        <th>Margem</th>
-                        <th>Preço</th>
+                        <th>Custo(R$)</th>
+                        <th>Margem(%)</th>
+                        <th>Preço(R$)</th>
 
 
                     </tr>
