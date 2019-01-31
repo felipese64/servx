@@ -1,9 +1,10 @@
 <?php 
 
-require_once('../lib/db.class.php');
-require_once('../dao/Products_dao.php');
-require_once('../model/Product.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/lib/db.class.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/dao/Products_dao.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/model/Product.php');
 
+//require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/model/Product.php');
 
 $id_prod = $_POST['id_prod1'];
 

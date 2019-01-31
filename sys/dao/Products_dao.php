@@ -1,6 +1,6 @@
 <?php 
-require_once('../lib/db.class.php');
-require_once('../model/product.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/lib/db.class.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/model/product.php');
 
 
 

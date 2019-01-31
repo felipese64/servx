@@ -6,24 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Home</title>
-
-
-    <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-
-
     <link href="../../apps/css/autocomplete.css" rel="stylesheet">
+    <link href="../../apps/css/datatable-custom.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link href="../../apps/css/datatable-custom.css" rel="stylesheet">
-    <!--
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">    
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
-    <link href="../../apps/css/jquery-ui.min.css" rel="stylesheet">
-    <link href="../../apps/css/jquery-ui.structure.min.css" rel="stylesheet">
-    <link href="../../apps/css/jquery-ui.theme.min.css" rel="stylesheet">
 
--->
 
     <link href="../../apps/css/style.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js">
@@ -49,6 +37,7 @@
 </head>
 
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
 
@@ -88,8 +77,6 @@
                     </li>
 
 
-
-
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button">Técnicos</a>
                     </li>
@@ -122,12 +109,9 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="panel_title">Produtos</h1>
-
             </div>
         </div>
     </div>
-
-
     <div class="container">
         <div class="table_panel">
 
@@ -266,20 +250,25 @@
                                 <div class="col-md-6"><label for="nome_prod">Nome </label><input id="nome_prod"
                                         name="nome_prod" type="text" class="form-control"></div>
                                 <div class="col-md-3"><label for="marca_prod">Marca </label><input id="marca_prod"
-                                        name="marca_prod" type="text" class="form-control"></div>
+                                        name="marca_prod" type="text" class="form-control">
+                                </div>
                                 <div class="col-md-3"><label for="grupo_prod">Grupo </label><input id="grupo_prod"
-                                        name="grupo_prod" type="text" class="form-control"></div>
+                                        name="grupo_prod" type="text" class="form-control">
+                                </div>
                             </div>
 
 
 
                             <div class="row">
                                 <div class="col-md-3"><label for="custo_prod">Custo (R$) </label><input style=""
-                                        id="custo_prod" name="custo_prod" type="text" class="form-control"></div>
+                                        id="custo_prod" name="custo_prod" type="text" class="form-control">
+                                </div>
                                 <div class="col-md-3"><label for="margem_prod">Margem (%) </label><input
-                                        id="margem_prod" name="margem_prod" type="text" class="form-control"></div>
+                                        id="margem_prod" name="margem_prod" type="text" class="form-control">
+                                </div>
                                 <div class="col-md-3"> <label for="preco_prod">Preço (R$) </label><input id="preco_prod"
-                                        name="preco_prod" type="text" class="form-control"></div>
+                                        name="preco_prod" type="text" class="form-control">
+                                </div>
                                 <div class="col-md-3"> <label for="unidade_prod">Unidade</label>
                                     <select id="unidade_prod" name="unidade_prod" class="form-control">
                                         <option selected>Escolha...</option>

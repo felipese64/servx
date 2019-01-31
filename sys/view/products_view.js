@@ -1,14 +1,6 @@
 /********************************************CORRIGIR************************************************************* 
 
-    modal window se desloca p/ esquerda por causa da barra de rolagem
-    Corrigir *** Criar objeto DB em todas as funcoes do DAO
-    arrumar design entre navbar e body
-    navbar collapse
-    mostrar % da margem na datatable
-    fazer regEXP p/ real->double
-    usar int ao inves de double
-    database e variaveis em ingles
-
+   
     ******************************************************************************************************************/
 
 $(document).ready(function () {
@@ -35,7 +27,7 @@ $(document).ready(function () {
 
 
         "ajax": {
-            "url": "../controller/products_controller.php",
+            "url": "../controller/products/products_controller.php",
             "type": "POST"
         }
     });
@@ -92,7 +84,7 @@ $(document).ready(function () {
 
         $.ajax({
 
-            url: '../controller/read_product.php',
+            url: '../controller/products/read_product.php',
             method: 'post',
             data: {
                 id_prod1: id_prod
@@ -150,7 +142,7 @@ $(document).ready(function () {
 
         $.ajax({
 
-            url: '../controller/read_product.php',
+            url: '../controller/products/read_product.php',
             method: 'post',
             data: {
                 id_prod1: id_prod
@@ -244,7 +236,7 @@ $(document).ready(function () {
 
         $.ajax({
 
-            url: '../controller/delete_product.php',
+            url: '../controller/products/delete_product.php',
             method: 'post',
             data: {
                 id_prod1: id_prod
@@ -253,7 +245,7 @@ $(document).ready(function () {
 
                 //alert(data);
                 //data = 1 p sucesso
-
+                //alert(data);
 
 
                 $('#modal_confirm_delete').modal('hide');
@@ -276,7 +268,7 @@ $(document).ready(function () {
 
         $.ajax({
 
-            url: '../controller/read_product.php',
+            url: '../controller/products/read_product.php',
             method: 'post',
             data: {
                 id_prod1: id_prod
@@ -415,7 +407,7 @@ $(document).ready(function () {
 
                         $.ajax({
 
-                            url: '../controller/update_product.php',
+                            url: '../controller/products/update_product.php',
                             method: 'post',
                             data: {
                                 id_prod: id_prod,
@@ -476,7 +468,7 @@ $(document).ready(function () {
 
         $.ajax({
 
-            url: '../controller/read_product.php',
+            url: '../controller/products/read_product.php',
             method: 'post',
             data: {
                 id_prod1: id_prod
@@ -629,7 +621,7 @@ $(document).ready(function () {
 
                         $.ajax({
 
-                            url: '../controller/update_product.php',
+                            url: '../controller/products/update_product.php',
                             method: 'post',
                             data: {
                                 id_prod: id_prod,
@@ -684,7 +676,7 @@ $(document).ready(function () {
         
                 $.ajax({
         
-                    url: '../controller/update_product.php',
+                    url: '../controller/products/update_product.php',
                     method: 'post',
                     data: {
                         id_prod: id_prod,
@@ -751,7 +743,7 @@ $(document).ready(function () {
     function autocomplete_product_groups(input) {
         $.ajax({
 
-            url: '../controller/read_product_groups.php',
+            url: '../controller/products/read_product_groups.php',
             method: 'post',
             success: function (data) {
 
@@ -768,7 +760,7 @@ $(document).ready(function () {
     function autocomplete_product_brands(input) {
         $.ajax({
 
-            url: '../controller/read_product_brands.php',
+            url: '../controller/products/read_product_brands.php',
             method: 'post',
             success: function (data) {
 
@@ -872,7 +864,7 @@ $(document).ready(function () {
 
 
             $.ajax({
-                url: '../controller/create_product.php',
+                url: '../controller/products/create_product.php',
                 method: 'post',
                 data: {
                     nome_prod: nome_prod,
@@ -941,7 +933,7 @@ $(document).ready(function () {
 
         $.ajax({
 
-            url: '../controller/read_product.php',
+            url: '../controller/products/read_product.php',
             method: 'post',
             data: {
                 id_prod1: id_prod
