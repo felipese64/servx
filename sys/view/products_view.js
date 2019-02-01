@@ -1,8 +1,3 @@
-/********************************************CORRIGIR************************************************************* 
-
-   
-    ******************************************************************************************************************/
-
 $(document).ready(function () {
     var table = $('#list-products').DataTable({
         "processing": true,
@@ -11,7 +6,6 @@ $(document).ready(function () {
             "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
         },
         "initComplete": function (settings, json) {
-
 
             $('#list-products_filter').prepend(
                 '<button type="button" class="btn btn-primary" id="btn_open_create_product_modal">Adicionar Produto</button>'
@@ -25,37 +19,12 @@ $(document).ready(function () {
 
         },
 
-
         "ajax": {
-            "url": "../controller/products/products_controller.php",
+            "url": "../controller/products/datatable.php",
             "type": "POST"
         }
     });
 
-    function isFloat(n) {
-        return parseFloat(n) == n && n != 0;
-    }
-
-
-
-    /*
-    document.getElementById('modal_edit_product').onkeydown = function (evt) {
-        var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
-        if (keyCode == 13) {
-            $('#btn_update_product').click();
-        }
-    }
-
-    */
-
-    function enter_to_send_form(id_form, id_button) {
-        document.getElementById(id_form).onkeydown = function (evt) {
-            var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
-            if (keyCode == 13) {
-                $("#" + id_button).click();
-            }
-        }
-    }
 
     enter_to_send_form('modal_edit_product', 'btn_update_product');
     enter_to_send_form('modal_create_product', 'btn_create_product');
@@ -65,60 +34,37 @@ $(document).ready(function () {
     enter_to_send_form('modal_confirm_delete', 'btn_confirm_product_deletion');
 
 
-
-
     $('#table_body').on('click', 'tr', function () {
+
         var data = table.row(this).data();
-
-
-        var id_prod = data[0];
-
-
-        //var id_prod = document.getElementById("input_id_prod");
-        //id_prod.value = data[0];
-
-        //$("#id_prod").value(data[0]);
-        //document.getElementById("form_id_prod").submit();
-        //alert(id_prod);
-
+        var prod_id = data[0];
 
         $.ajax({
 
             url: '../controller/products/read_product.php',
             method: 'post',
             data: {
-                id_prod1: id_prod
+                prod_id: prod_id
             },
             success: function (data) {
 
-                //alert(data);
-
                 var product_row = JSON.parse(data);
-                //alert(product_row['nome_prod']);
 
-                $('#id_prod').val(product_row['id_prod']);
-                $('#nome_prod').val(product_row['nome_prod']);
-                $('#desc_prod').val(product_row['desc_prod']);
-                $('#marca_prod').val(product_row['marca_prod']);
-                $('#grupo_prod').val(product_row['grupo_prod']);
-                $('#custo_prod').val(float_to_brl(parseFloat(product_row[
-                    'custo_prod'])));
-                $('#margem_prod').val(product_row['margem_prod']);
-                $('#preco_prod').val(float_to_brl(parseFloat(product_row[
-                    'preco_prod'])));
-                $('#unidade_prod').val(product_row['unidade_prod']);
-
+                $('#prod_id').val(product_row['prod_id']);
+                $('#prod_name').val(product_row['prod_name']);
+                $('#prod_desc').val(product_row['prod_desc']);
+                $('#prod_brand').val(product_row['prod_brand']);
+                $('#prod_group').val(product_row['prod_group']);
+                $('#prod_cost').val(float_to_brl(parseFloat(product_row[
+                    'prod_cost'])));
+                $('#prod_markup').val(product_row['prod_markup']);
+                $('#prod_price').val(float_to_brl(parseFloat(product_row['prod_price'])));
+                $('#prod_unit').val(product_row['prod_unit']);
                 $('#modal_edit_product').modal('show');
 
             }
         });
-
-
-
-
     });
-
-
 
 
     $(".btn_cancel_product_deletion").click(function () {
@@ -126,67 +72,46 @@ $(document).ready(function () {
     });
 
 
-
-
     $("#modal_edit_product").on('hide.bs.modal', function () {
 
-        // $("#modal_edit_product").on('hidden.bs.modal', function() {
-
-        //alert(data_form_prod.toString());
-        //console.log(data_form_prod);
-        autocomplete_product_groups('grupo_prod');
-        autocomplete_product_brands('marca_prod');
-
-        var id_prod = $('#id_prod').val();
-
+        autocomplete_product_groups('prod_group');
+        autocomplete_product_brands('prod_brand');
+        var prod_id = $('#prod_id').val();
 
         $.ajax({
 
             url: '../controller/products/read_product.php',
             method: 'post',
             data: {
-                id_prod1: id_prod
+                prod_id: prod_id
             },
             success: function (data) {
 
-                //Descobrir como comparar array com objeto p/ simplificar
-                //Unico campo que pode estar vazio nessa verificação é o desc_prod
-                //Unico campo que pode estar vazio nessa verificação é o desc_prod
-
                 var product_row = JSON.parse(data);
-
-                var validate_id_prod = product_row['id_prod'] == $('#id_prod').val();
-                var validate_nome_prod = product_row['nome_prod'] == $('#nome_prod')
+                var validate_prod_id = product_row['prod_id'] == $('#prod_id').val();
+                var validate_prod_name = product_row['prod_name'] == $('#prod_name')
                     .val().toUpperCase();
-
-                //alert('conteudo:' + product_row['desc_prod']);
-                // var form_desc_prod;
-                // $('#desc_prod').val() ? form_desc_prod = $('#desc_prod').val() :
-                //     form_desc_prod = null;
-
-                //  var validate_desc_prod = product_row['desc_prod'] == form_desc_prod;
-                var validate_desc_prod = product_row['desc_prod'] == $('#desc_prod')
+                var validate_prod_desc = product_row['prod_desc'] == $('#prod_desc')
                     .val().toUpperCase();
-                var validate_marca_prod = product_row['marca_prod'] == $(
-                    '#marca_prod').val().toUpperCase();
-                var validate_grupo_prod = product_row['grupo_prod'] == $(
-                    '#grupo_prod').val().toUpperCase();
-                var validate_custo_prod = product_row['custo_prod'] ==
+                var validate_prod_brand = product_row['prod_brand'] == $(
+                    '#prod_brand').val().toUpperCase();
+                var validate_prod_group = product_row['prod_group'] == $(
+                    '#prod_group').val().toUpperCase();
+                var validate_prod_cost = product_row['prod_cost'] ==
                     brl_to_float($(
-                        '#custo_prod').val());
-                var validate_margem_prod = product_row['margem_prod'] == $(
-                    '#margem_prod').val();
-                var validate_preco_prod = product_row['preco_prod'] ==
+                        '#prod_cost').val());
+                var validate_prod_markup = product_row['prod_markup'] == $(
+                    '#prod_markup').val();
+                var validate_prod_price = product_row['prod_price'] ==
                     brl_to_float($(
-                        '#preco_prod').val());
-                var validate_unidade_prod = product_row['unidade_prod'] == $(
-                    '#unidade_prod').val();
+                        '#prod_price').val());
+                var validate_prod_unit = product_row['prod_unit'] == $(
+                    '#prod_unit').val();
 
-
-                if (validate_id_prod && validate_nome_prod && validate_desc_prod &&
-                    validate_marca_prod && validate_grupo_prod &&
-                    validate_custo_prod && validate_margem_prod &&
-                    validate_preco_prod && validate_unidade_prod) {
+                if (validate_prod_id && validate_prod_name && validate_prod_desc &&
+                    validate_prod_brand && validate_prod_group &&
+                    validate_prod_cost && validate_prod_markup &&
+                    validate_prod_price && validate_prod_unit) {
                     var form_equals_db = true;
                 } else {
                     var form_equals_db = false;
@@ -199,120 +124,82 @@ $(document).ready(function () {
 
                 if (display == 'none' && !form_equals_db) {
 
-                    /*
-                    alert(validate_id_prod + ' ' + validate_nome_prod + ' ' +
-                        validate_desc_prod + ' ' + validate_marca_prod + ' ' +
-                        validate_grupo_prod + ' ' + validate_custo_prod + ' ' +
-                        validate_margem_prod + ' ' + validate_preco_prod + ' ' +
-                        validate_unidade_prod);
-                    */
-
                     clean_modal_edit_product();
                     $('#modal_confirm_update_product').modal('show');
-
-
-
                 }
-
             }
-
-
-
-
         });
-
-
     });
 
+
     $("#modal_edit_product").on('shown.bs.modal', function () {
-        autocomplete_product_groups('grupo_prod');
-        autocomplete_product_brands('marca_prod');
+        autocomplete_product_groups('prod_group');
+        autocomplete_product_brands('prod_brand');
     });
 
 
     $("#btn_confirm_product_deletion").click(function () {
 
-        var id_prod = $('#id_prod').val();
+        var prod_id = $('#prod_id').val();
 
         $.ajax({
 
             url: '../controller/products/delete_product.php',
             method: 'post',
             data: {
-                id_prod1: id_prod
+                prod_id: prod_id
             },
             success: function (data) {
 
-                //alert(data);
-                //data = 1 p sucesso
-                //alert(data);
-
 
                 $('#modal_confirm_delete').modal('hide');
-                //alert('Produto excluido com sucesso!');
                 $('#list-products').DataTable().ajax.reload();
 
 
             }
         });
-
-
-
     });
 
 
     $('#btn_update_product').click(function () {
 
-        var id_prod = $('#id_prod').val();
-
+        var prod_id = $('#prod_id').val();
 
         $.ajax({
 
             url: '../controller/products/read_product.php',
             method: 'post',
             data: {
-                id_prod1: id_prod
+                prod_id: prod_id
             },
             success: function (data) {
 
-                //Descobrir como comparar array com objeto p/ simplificar
-                //Unico campo que pode estar vazio nessa verificação é o desc_prod
-                //Unico campo que pode estar vazio nessa verificação é o desc_prod
-
                 var product_row = JSON.parse(data);
 
-                var validate_id_prod = product_row['id_prod'] == $('#id_prod').val();
-                var validate_nome_prod = product_row['nome_prod'] == $('#nome_prod')
+                var validate_prod_id = product_row['prod_id'] == $('#prod_id').val();
+                var validate_prod_name = product_row['prod_name'] == $('#prod_name')
                     .val().toUpperCase();
-
-                //alert('conteudo:' + product_row['desc_prod']);
-                // var form_desc_prod;
-                // $('#desc_prod').val() ? form_desc_prod = $('#desc_prod').val() :
-                //     form_desc_prod = null;
-
-                //  var validate_desc_prod = product_row['desc_prod'] == form_desc_prod;
-                var validate_desc_prod = product_row['desc_prod'] == $('#desc_prod')
+                var validate_prod_desc = product_row['prod_desc'] == $('#prod_desc')
                     .val().toUpperCase();
-                var validate_marca_prod = product_row['marca_prod'] == $(
-                    '#marca_prod').val().toUpperCase();
-                var validate_grupo_prod = product_row['grupo_prod'] == $(
-                    '#grupo_prod').val().toUpperCase();
-                var validate_custo_prod = product_row['custo_prod'] ==
+                var validate_prod_brand = product_row['prod_brand'] == $(
+                    '#prod_brand').val().toUpperCase();
+                var validate_prod_group = product_row['prod_group'] == $(
+                    '#prod_group').val().toUpperCase();
+                var validate_prod_cost = product_row['prod_cost'] ==
                     brl_to_float($(
-                        '#custo_prod').val());
-                var validate_margem_prod = product_row['margem_prod'] == $(
-                    '#margem_prod').val();
-                var validate_preco_prod = product_row['preco_prod'] ==
+                        '#prod_cost').val());
+                var validate_prod_markup = product_row['prod_markup'] == $(
+                    '#prod_markup').val();
+                var validate_prod_price = product_row['prod_price'] ==
                     brl_to_float($(
-                        '#preco_prod').val());
-                var validate_unidade_prod = product_row['unidade_prod'] == $(
-                    '#unidade_prod').val();
+                        '#prod_price').val());
+                var validate_prod_unit = product_row['prod_unit'] == $(
+                    '#prod_unit').val();
 
-
-                if (validate_id_prod && validate_nome_prod && validate_desc_prod &&
-                    validate_marca_prod && validate_grupo_prod &&
-                    validate_custo_prod && validate_margem_prod &&
-                    validate_preco_prod && validate_unidade_prod) {
+                if (validate_prod_id && validate_prod_name && validate_prod_desc &&
+                    validate_prod_brand && validate_prod_group &&
+                    validate_prod_cost && validate_prod_markup &&
+                    validate_prod_price && validate_prod_unit) {
                     var form_equals_db = true;
                 } else {
                     var form_equals_db = false;
@@ -325,194 +212,145 @@ $(document).ready(function () {
 
                 if (display == 'none' && !form_equals_db) {
 
-                    var id_prod = $('#id_prod').val();
-                    var nome_prod = $('#nome_prod').val().toUpperCase();
-                    var marca_prod = $('#marca_prod').val().toUpperCase();
-                    var grupo_prod = $('#grupo_prod').val().toUpperCase();
-                    var custo_prod = brl_to_float($('#custo_prod').val());
-                    var margem_prod = $('#margem_prod').val();
-                    var preco_prod = brl_to_float($('#preco_prod').val());
-                    var unidade_prod = $('#unidade_prod').val();
-                    var desc_prod = $('#desc_prod').val().toUpperCase();
+                    var prod_id = $('#prod_id').val();
+                    var prod_name = $('#prod_name').val().toUpperCase();
+                    var prod_brand = $('#prod_brand').val().toUpperCase();
+                    var prod_group = $('#prod_group').val().toUpperCase();
+                    var prod_cost = brl_to_float($('#prod_cost').val());
+                    var prod_markup = $('#prod_markup').val();
+                    var prod_price = brl_to_float($('#prod_price').val());
+                    var prod_unit = $('#prod_unit').val();
+                    var prod_desc = $('#prod_desc').val().toUpperCase();
                     var form_ok = true;
 
-
-                    if (nome_prod) {
-                        document.getElementById('nome_prod').style.boxShadow =
+                    if (prod_name) {
+                        document.getElementById('prod_name').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('nome_prod').style.boxShadow =
+                        document.getElementById('prod_name').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
-
-                    if (marca_prod) {
-                        document.getElementById('marca_prod').style.boxShadow =
+                    if (prod_brand) {
+                        document.getElementById('prod_brand').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('marca_prod').style.boxShadow =
+                        document.getElementById('prod_brand').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
-
-                    if (grupo_prod) {
-                        document.getElementById('grupo_prod').style.boxShadow =
+                    if (prod_group) {
+                        document.getElementById('prod_group').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('grupo_prod').style.boxShadow =
+                        document.getElementById('prod_group').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
-
-                    if (custo_prod && isFloat(custo_prod)) {
-                        document.getElementById('custo_prod').style.boxShadow =
+                    if (prod_cost && isFloat(prod_cost)) {
+                        document.getElementById('prod_cost').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('custo_prod').style.boxShadow =
+                        document.getElementById('prod_cost').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
-
-                    if (margem_prod && isFloat(margem_prod)) {
-                        document.getElementById('margem_prod').style.boxShadow =
+                    if (prod_markup && isFloat(prod_markup)) {
+                        document.getElementById('prod_markup').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('margem_prod').style.boxShadow =
+                        document.getElementById('prod_markup').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
-
-                    if (preco_prod && isFloat(preco_prod)) {
-                        document.getElementById('preco_prod').style.boxShadow =
+                    if (prod_price && isFloat(prod_price)) {
+                        document.getElementById('prod_price').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('preco_prod').style.boxShadow =
+                        document.getElementById('prod_price').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
-
-                    if (unidade_prod && unidade_prod != 'Escolha...') {
-                        document.getElementById('unidade_prod').style.boxShadow =
+                    if (prod_unit && prod_unit != 'Escolha...') {
+                        document.getElementById('prod_unit').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('unidade_prod').style.boxShadow =
+                        document.getElementById('prod_unit').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
-
-
 
                     if (form_ok) {
-
 
                         $.ajax({
 
                             url: '../controller/products/update_product.php',
                             method: 'post',
                             data: {
-                                id_prod: id_prod,
-                                nome_prod: nome_prod,
-                                desc_prod: desc_prod,
-                                marca_prod: marca_prod,
-                                grupo_prod: grupo_prod,
-                                custo_prod: custo_prod,
-                                margem_prod: margem_prod,
-                                preco_prod: preco_prod,
-                                unidade_prod: unidade_prod
+                                prod_id: prod_id,
+                                prod_name: prod_name,
+                                prod_desc: prod_desc,
+                                prod_brand: prod_brand,
+                                prod_group: prod_group,
+                                prod_cost: prod_cost,
+                                prod_markup: prod_markup,
+                                prod_price: prod_price,
+                                prod_unit: prod_unit
                             },
 
                             success: function (data) {
-
-                                //alert(data);
 
                                 $('#list-products').DataTable().ajax.reload();
                                 $('#modal_edit_product').modal('hide');
                                 $('#modal_update_product_success_message').modal(
                                     'show');
-
-
-                                //  $('#modal_confirm_update_product').modal('hide');
                             }
                         });
-
-
                     }
-
-
-
-
                 }
-
             }
-
-
-
-
         });
-
-
-
-
-
-
-
-
-
-
     });
+
 
     $("#btn_confirm_product_update").click(function () {
 
-        var id_prod = $('#id_prod').val();
-
+        var prod_id = $('#prod_id').val();
 
         $.ajax({
 
             url: '../controller/products/read_product.php',
             method: 'post',
             data: {
-                id_prod1: id_prod
+                prod_id: prod_id
             },
             success: function (data) {
 
-                //Descobrir como comparar array com objeto p/ simplificar
-                //Unico campo que pode estar vazio nessa verificação é o desc_prod
-                //Unico campo que pode estar vazio nessa verificação é o desc_prod
-
                 var product_row = JSON.parse(data);
-
-                var validate_id_prod = product_row['id_prod'] == $('#id_prod').val();
-                var validate_nome_prod = product_row['nome_prod'] == $('#nome_prod')
+                var validate_prod_id = product_row['prod_id'] == $('#prod_id').val();
+                var validate_prod_name = product_row['prod_name'] == $('#prod_name')
                     .val().toUpperCase();
-
-                //alert('conteudo:' + product_row['desc_prod']);
-                // var form_desc_prod;
-                // $('#desc_prod').val() ? form_desc_prod = $('#desc_prod').val() :
-                //     form_desc_prod = null;
-
-                //  var validate_desc_prod = product_row['desc_prod'] == form_desc_prod;
-                var validate_desc_prod = product_row['desc_prod'] == $('#desc_prod')
+                var validate_prod_desc = product_row['prod_desc'] == $('#prod_desc')
                     .val().toUpperCase();
-                var validate_marca_prod = product_row['marca_prod'] == $(
-                    '#marca_prod').val().toUpperCase();
-                var validate_grupo_prod = product_row['grupo_prod'] == $(
-                    '#grupo_prod').val().toUpperCase();
-                var validate_custo_prod = product_row['custo_prod'] ==
+                var validate_prod_brand = product_row['prod_brand'] == $(
+                    '#prod_brand').val().toUpperCase();
+                var validate_prod_group = product_row['prod_group'] == $(
+                    '#prod_group').val().toUpperCase();
+                var validate_prod_cost = product_row['prod_cost'] ==
                     brl_to_float($(
-                        '#custo_prod').val());
-                var validate_margem_prod = product_row['margem_prod'] == $(
-                    '#margem_prod').val();
-                var validate_preco_prod = product_row['preco_prod'] ==
+                        '#prod_cost').val());
+                var validate_prod_markup = product_row['prod_markup'] == $(
+                    '#prod_markup').val();
+                var validate_prod_price = product_row['prod_price'] ==
                     brl_to_float($(
-                        '#preco_prod').val());
-                var validate_unidade_prod = product_row['unidade_prod'] == $(
-                    '#unidade_prod').val();
+                        '#prod_price').val());
+                var validate_prod_unit = product_row['prod_unit'] == $(
+                    '#prod_unit').val();
 
-
-                if (validate_id_prod && validate_nome_prod && validate_desc_prod &&
-                    validate_marca_prod && validate_grupo_prod &&
-                    validate_custo_prod && validate_margem_prod &&
-                    validate_preco_prod && validate_unidade_prod) {
+                if (validate_prod_id && validate_prod_name && validate_prod_desc &&
+                    validate_prod_brand && validate_prod_group &&
+                    validate_prod_cost && validate_prod_markup &&
+                    validate_prod_price && validate_prod_unit) {
                     var form_equals_db = true;
                 } else {
                     var form_equals_db = false;
@@ -525,114 +363,104 @@ $(document).ready(function () {
 
                 if (display == 'none' && !form_equals_db) {
 
-                    var id_prod = $('#id_prod').val();
-                    var nome_prod = $('#nome_prod').val().toUpperCase();
-                    var marca_prod = $('#marca_prod').val().toUpperCase();
-                    var grupo_prod = $('#grupo_prod').val().toUpperCase();
-                    var custo_prod = brl_to_float($('#custo_prod').val());
-                    var margem_prod = $('#margem_prod').val();
-                    var preco_prod = brl_to_float($('#preco_prod').val());
-                    var unidade_prod = $('#unidade_prod').val();
-                    var desc_prod = $('#desc_prod').val().toUpperCase();
+                    var prod_id = $('#prod_id').val();
+                    var prod_name = $('#prod_name').val().toUpperCase();
+                    var prod_brand = $('#prod_brand').val().toUpperCase();
+                    var prod_group = $('#prod_group').val().toUpperCase();
+                    var prod_cost = brl_to_float($('#prod_cost').val());
+                    var prod_markup = $('#prod_markup').val();
+                    var prod_price = brl_to_float($('#prod_price').val());
+                    var prod_unit = $('#prod_unit').val();
+                    var prod_desc = $('#prod_desc').val().toUpperCase();
                     var form_ok = true;
 
-
-                    if (nome_prod) {
-                        document.getElementById('nome_prod').style.boxShadow =
+                    if (prod_name) {
+                        document.getElementById('prod_name').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('nome_prod').style.boxShadow =
+                        document.getElementById('prod_name').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                         $('#modal_confirm_update_product').modal('hide');
                         $('#modal_edit_product').modal('show');
                     }
-
-                    if (marca_prod) {
-                        document.getElementById('marca_prod').style.boxShadow =
+                    if (prod_brand) {
+                        document.getElementById('prod_brand').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('marca_prod').style.boxShadow =
+                        document.getElementById('prod_brand').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                         $('#modal_confirm_update_product').modal('hide');
                         $('#modal_edit_product').modal('show');
                     }
-
-                    if (grupo_prod) {
-                        document.getElementById('grupo_prod').style.boxShadow =
+                    if (prod_group) {
+                        document.getElementById('prod_group').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('grupo_prod').style.boxShadow =
+                        document.getElementById('prod_group').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                         $('#modal_confirm_update_product').modal('hide');
                         $('#modal_edit_product').modal('show');
                     }
-
-                    if (custo_prod && isFloat(custo_prod)) {
-                        document.getElementById('custo_prod').style.boxShadow =
+                    if (prod_cost && isFloat(prod_cost)) {
+                        document.getElementById('prod_cost').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('custo_prod').style.boxShadow =
+                        document.getElementById('prod_cost').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                         $('#modal_confirm_update_product').modal('hide');
                         $('#modal_edit_product').modal('show');
                     }
-
-                    if (margem_prod && isFloat(margem_prod)) {
-                        document.getElementById('margem_prod').style.boxShadow =
+                    if (prod_markup && isFloat(prod_markup)) {
+                        document.getElementById('prod_markup').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('margem_prod').style.boxShadow =
+                        document.getElementById('prod_markup').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                         $('#modal_confirm_update_product').modal('hide');
                         $('#modal_edit_product').modal('show');
                     }
-
-                    if (preco_prod && isFloat(preco_prod)) {
-                        document.getElementById('preco_prod').style.boxShadow =
+                    if (prod_price && isFloat(prod_price)) {
+                        document.getElementById('prod_price').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('preco_prod').style.boxShadow =
+                        document.getElementById('prod_price').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                         $('#modal_confirm_update_product').modal('hide');
                         $('#modal_edit_product').modal('show');
                     }
-
-                    if (unidade_prod && unidade_prod != 'Escolha...') {
-                        document.getElementById('unidade_prod').style.boxShadow =
+                    if (prod_unit && prod_unit != 'Escolha...') {
+                        document.getElementById('prod_unit').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('unidade_prod').style.boxShadow =
+                        document.getElementById('prod_unit').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                         $('#modal_confirm_update_product').modal('hide');
                         $('#modal_edit_product').modal('show');
                     }
-
-
 
                     if (form_ok) {
-
 
                         $.ajax({
 
                             url: '../controller/products/update_product.php',
                             method: 'post',
                             data: {
-                                id_prod: id_prod,
-                                nome_prod: nome_prod,
-                                desc_prod: desc_prod,
-                                marca_prod: marca_prod,
-                                grupo_prod: grupo_prod,
-                                custo_prod: custo_prod,
-                                margem_prod: margem_prod,
-                                preco_prod: preco_prod,
-                                unidade_prod: unidade_prod
+                                prod_id: prod_id,
+                                prod_name: prod_name,
+                                prod_desc: prod_desc,
+                                prod_brand: prod_brand,
+                                prod_group: prod_group,
+                                prod_cost: prod_cost,
+                                prod_markup: prod_markup,
+                                prod_price: prod_price,
+                                prod_unit: prod_unit
                             },
 
                             success: function (data) {
@@ -643,100 +471,41 @@ $(document).ready(function () {
                                 $('#modal_update_product_success_message').modal('show');
                             }
                         });
-
-
                     }
-
-
-
-
                 }
-
             }
-
-
-
-
         });
-
-        /*
-        
-        
-                var id_prod = $('#id_prod').val();
-                var nome_prod = $('#nome_prod').val().toUpperCase();
-                var desc_prod = $('#desc_prod').val().toUpperCase();
-                var marca_prod = $('#marca_prod').val().toUpperCase();
-                var grupo_prod = $('#grupo_prod').val().toUpperCase();
-                var custo_prod = brl_to_float($('#custo_prod').val());
-                var margem_prod = $('#margem_prod').val();
-                var preco_prod = brl_to_float($('#preco_prod').val());
-                var unidade_prod = $('#unidade_prod').val();
-        
-        
-        
-                $.ajax({
-        
-                    url: '../controller/products/update_product.php',
-                    method: 'post',
-                    data: {
-                        id_prod: id_prod,
-                        nome_prod: nome_prod,
-                        desc_prod: desc_prod,
-                        marca_prod: marca_prod,
-                        grupo_prod: grupo_prod,
-                        custo_prod: custo_prod,
-                        margem_prod: margem_prod,
-                        preco_prod: preco_prod,
-                        unidade_prod: unidade_prod
-                    },
-        
-                    success: function (data) {
-        
-                        //alert(data);
-        
-                        $('#list-products').DataTable().ajax.reload();
-                        $('#modal_edit_product').modal('hide');
-                        $('#modal_confirm_update_product').modal('hide');
-                        $('#modal_update_product_success_message').modal('show');
-        
-        
-        
-                    }
-                });
-        */
-
-
-
     });
+
 
     function clean_modal_edit_product() {
 
-        document.getElementById('nome_prod').style.boxShadow = "0px 0px";
-        document.getElementById('marca_prod').style.boxShadow = "0px 0px";
-        document.getElementById('grupo_prod').style.boxShadow = "0px 0px";
-        document.getElementById('custo_prod').style.boxShadow = "0px 0px";
-        document.getElementById('margem_prod').style.boxShadow = "0px 0px";
-        document.getElementById('preco_prod').style.boxShadow = "0px 0px";
-        document.getElementById('unidade_prod').style.boxShadow = "0px 0px";
+        document.getElementById('prod_name').style.boxShadow = "0px 0px";
+        document.getElementById('prod_brand').style.boxShadow = "0px 0px";
+        document.getElementById('prod_group').style.boxShadow = "0px 0px";
+        document.getElementById('prod_cost').style.boxShadow = "0px 0px";
+        document.getElementById('prod_markup').style.boxShadow = "0px 0px";
+        document.getElementById('prod_price').style.boxShadow = "0px 0px";
+        document.getElementById('prod_unit').style.boxShadow = "0px 0px";
     };
 
     function clean_modal_create_product() {
-        $('#nome_prod_create').val('');
-        $('#marca_prod_create').val('');
-        $('#grupo_prod_create').val('');
-        $('#custo_prod_create').val('0,00');
-        $('#margem_prod_create').val('60');
-        $('#preco_prod_create').val('0,00');
-        $('#unidade_prod_create').val('Escolha...');
-        $('#desc_prod_create').val('');
+        $('#prod_name_create').val('');
+        $('#prod_brand_create').val('');
+        $('#prod_group_create').val('');
+        $('#prod_cost_create').val('0,00');
+        $('#prod_markup_create').val('60');
+        $('#prod_price_create').val('0,00');
+        $('#prod_unit_create').val('Escolha...');
+        $('#prod_desc_create').val('');
 
-        document.getElementById('nome_prod_create').style.boxShadow = "0px 0px";
-        document.getElementById('marca_prod_create').style.boxShadow = "0px 0px";
-        document.getElementById('grupo_prod_create').style.boxShadow = "0px 0px";
-        document.getElementById('custo_prod_create').style.boxShadow = "0px 0px";
-        document.getElementById('margem_prod_create').style.boxShadow = "0px 0px";
-        document.getElementById('preco_prod_create').style.boxShadow = "0px 0px";
-        document.getElementById('unidade_prod_create').style.boxShadow = "0px 0px";
+        document.getElementById('prod_name_create').style.boxShadow = "0px 0px";
+        document.getElementById('prod_brand_create').style.boxShadow = "0px 0px";
+        document.getElementById('prod_group_create').style.boxShadow = "0px 0px";
+        document.getElementById('prod_cost_create').style.boxShadow = "0px 0px";
+        document.getElementById('prod_markup_create').style.boxShadow = "0px 0px";
+        document.getElementById('prod_price_create').style.boxShadow = "0px 0px";
+        document.getElementById('prod_unit_create').style.boxShadow = "0px 0px";
     };
 
 
@@ -748,7 +517,6 @@ $(document).ready(function () {
             success: function (data) {
 
                 var groups = JSON.parse(data);
-
                 for (var i = 0; i < groups.length; i++) {
                     groups[i] = groups[i].toString();
                 }
@@ -765,7 +533,6 @@ $(document).ready(function () {
             success: function (data) {
 
                 var brands = JSON.parse(data);
-
                 for (var i = 0; i < brands.length; i++) {
                     brands[i] = brands[i].toString();
                 }
@@ -776,105 +543,93 @@ $(document).ready(function () {
 
     $("#modal_create_product").on('hidden.bs.modal', function () {
         clean_modal_create_product();
-        autocomplete_product_groups('grupo_prod_create');
-        autocomplete_product_brands('marca_prod_create');
+        autocomplete_product_groups('prod_group_create');
+        autocomplete_product_brands('prod_brand_create');
 
     });
 
     $("#modal_create_product").on('shown.bs.modal', function () {
-        autocomplete_product_groups('grupo_prod_create');
-        autocomplete_product_brands('marca_prod_create');
+        autocomplete_product_groups('prod_group_create');
+        autocomplete_product_brands('prod_brand_create');
     });
-
-
 
 
     $("#btn_create_product").click(function () {
 
-        var nome_prod = $('#nome_prod_create').val().toUpperCase();
-        var marca_prod = $('#marca_prod_create').val().toUpperCase();
-        var grupo_prod = $('#grupo_prod_create').val().toUpperCase();
-        var custo_prod = brl_to_float($('#custo_prod_create').val());
-        var margem_prod = $('#margem_prod_create').val();
-        var preco_prod = brl_to_float($('#preco_prod_create').val());
-        var unidade_prod = $('#unidade_prod_create').val();
-        var desc_prod = $('#desc_prod_create').val();
+        var prod_name = $('#prod_name_create').val().toUpperCase();
+        var prod_brand = $('#prod_brand_create').val().toUpperCase();
+        var prod_group = $('#prod_group_create').val().toUpperCase();
+        var prod_cost = brl_to_float($('#prod_cost_create').val());
+        var prod_markup = $('#prod_markup_create').val();
+        var prod_price = brl_to_float($('#prod_price_create').val());
+        var prod_unit = $('#prod_unit_create').val();
+        var prod_desc = $('#prod_desc_create').val();
         var form_ok = true;
 
 
-        if (nome_prod) {
-            document.getElementById('nome_prod_create').style.boxShadow = "0px 0px";
+        if (prod_name) {
+            document.getElementById('prod_name_create').style.boxShadow = "0px 0px";
         } else {
-            document.getElementById('nome_prod_create').style.boxShadow =
+            document.getElementById('prod_name_create').style.boxShadow =
                 "0 0 0 .2rem rgba(255,0,0,.25)";
             form_ok = false;
         }
-
-        if (marca_prod) {
-            document.getElementById('marca_prod_create').style.boxShadow = "0px 0px";
+        if (prod_brand) {
+            document.getElementById('prod_brand_create').style.boxShadow = "0px 0px";
         } else {
-            document.getElementById('marca_prod_create').style.boxShadow =
+            document.getElementById('prod_brand_create').style.boxShadow =
                 "0 0 0 .2rem rgba(255,0,0,.25)";
             form_ok = false;
         }
-
-        if (grupo_prod) {
-            document.getElementById('grupo_prod_create').style.boxShadow = "0px 0px";
+        if (prod_group) {
+            document.getElementById('prod_group_create').style.boxShadow = "0px 0px";
         } else {
-            document.getElementById('grupo_prod_create').style.boxShadow =
+            document.getElementById('prod_group_create').style.boxShadow =
                 "0 0 0 .2rem rgba(255,0,0,.25)";
             form_ok = false;
         }
-
-        if (custo_prod && isFloat(custo_prod)) {
-            document.getElementById('custo_prod_create').style.boxShadow = "0px 0px";
+        if (prod_cost && isFloat(prod_cost)) {
+            document.getElementById('prod_cost_create').style.boxShadow = "0px 0px";
         } else {
-            document.getElementById('custo_prod_create').style.boxShadow =
+            document.getElementById('prod_cost_create').style.boxShadow =
                 "0 0 0 .2rem rgba(255,0,0,.25)";
             form_ok = false;
         }
-
-        if (margem_prod && isFloat(margem_prod)) {
-            document.getElementById('margem_prod_create').style.boxShadow = "0px 0px";
+        if (prod_markup && isFloat(prod_markup)) {
+            document.getElementById('prod_markup_create').style.boxShadow = "0px 0px";
         } else {
-            document.getElementById('margem_prod_create').style.boxShadow =
+            document.getElementById('prod_markup_create').style.boxShadow =
                 "0 0 0 .2rem rgba(255,0,0,.25)";
             form_ok = false;
         }
-
-        if (preco_prod && isFloat(preco_prod)) {
-            document.getElementById('preco_prod_create').style.boxShadow = "0px 0px";
+        if (prod_price && isFloat(prod_price)) {
+            document.getElementById('prod_price_create').style.boxShadow = "0px 0px";
         } else {
-            document.getElementById('preco_prod_create').style.boxShadow =
+            document.getElementById('prod_price_create').style.boxShadow =
                 "0 0 0 .2rem rgba(255,0,0,.25)";
             form_ok = false;
         }
-
-        if (unidade_prod && unidade_prod != 'Escolha...') {
-            document.getElementById('unidade_prod_create').style.boxShadow = "0px 0px";
+        if (prod_unit && prod_unit != 'Escolha...') {
+            document.getElementById('prod_unit_create').style.boxShadow = "0px 0px";
         } else {
-            document.getElementById('unidade_prod_create').style.boxShadow =
+            document.getElementById('prod_unit_create').style.boxShadow =
                 "0 0 0 .2rem rgba(255,0,0,.25)";
             form_ok = false;
         }
-
-
-
         if (form_ok) {
-
 
             $.ajax({
                 url: '../controller/products/create_product.php',
                 method: 'post',
                 data: {
-                    nome_prod: nome_prod,
-                    marca_prod: marca_prod,
-                    grupo_prod: grupo_prod,
-                    custo_prod: custo_prod,
-                    margem_prod: margem_prod,
-                    preco_prod: preco_prod,
-                    unidade_prod: unidade_prod,
-                    desc_prod: desc_prod
+                    prod_name: prod_name,
+                    prod_brand: prod_brand,
+                    prod_group: prod_group,
+                    prod_cost: prod_cost,
+                    prod_markup: prod_markup,
+                    prod_price: prod_price,
+                    prod_unit: prod_unit,
+                    prod_desc: prod_desc
                 },
                 success: function (data) {
                     $('#list-products').DataTable().ajax.reload();
@@ -882,75 +637,52 @@ $(document).ready(function () {
                     $('#modal_create_product_success_message').modal('show');
                     clean_modal_create_product();
                 }
-
-
             });
         }
     });
 
 
-    function selectAllText(textbox) {
-        textbox.focus();
-        textbox.select();
-    }
-
-    $('#custo_prod').click(function () {
+    $('#prod_cost').click(function () {
         selectAllText(jQuery(this))
     });
 
-    $('#margem_prod').click(function () {
+    $('#prod_markup').click(function () {
         selectAllText(jQuery(this))
     });
 
-    $('#preco_prod').click(function () {
+    $('#prod_price').click(function () {
         selectAllText(jQuery(this))
     });
 
-    $('#custo_prod_create').click(function () {
+    $('#prod_cost_create').click(function () {
         selectAllText(jQuery(this))
     });
 
-    $('#margem_prod_create').click(function () {
+    $('#prod_markup_create').click(function () {
         selectAllText(jQuery(this))
     });
 
-    $('#preco_prod_create').click(function () {
+    $('#prod_price_create').click(function () {
         selectAllText(jQuery(this))
     });
 
 
     $("#btn_delete_product").click(function () {
 
-        //form exclusao pega nome modificado do form de edição
-
-
         $('#modal_edit_product').modal('hide');
-
-        var id_prod = $('#id_prod').val();
-
-
-
+        var prod_id = $('#prod_id').val();
 
         $.ajax({
 
             url: '../controller/products/read_product.php',
             method: 'post',
             data: {
-                id_prod1: id_prod
+                prod_id: prod_id
             },
             success: function (data) {
 
-                //alert(data);
-
                 var product_row = JSON.parse(data);
-                //alert(product_row['nome_prod']);
-
-
-
-
-                var selected_product = product_row['nome_prod'];
-
-
+                var selected_product = product_row['prod_name'];
                 $('#txt_delete_product').text(
                     'Tem certeza que deseja excluir o produto \"' +
                     selected_product + '\"?');
@@ -962,255 +694,110 @@ $(document).ready(function () {
     });
 
 
-    $("#custo_prod").keyup(function () {
+    $("#prod_cost").keyup(function () {
 
-        var string_custo_prod = $("#custo_prod").val().toString();
+        var prod_cost = brl_to_float($("#prod_cost").val());
+        var prod_markup = $("#prod_markup").val();
+        var prod_price = prod_cost * ((prod_markup / 100) + 1);
 
-        var x = string_custo_prod.length;
-        var simbolo_decimal = string_custo_prod.substring(x - 3, x);
-        //var have_comma = string_custo_prod.includes(",");
-        //var have_dot = string_custo_prod.includes(".");
+        isNaN(prod_price) ? $("#prod_price").val('0,00') : $(
+            "#prod_price").val(float_to_brl(prod_price));
 
-
-        // var simbolo_decimal = string_custo_prod.charAt(x - 3);
-
-        var custo_prod = brl_to_float($("#custo_prod").val());
-        //alert ("Custo_prod: " + custo_prod + "custoi prod val" + $("#custo_prod").val());
-
-        // está ignorando a casa decimal
-
-
-
-
-
-
-
-
-
-
-        var margem_prod = $("#margem_prod").val();
-        var preco_prod = custo_prod * ((margem_prod / 100) + 1);
-
-
-        var custo_prod_real = float_to_brl(parseFloat(custo_prod));
-        var custo_prod_double = brl_to_float(custo_prod);
-        var custo_prod_real2 = float_to_brl(parseFloat(custo_prod_double));
-
-        //echo(custo_prod);
-
-        //alert(custo_prod_real + " Double: " + custo_prod_double + " Segunda conversão" + custo_prod_real2);
-        //cursor p/ esquerda
-        //$("#preco_prod").val(float_to_brl(preco_prod));
-
-        //$("#custo_prod").val(float_to_brl(parseFloat(custo_prod)));
-
-        isNaN(preco_prod) ? $("#preco_prod").val('0,00') : $(
-            "#preco_prod").val(float_to_brl(preco_prod));
-
-        isNaN(custo_prod) ? $("#custo_prod").val('0,00') : $(
-            "#custo_prod").val(float_to_brl(parseFloat(custo_prod)));
-
-
-
-    });
-
-    $("#margem_prod").keyup(function () {
-
-        var string_custo_prod = $("#custo_prod").val().toString();
-
-        var x = string_custo_prod.length;
-        var simbolo_decimal = string_custo_prod.substring(x - 3, x);
-
-        //var have_comma = string_custo_prod.includes(",");
-        //var have_dot = string_custo_prod.includes(".");
-
-        var custo_prod = brl_to_float($("#custo_prod").val());
-        var margem_prod = $("#margem_prod").val();
-        var preco_prod = custo_prod * ((margem_prod / 100) + 1);
-        var custo_prod_real = float_to_brl(parseFloat(custo_prod));
-        var custo_prod_double = brl_to_float(custo_prod);
-        var custo_prod_real2 = float_to_brl(parseFloat(custo_prod_double));
-
-
-        //$("#preco_prod").val(float_to_brl(preco_prod));
-        //$("#margem_prod").val(parseInt(margem_prod));
-        isNaN(margem_prod) || margem_prod == '' ? $("#margem_prod").val('0') : $(
-            "#margem_prod").val(parseInt(margem_prod));
-
-        isNaN(preco_prod) ? $("#preco_prod").val('0,00') : $(
-            "#preco_prod").val(float_to_brl(preco_prod));
-
-
-        //$("#custo_prod").val(float_to_brl(parseFloat(custo_prod)));
+        isNaN(prod_cost) ? $("#prod_cost").val('0,00') : $(
+            "#prod_cost").val(float_to_brl(parseFloat(prod_cost)));
     });
 
 
-    $("#preco_prod").keyup(function () {
+    $("#prod_markup").keyup(function () {
+
+        var prod_cost = brl_to_float($("#prod_cost").val());
+        var prod_markup = $("#prod_markup").val();
+        var prod_price = prod_cost * ((prod_markup / 100) + 1);
+
+        isNaN(prod_markup) || prod_markup == '' ? $("#prod_markup").val('0') : $(
+            "#prod_markup").val(parseInt(prod_markup));
+
+        isNaN(prod_price) ? $("#prod_price").val('0,00') : $(
+            "#prod_price").val(float_to_brl(prod_price));
+    });
 
 
+    $("#prod_price").keyup(function () {
 
-        var custo_prod = brl_to_float($("#custo_prod").val());
-        var margem_prod = $("#margem_prod").val();
-        var preco_prod = $("#preco_prod").val();
+        var prod_cost = brl_to_float($("#prod_cost").val());
+        var prod_price = $("#prod_price").val();
+        var price_toFloat = brl_to_float(prod_price);
+        var prod_cost_double = brl_to_float(prod_cost);
+        var price_toBrl = float_to_brl(parseFloat(price_toFloat));
+        var prod_markup = ((price_toFloat / prod_cost_double) - 1) * 100;
 
-        var preco_prod_double = brl_to_float(preco_prod);
-        var custo_prod_double = brl_to_float(custo_prod);
-        var preco_prod_real2 = float_to_brl(parseFloat(preco_prod_double));
-        var margem_prod_calculada = ((preco_prod_double / custo_prod_double) - 1) * 100;
-
-        if (margem_prod_calculada < 1 || isNaN(margem_prod_calculada) || margem_prod_calculada ==
+        if (prod_markup < 1 || isNaN(prod_markup) || prod_markup ==
             Infinity) {
-            $("#margem_prod").val('0');
+            $("#prod_markup").val('0');
         } else {
-            $("#margem_prod").val(parseInt(margem_prod_calculada));
+            $("#prod_markup").val(parseInt(prod_markup));
         }
 
-        //$("#preco_prod").val(preco_prod_real2);
+        isNaN(parseFloat(price_toBrl)) ? $("#prod_price").val('0,00') : $(
+            "#prod_price").val(
+                price_toBrl);
+    });
 
 
-        isNaN(parseFloat(preco_prod_real2)) ? $("#preco_prod").val('0,00') : $(
-            "#preco_prod").val(
-                preco_prod_real2);
+    $("#prod_cost_create").keyup(function () {
+
+        var prod_cost = brl_to_float($("#prod_cost_create").val());
+        var prod_markup = $("#prod_markup_create").val();
+        var prod_price = prod_cost * ((prod_markup / 100) + 1);
+
+        isNaN(prod_price) ? $("#prod_price_create").val('0,00') : $(
+            "#prod_price_create").val(float_to_brl(prod_price));
+
+        isNaN(prod_cost) ? $("#prod_cost_create").val('0,00') : $(
+            "#prod_cost_create").val(float_to_brl(parseFloat(prod_cost)));
+    });
+
+
+    $("#prod_markup_create").keyup(function () {
+
+        var string_prod_cost = $("#prod_cost_create").val().toString();
+
+        var x = string_prod_cost.length;
+        var prod_cost = brl_to_float($("#prod_cost_create").val());
+        var prod_markup = $("#prod_markup_create").val();
+        var prod_price = prod_cost * ((prod_markup / 100) + 1);
+        var prod_cost_double = brl_to_float(prod_cost);
+
+        isNaN(prod_markup) || prod_markup == '' ? $("#prod_markup_create").val('0') : $(
+            "#prod_markup_create").val(parseInt(prod_markup));
+
+        isNaN(prod_price) ? $("#prod_price_create").val('0,00') : $(
+            "#prod_price_create").val(float_to_brl(prod_price));
 
     });
 
 
+    $("#prod_price_create").keyup(function () {
 
+        var prod_cost = brl_to_float($("#prod_cost_create").val());
+        var prod_price = $("#prod_price_create").val();
 
+        var price_toFloat = brl_to_float(prod_price);
+        var prod_cost_double = brl_to_float(prod_cost);
+        var price_toBrl = float_to_brl(parseFloat(price_toFloat));
+        var prod_markup = ((price_toFloat / prod_cost_double) - 1) * 100;
 
-    //funções do form criar produto
-
-
-
-
-
-
-
-
-    $("#custo_prod_create").keyup(function () {
-
-        var string_custo_prod = $("#custo_prod_create").val().toString();
-
-        var x = string_custo_prod.length;
-        var simbolo_decimal = string_custo_prod.substring(x - 3, x);
-        //var have_comma = string_custo_prod.includes(",");
-        //var have_dot = string_custo_prod.includes(".");
-
-
-        // var simbolo_decimal = string_custo_prod.charAt(x - 3);
-
-        var custo_prod = brl_to_float($("#custo_prod_create").val());
-        //alert ("Custo_prod: " + custo_prod + "custoi prod val" + $("#custo_prod").val());
-
-        // está ignorando a casa decimal
-
-
-
-
-
-
-
-
-
-
-        var margem_prod = $("#margem_prod_create").val();
-        var preco_prod = custo_prod * ((margem_prod / 100) + 1);
-
-
-        var custo_prod_real = float_to_brl(parseFloat(custo_prod));
-        var custo_prod_double = brl_to_float(custo_prod);
-        var custo_prod_real2 = float_to_brl(parseFloat(custo_prod_double));
-
-        //echo(custo_prod);
-
-        //alert(custo_prod_real + " Double: " + custo_prod_double + " Segunda conversão" + custo_prod_real2);
-        //cursor p/ esquerda
-        //$("#preco_prod_create").val(float_to_brl(preco_prod));
-
-        //$("#custo_prod_create").val(float_to_brl(parseFloat(custo_prod)));
-
-        isNaN(preco_prod) ? $("#preco_prod_create").val('0,00') : $(
-            "#preco_prod_create").val(float_to_brl(preco_prod));
-
-        isNaN(custo_prod) ? $("#custo_prod_create").val('0,00') : $(
-            "#custo_prod_create").val(float_to_brl(parseFloat(custo_prod)));
-
-
-
-    });
-
-    $("#margem_prod_create").keyup(function () {
-
-        var string_custo_prod = $("#custo_prod_create").val().toString();
-
-        var x = string_custo_prod.length;
-        var simbolo_decimal = string_custo_prod.substring(x - 3, x);
-
-        //var have_comma = string_custo_prod.includes(",");
-        //var have_dot = string_custo_prod.includes(".");
-
-        var custo_prod = brl_to_float($("#custo_prod_create").val());
-        var margem_prod = $("#margem_prod_create").val();
-        var preco_prod = custo_prod * ((margem_prod / 100) + 1);
-        var custo_prod_real = float_to_brl(parseFloat(custo_prod));
-        var custo_prod_double = brl_to_float(custo_prod);
-        var custo_prod_real2 = float_to_brl(parseFloat(custo_prod_double));
-
-
-        //$("#preco_prod_create").val(float_to_brl(preco_prod));
-        //$("#margem_prod_create").val(parseInt(margem_prod));
-        isNaN(margem_prod) || margem_prod == '' ? $("#margem_prod_create").val('0') : $(
-            "#margem_prod_create").val(parseInt(margem_prod));
-
-        isNaN(preco_prod) ? $("#preco_prod_create").val('0,00') : $(
-            "#preco_prod_create").val(float_to_brl(preco_prod));
-
-
-        //$("#custo_prod_create").val(float_to_brl(parseFloat(custo_prod)));
-    });
-
-
-    $("#preco_prod_create").keyup(function () {
-
-
-
-        var custo_prod = brl_to_float($("#custo_prod_create").val());
-        var margem_prod = $("#margem_prod_create").val();
-        var preco_prod = $("#preco_prod_create").val();
-
-        var preco_prod_double = brl_to_float(preco_prod);
-        var custo_prod_double = brl_to_float(custo_prod);
-        var preco_prod_real2 = float_to_brl(parseFloat(preco_prod_double));
-        var margem_prod_calculada = ((preco_prod_double / custo_prod_double) - 1) * 100;
-
-        if (margem_prod_calculada < 1 || isNaN(margem_prod_calculada) || margem_prod_calculada ==
+        if (prod_markup < 1 || isNaN(prod_markup) || prod_markup ==
             Infinity) {
-            $("#margem_prod_create").val('0');
-            //alert('NaN: ' + margem_prod_calculada);
+            $("#prod_markup_create").val('0');
         } else {
-            $("#margem_prod_create").val(parseInt(margem_prod_calculada));
-            //alert('Number: ' + margem_prod_calculada);
+            $("#prod_markup_create").val(parseInt(prod_markup));
         }
 
-        //$("#preco_prod_create").val(preco_prod_real2);
-
-
-        isNaN(parseFloat(preco_prod_real2)) ? $("#preco_prod_create").val('0,00') : $(
-            "#preco_prod_create").val(
-                preco_prod_real2);
+        isNaN(parseFloat(price_toBrl)) ? $("#prod_price_create").val('0,00') : $(
+            "#prod_price_create").val(
+                price_toBrl);
 
     });
-
-    //funções do form criar produto
-
-
-
-
-
-
-
-
-
-
 
 });

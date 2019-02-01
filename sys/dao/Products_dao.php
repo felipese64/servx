@@ -1,75 +1,60 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/lib/db.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/model/product.php');
-
-
-
-
-
 class Products_dao
 {
-
-
 
     public function createProduct(Product $product)
     {
 
         $objDb = new db();
-        $link = $objDb->conecta_mysql();
+        $link = $objDb->mysql_connect();
 
-        $nome_prod = $product->getNome_prod();
-        $desc_prod = $product->getDesc_prod();
-        $grupo_prod = $product->getGrupo_prod();
-        $marca_prod = $product->getMarca_prod();
-        $custo_prod = $product->getCusto_prod();
-        $margem_prod = $product->getMargem_prod();
-        $preco_prod = $product->getPreco_prod();
-        $unidade_prod = $product->getUnidade_prod();
+        $prod_name = $product->getProd_name();
+        $prod_desc = $product->getProd_desc();
+        $prod_group = $product->getProd_group();
+        $prod_brand = $product->getProd_brand();
+        $prod_cost = $product->getProd_cost();
+        $prod_markup = $product->getProd_markup();
+        $prod_price = $product->getProd_price();
+        $prod_unit = $product->getProd_unit();
 
-        $sql = "INSERT INTO `servx`.`tbprodutos` (`nome_prod`, `grupo_prod`, `desc_prod`, `marca_prod`, `custo_prod`, `margem_prod`, `preco_prod`, `unidade_prod`) VALUES ('$nome_prod', '$grupo_prod', '$desc_prod', '$marca_prod', '$custo_prod', '$margem_prod', '$preco_prod', '$unidade_prod')";
+        $sql = "INSERT INTO `servx`.`tbproducts` (`prod_name`, `prod_group`, `prod_desc`, `prod_brand`, `prod_cost`, `prod_markup`, `prod_price`, `prod_unit`) VALUES ('$prod_name', '$prod_group', '$prod_desc', '$prod_brand', '$prod_cost', '$prod_markup', '$prod_price', '$prod_unit')";
 
         $rs = mysqli_query($link, $sql);
-        //$registro = mysqli_fetch_array($rs, MYSQLI_ASSOC);
-        //echo ($registro);
-
     }
 
     public function readProduct(Product $product)
     {
 
         $objDb = new db();
-        $link = $objDb->conecta_mysql();
+        $link = $objDb->mysql_connect();
 
-        $id_prod = $product->getId_prod();
-        $sql = "SELECT * FROM tbprodutos where id_prod = $id_prod";
+        $prod_id = $product->getProd_id();
+        $sql = "SELECT * FROM tbproducts where prod_id = $prod_id";
         $rs = mysqli_query($link, $sql);
-        $registro = mysqli_fetch_array($rs, MYSQLI_ASSOC);
+        $reg = mysqli_fetch_array($rs, MYSQLI_ASSOC);
 
-        $product->setNome_prod($registro['nome_prod']);
-        $product->setGrupo_prod($registro['grupo_prod']);
-        $product->setDesc_prod($registro['desc_prod']);
-        $product->setMarca_prod($registro['marca_prod']);
-        $product->setCusto_prod($registro['custo_prod']);
-        $product->setMargem_prod($registro['margem_prod']);
-        $product->setPreco_prod($registro['preco_prod']);
-        $product->setUnidade_prod($registro['unidade_prod']);
+        $product->setProd_name($reg['prod_name']);
+        $product->setProd_group($reg['prod_group']);
+        $product->setProd_desc($reg['prod_desc']);
+        $product->setProd_brand($reg['prod_brand']);
+        $product->setProd_cost($reg['prod_cost']);
+        $product->setProd_markup($reg['prod_markup']);
+        $product->setProd_price($reg['prod_price']);
+        $product->setProd_unit($reg['prod_unit']);
 
-        $product_row['id_prod'] = $product->getId_prod();
-        $product_row['nome_prod'] = $product->getNome_prod();
-        $product_row['desc_prod'] = $product->getDesc_prod();
-        $product_row['marca_prod'] = $product->getMarca_prod();
-        $product_row['grupo_prod'] = $product->getGrupo_prod();
-        $product_row['custo_prod'] = $product->getCusto_prod();
-        $product_row['margem_prod'] = $product->getMargem_prod();
-        $product_row['preco_prod'] = $product->getPreco_prod();
-        $product_row['unidade_prod'] = $product->getUnidade_prod();
+        $prod_array['prod_id'] = $product->getProd_id();
+        $prod_array['prod_name'] = $product->getProd_name();
+        $prod_array['prod_desc'] = $product->getProd_desc();
+        $prod_array['prod_brand'] = $product->getProd_brand();
+        $prod_array['prod_group'] = $product->getProd_group();
+        $prod_array['prod_cost'] = $product->getProd_cost();
+        $prod_array['prod_markup'] = $product->getProd_markup();
+        $prod_array['prod_price'] = $product->getProd_price();
+        $prod_array['prod_unit'] = $product->getProd_unit();
 
-        return $product_row;
-        
-       
-        //echo ($registro);
-
-
+        return $prod_array;
     }
 
 
@@ -77,13 +62,13 @@ class Products_dao
     {
 
         $objDb = new db();
-        $link = $objDb->conecta_mysql();
+        $link = $objDb->mysql_connect();
         $i = 0;
 
-        $sql = "select grupo_prod from tbprodutos group by grupo_prod";
+        $sql = "select prod_group from tbproducts group by prod_group";
         $rs = mysqli_query($link, $sql);
-        while ($registro = mysqli_fetch_array($rs, MYSQLI_NUM)) {
-            $group[$i] = $registro;
+        while ($reg = mysqli_fetch_array($rs, MYSQLI_NUM)) {
+            $group[$i] = $reg;
             $i++;
         }
         return $group;
@@ -93,13 +78,13 @@ class Products_dao
     {
 
         $objDb = new db();
-        $link = $objDb->conecta_mysql();
+        $link = $objDb->mysql_connect();
         $i = 0;
 
-        $sql = "select marca_prod from tbprodutos group by marca_prod";
+        $sql = "select prod_brand from tbproducts group by prod_brand";
         $rs = mysqli_query($link, $sql);
-        while ($registro = mysqli_fetch_array($rs, MYSQLI_NUM)) {
-            $brands[$i] = $registro;
+        while ($reg = mysqli_fetch_array($rs, MYSQLI_NUM)) {
+            $brands[$i] = $reg;
             $i++;
         }
         return $brands;
@@ -108,42 +93,31 @@ class Products_dao
     public function updateProduct(Product $product)
     {
         $objDb = new db();
-        $link = $objDb->conecta_mysql();
+        $link = $objDb->mysql_connect();
 
-        $id_prod = $product->getId_prod();
-        $nome_prod = $product->getNome_prod();
-        $desc_prod = $product->getDesc_prod();
-        $grupo_prod = $product->getGrupo_prod();
-        $marca_prod = $product->getMarca_prod();
-        $custo_prod = $product->getCusto_prod();
-        $margem_prod = $product->getMargem_prod();
-        $preco_prod = $product->getPreco_prod();
-        $unidade_prod = $product->getUnidade_prod();
+        $prod_id = $product->getProd_id();
+        $prod_name = $product->getProd_name();
+        $prod_desc = $product->getProd_desc();
+        $prod_group = $product->getProd_group();
+        $prod_brand = $product->getProd_brand();
+        $prod_cost = $product->getProd_cost();
+        $prod_markup = $product->getProd_markup();
+        $prod_price = $product->getProd_price();
+        $prod_unit = $product->getProd_unit();
 
-        $sql = "UPDATE `servx`.`tbprodutos` SET `nome_prod`= '$nome_prod', `desc_prod`= '$desc_prod', `grupo_prod`='$grupo_prod', `marca_prod`='$marca_prod', `custo_prod`='$custo_prod', `margem_prod`='$margem_prod', `preco_prod`='$preco_prod', `unidade_prod`='$unidade_prod' WHERE `id_prod`='$id_prod'";
-
+        $sql = "UPDATE `servx`.`tbproducts` SET `prod_name`= '$prod_name', `prod_desc`= '$prod_desc', `prod_group`='$prod_group', `prod_brand`='$prod_brand', `prod_cost`='$prod_cost', `prod_markup`='$prod_markup', `prod_price`='$prod_price', `prod_unit`='$prod_unit' WHERE `prod_id`='$prod_id'";
         $rs = mysqli_query($link, $sql);
-        echo mysqli_error($link);
-
-
     }
 
 
     public function deleteProduct(Product $product)
     {
         $objDb = new db();
-        $link = $objDb->conecta_mysql();
+        $link = $objDb->mysql_connect();
 
-        $id_prod = $product->getId_prod();
-        $sql = "DELETE FROM `servx`.`tbprodutos` WHERE `id_prod`='$id_prod'";
-        //$sql = "DELETE FROM `servx`.`tbprodutos` WHERE `id_prod`='50'";
+        $prod_id = $product->getProd_id();
+        $sql = "DELETE FROM `servx`.`tbproducts` WHERE `prod_id`='$prod_id'";
         $rs = mysqli_query($link, $sql);
-        return $rs;
-
     }
-
 };
-
-
-
 ?>

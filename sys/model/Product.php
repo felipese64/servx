@@ -2,194 +2,194 @@
 
 class product
 {
-    private $id_prod;
-    private $nome_prod;
-    private $desc_prod;
-    private $grupo_prod;
-    private $marca_prod;
-    private $custo_prod;
-    private $margem_prod;
-    private $preco_prod;
-    private $unidade_prod;
+    private $prod_id;
+    private $prod_name;
+    private $prod_desc;
+    private $prod_group;
+    private $prod_brand;
+    private $prod_cost;
+    private $prod_markup;
+    private $prod_price;
+    private $prod_unit;
 
 
     /**
-     * Get the value of id_prod
+     * Get the value of prod_id
      */
-    public function getId_prod()
+    public function getProd_id()
     {
-        return $this->id_prod;
+        return $this->prod_id;
     }
 
     /**
-     * Set the value of id_prod
+     * Set the value of prod_id
      *
      * @return  self
      */
-    public function setId_prod($id_prod)
+    public function setProd_id($prod_id)
     {
-        $this->id_prod = $id_prod;
+        $this->prod_id = $prod_id;
 
         return $this;
     }
 
     /**
-     * Get the value of nome_prod
+     * Get the value of prod_name
      */
-    public function getNome_prod()
+    public function getProd_name()
     {
-        return $this->nome_prod;
+        return $this->prod_name;
     }
 
     /**
-     * Set the value of nome_prod
+     * Set the value of prod_name
      *
      * @return  self
      */
-    public function setNome_prod($nome_prod)
+    public function setProd_name($prod_name)
     {
-        $this->nome_prod = $nome_prod;
+        $this->prod_name = $prod_name;
 
         return $this;
     }
 
     /**
-     * Get the value of desc_prod
+     * Get the value of prod_desc
      */
-    public function getDesc_prod()
+    public function getProd_desc()
     {
-        return $this->desc_prod;
+        return $this->prod_desc;
     }
 
     /**
-     * Set the value of desc_prod
+     * Set the value of prod_desc
      *
      * @return  self
      */
-    public function setDesc_prod($desc_prod)
+    public function setProd_desc($prod_desc)
     {
-        $this->desc_prod = $desc_prod;
+        $this->prod_desc = $prod_desc;
 
         return $this;
     }
 
     /**
-     * Get the value of grupo_prod
+     * Get the value of prod_group
      */
-    public function getGrupo_prod()
+    public function getProd_group()
     {
-        return $this->grupo_prod;
+        return $this->prod_group;
     }
 
     /**
-     * Set the value of grupo_prod
+     * Set the value of prod_group
      *
      * @return  self
      */
-    public function setGrupo_prod($grupo_prod)
+    public function setProd_group($prod_group)
     {
-        $this->grupo_prod = $grupo_prod;
+        $this->prod_group = $prod_group;
 
         return $this;
     }
 
     /**
-     * Get the value of marca_prod
+     * Get the value of prod_brand
      */
-    public function getMarca_prod()
+    public function getProd_brand()
     {
-        return $this->marca_prod;
+        return $this->prod_brand;
     }
 
     /**
-     * Set the value of marca_prod
+     * Set the value of prod_brand
      *
      * @return  self
      */
-    public function setMarca_prod($marca_prod)
+    public function setProd_brand($prod_brand)
     {
-        $this->marca_prod = $marca_prod;
+        $this->prod_brand = $prod_brand;
 
         return $this;
     }
 
 
     /**
-     * Get the value of custo_prod
+     * Get the value of prod_cost
      */
-    public function getCusto_prod()
+    public function getProd_cost()
     {
-        return $this->custo_prod;
+        return $this->prod_cost;
     }
 
     /**
-     * Set the value of custo_prod
+     * Set the value of prod_cost
      *
      * @return  self
      */
-    public function setCusto_prod($custo_prod)
+    public function setProd_cost($prod_cost)
     {
-        $this->custo_prod = $custo_prod;
+        $this->prod_cost = $prod_cost;
 
         return $this;
     }
 
     /**
-     * Get the value of margem_prod
+     * Get the value of prod_markup
      */
-    public function getMargem_prod()
+    public function getProd_markup()
     {
-        return $this->margem_prod;
+        return $this->prod_markup;
     }
 
     /**
-     * Set the value of margem_prod
+     * Set the value of prod_markup
      *
      * @return  self
      */
-    public function setMargem_prod($margem_prod)
+    public function setProd_markup($prod_markup)
     {
-        $this->margem_prod = $margem_prod;
+        $this->prod_markup = $prod_markup;
 
         return $this;
     }
 
     /**
-     * Get the value of preco_prod
+     * Get the value of prod_price
      */
-    public function getPreco_prod()
+    public function getProd_price()
     {
-        return $this->preco_prod;
+        return $this->prod_price;
     }
 
     /**
-     * Set the value of preco_prod
+     * Set the value of prod_price
      *
      * @return  self
      */
-    public function setPreco_prod($preco_prod)
+    public function setProd_price($prod_price)
     {
-        $this->preco_prod = $preco_prod;
+        $this->prod_price = $prod_price;
 
         return $this;
     }
 
     /**
-     * Get the value of unidade_prod
+     * Get the value of prod_unit
      */
-    public function getUnidade_prod()
+    public function getProd_unit()
     {
-        return $this->unidade_prod;
+        return $this->prod_unit;
     }
 
     /**
-     * Set the value of unidade_prod
+     * Set the value of prod_unit
      *
      * @return  self
      */
-    public function setUnidade_prod($unidade_prod)
+    public function setProd_unit($prod_unit)
     {
-        $this->unidade_prod = $unidade_prod;
+        $this->prod_unit = $prod_unit;
 
         return $this;
     }

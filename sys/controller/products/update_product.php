@@ -4,24 +4,19 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/lib/db.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/dao/Products_dao.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/model/Product.php');
 
-
 $product = new Product();
 $productsDao = new Products_dao();
 
-$product->setId_prod($_POST['id_prod']);
-$product->setNome_prod($_POST['nome_prod']);
-$product->setGrupo_prod($_POST['grupo_prod']);
-$product->setDesc_prod($_POST['desc_prod']);
-$product->setMarca_prod($_POST['marca_prod']);
-$product->setCusto_prod($_POST['custo_prod']);
-$product->setMargem_prod($_POST['margem_prod']);
-$product->setPreco_prod($_POST['preco_prod']);
-$product->setUnidade_prod($_POST['unidade_prod']);
-
+$product->setProd_id($_POST['prod_id']);
+$product->setProd_name($_POST['prod_name']);
+$product->setProd_group($_POST['prod_group']);
+$product->setProd_desc($_POST['prod_desc']);
+$product->setProd_brand($_POST['prod_brand']);
+$product->setProd_cost($_POST['prod_cost']);
+$product->setProd_markup($_POST['prod_markup']);
+$product->setProd_price($_POST['prod_price']);
+$product->setProd_unit($_POST['prod_unit']);
 
 echo $productsDao->updateProduct($product);
-
-
-
 
 ?>

@@ -4,14 +4,14 @@ class db
 {
 
     private $host = 'localhost';
-    private $usuario = 'root';
-    private $senha = '';
-    private $database = 'servx';
+    private $user = 'root';
+    private $pass = '';
+    private $db = 'servx';
 
-    public function conecta_mysql()
+    public function mysql_connect()
     {
 
-        $con = mysqli_connect($this->host, $this->usuario, $this->senha, $this->database);
+        $con = mysqli_connect($this->host, $this->user, $this->pass, $this->db);
         mysqli_set_charset($con, 'utf8');
 
         if (mysqli_connect_errno()) {
@@ -19,9 +19,6 @@ class db
         }
 
         return $con;
-
-
     }
-
 }
 ?>
