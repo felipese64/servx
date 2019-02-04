@@ -4,32 +4,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
     <title>Home</title>
-
     <link href="apps/css/bootstrap.min.css" rel="stylesheet">
-
 
     <!-- Documentation extras -->
 
     <link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
-
-    <link href="apps/css/docs.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="apps/css/all.min.css" rel="stylesheet">
     <link href="apps/css/style.css" rel="stylesheet">
-
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 </head>
 
 <body>
-
-
-
-
-
-
-
 
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
@@ -46,10 +35,6 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="index.php">Início<span class="sr-only">(current)</span></a>
                     </li>
-
-
-
-
 
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button">OS</a>
@@ -83,22 +68,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Sair<span class="sr-only">(current)</span></a>
                     </li>
-
-
-
-
-
-
                 </ul>
-
             </div>
         </div>
     </nav>
-
-
-
-
-
 
 
     <div class="container">
@@ -120,9 +93,6 @@
                         <h2 class="icon_description">OS</h2>
                     </div>
                 </a>
-
-
-
 
             </div>
 
@@ -170,46 +140,16 @@
                     </div>
                 </a>
             </div>
-
-
-
-
-
-
-
-
-
-
         </div><!-- row -->
-
-
     </div><!-- container -->
 
-
-
-
-
-
-
-
-
-
-
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
     </script>
-    <script>
-        window.jQuery || document.write('<script src="apps/js/jquery-slim.min.js"><\/script>')
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
     </script>
 
-    <script src="apps/js/popper.min.js">
-    </script>
-    <script src="apps/js/bootstrap.min.js">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js">
-    </script>
-    <script src="apps/js/docs.min.js">
-    </script>
 </body>
 
 </html>
