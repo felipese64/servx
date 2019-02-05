@@ -52,7 +52,7 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">Serviços</a>
+                        <a class="nav-link" href="sys\view\services_view.php" role="button">Serviços</a>
                     </li>
 
 
@@ -89,7 +89,7 @@
             <div class="col-sm-2">
                 <a href="#">
                     <div class="panel_button">
-                        <h2 class="fas fa-file"></h2><br />
+                        <h2 class="fas fa-file-alt"></h2><br />
                         <h2 class="icon_description">OS</h2>
                     </div>
                 </a>
@@ -115,7 +115,7 @@
             </div>
 
             <div class="col-sm-2">
-                <a href="#">
+                <a href="sys\view\services_view.php">
                     <div class="panel_button">
                         <h2 class="fas fa-wrench"></h2><br />
                         <h2 class="icon_description">Serviços</h2>
@@ -126,7 +126,7 @@
             <div class="col-sm-2">
                 <a href="#">
                     <div class="panel_button">
-                        <h2 class="fas fa-briefcase"></h2><br />
+                        <h2 class="fas fa-toolbox"></h2><br />
                         <h2 class="icon_description">Técnicos</h2>
                     </div>
                 </a>

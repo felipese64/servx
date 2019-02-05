@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Produtos</title>
+    <title>Serviços</title>
     <link href="../../apps/css/autocomplete.css" rel="stylesheet">
     <link href="../../apps/css/datatable-custom.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -30,8 +30,13 @@
     </script>
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js">
     </script>
+
+
     <script src="../../sys/lib/functions.js"></script>
-    <script src="products_view.js"></script>
+    <script src="services_view.js"></script>
+
+
+
 
 </head>
 
@@ -59,11 +64,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button">Clientes</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#" role="button">Produtos</a>
-                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="services_view.php" role="button">Serviços</a>
+                        <a class="nav-link" href="products_view.php" role="button">Produtos</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" role="button">Serviços</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button">Técnicos</a>
@@ -82,23 +87,20 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="panel_title">Produtos</h1>
+                <h1 class="panel_title">Serviços</h1>
             </div>
         </div>
     </div>
 
     <div class="container">
         <div class="table_panel">
-            <table id="list-products" class="display" style="width:100%">
+            <table id="list-services" class="display" style="width:100%">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
-                        <th>Unidade</th>
-                        <th>Marca</th>
-                        <th>Grupo</th>
-                        <th>Custo(R$)</th>
-                        <th>Margem(%)</th>
+                        <th>Tempo Estimado(Min)</th>
+                        <th>Preço/Min(R$)</th>
                         <th>Preço(R$)</th>
                     </tr>
                 </thead>
@@ -107,8 +109,8 @@
         </div>
     </div>
 
-    <!-- Modal Create Product -->
-    <div class="modal" id="modal_create_product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- Modal Create service -->
+    <div class="modal" id="modal_create_service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -119,39 +121,32 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_create_product">
+                    <form id="form_create_service">
                         <div class="form-group">
                             <br />
                             <div class="row">
-                                <div class="col-md-6"><label for="prod_name">Nome
-                                    </label><input id="prod_name_create" name="prod_name" type="text"
+                                <div class="col-md-12"><label for="serv_name_create">Nome
+                                    </label><input id="serv_name_create" name="serv_name" type="text"
                                         class="form-control"></div>
-                                <div class="col-md-3 autocomplete"><label for="prod_brand">Marca </label><input
-                                        id="prod_brand_create" name="prod_brand" type="text" class="form-control"></div>
-                                <div class="col-md-3"><label for="prod_group">Grupo </label><input
-                                        id="prod_group_create" name="prod_group" type="text" class="form-control"></div>
+
                             </div>
+
                             <div class="row">
-                                <div class="col-md-3"><label for="prod_cost">Custo (R$) </label><input value="0,00"
-                                        style="" id="prod_cost_create" name="prod_cost" type="text"
-                                        class="form-control"></div>
-                                <div class="col-md-3"><label for="prod_markup">Margem (%) </label><input value="60"
-                                        id="prod_markup_create" name="prod_markup" type="text" class="form-control">
+
+                                <div class="col-md-4"><label for="serv_ts_create">Tempo Estimado(Min)
+                                    </label><input id="serv_ts_create" name="serv_ts" type="text" class="form-control">
                                 </div>
-                                <div class="col-md-3"> <label for="prod_price">Preço (R$) </label><input value="0,00"
-                                        id="prod_price_create" name="prod_price" type="text" class="form-control"></div>
-                                <div class="col-md-3"> <label for="prod_unit">Unidade</label>
-                                    <select id="prod_unit_create" name="prod_unit" class="form-control">
-                                        <option selected>Escolha...</option>
-                                        <option value="Pç.">Pç.</option>
-                                        <option value="m">m</option>
-                                        <option value="Pct.">Pct.</option>
-                                        <option value="Cx.">Cx.</option>
-                                    </select></div>
+                                <div class="col-md-4"><label for="serv_ts_price_create">Preço/Min(R$) </label><input
+                                        id="serv_ts_price_create" name="serv_ts_price" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-4"><label for="serv_price_create">Preço(R$) </label><input
+                                        id="serv_price_create" name="serv_price" type="text" class="form-control"></div>
+
                             </div>
+
                             <div class="row">
-                                <div class="col-md-12"><label for="prod_desc">Descrição </label><textarea rows="3"
-                                        name="prod_desc" id="prod_desc_create" cols="30" rows="10"
+                                <div class="col-md-12"><label for="serv_desc_create">Descrição </label><textarea
+                                        rows="3" name="serv_desc" id="serv_desc_create" cols="30" rows="10"
                                         class="form-control"></textarea></div>
                             </div>
                         </div>
@@ -159,106 +154,96 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-danger mr-auto"
-                        id="btn_exit_creating_product">Sair</button>
-                    <button type="button" class="btn btn-primary" id="btn_create_product">Salvar</button>
+                        id="btn_exit_creating_service">Sair</button>
+                    <button type="button" class="btn btn-primary" id="btn_create_service">Salvar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /Modal Create Product -->
+    <!-- /Modal Create service -->
 
-    <!-- Modal Edit Product -->
-    <div class="modal" id="modal_edit_product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- Modal Edit service -->
+    <div class="modal" id="modal_edit_service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Editar</h5>
-                    <button type="button" class="close" id="btn_close_product_edition" data-dismiss="modal"
+                    <button type="button" class="close" id="btn_close_service_edition" data-dismiss="modal"
                         aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_edit_product">
+                    <form id="form_edit_service">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-2"><label for="prod_id">ID </label><input id="prod_id" name="prod_id"
+                                <div class="col-md-2"><label for="serv_id">ID </label><input id="serv_id" name="serv_id"
                                         type="text" class="form-control" style="pointer-events: none;" readonly></div>
                                 <div class="col-md-10"></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label for="prod_name">Nome </label><input id="prod_name"
-                                        name="prod_name" type="text" class="form-control"></div>
-                                <div class="col-md-3"><label for="prod_brand">Marca </label><input id="prod_brand"
-                                        name="prod_brand" type="text" class="form-control">
+                                <div class="col-md-12"><label for="serv_name">Nome
+                                    </label><input id="serv_name" name="serv_name" type="text" class="form-control">
                                 </div>
-                                <div class="col-md-3"><label for="prod_group">Grupo </label><input id="prod_group"
-                                        name="prod_group" type="text" class="form-control">
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-4"><label for="serv_ts">Tempo Estimado(Min)
+                                    </label><input id="serv_ts" name="serv_ts" type="text" class="form-control">
                                 </div>
+                                <div class="col-md-4"><label for="serv_ts_price">Preço/Min(R$) </label><input
+                                        id="serv_ts_price" name="serv_ts_price" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-4"><label for="serv_price">Preço(R$) </label><input id="serv_price"
+                                        name="serv_price" type="text" class="form-control"></div>
+
                             </div>
                             <div class="row">
-                                <div class="col-md-3"><label for="prod_cost">Custo (R$) </label><input style=""
-                                        id="prod_cost" name="prod_cost" type="text" class="form-control">
-                                </div>
-                                <div class="col-md-3"><label for="prod_markup">Margem (%) </label><input
-                                        id="prod_markup" name="prod_markup" type="text" class="form-control">
-                                </div>
-                                <div class="col-md-3"> <label for="prod_price">Preço (R$) </label><input id="prod_price"
-                                        name="prod_price" type="text" class="form-control">
-                                </div>
-                                <div class="col-md-3"> <label for="prod_unit">Unidade</label>
-                                    <select id="prod_unit" name="prod_unit" class="form-control">
-                                        <option selected>Escolha...</option>
-                                        <option value="Pç.">Pç.</option>
-                                        <option value="m">m</option>
-                                        <option value="Pct.">Pct.</option>
-                                        <option value="Cx.">Cx.</option>
-                                    </select></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12"><label for="prod_desc">Descrição </label><textarea rows="3"
-                                        name="prod_desc" id="prod_desc" cols="30" rows="10"
+                                <div class="col-md-12"><label for="serv_desc">Descrição </label><textarea rows="3"
+                                        name="serv_desc" id="serv_desc" cols="30" rows="10"
                                         class="form-control"></textarea></div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger mr-auto" id="btn_delete_product">Excluir</button>
-                    <button type="button" class="btn btn-primary" id="btn_update_product">Salvar</button>
+                    <button type="button" class="btn btn-danger mr-auto" id="btn_delete_service">Excluir</button>
+                    <button type="button" class="btn btn-primary" id="btn_update_service">Salvar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /Modal Edit Product -->
+    <!-- /Modal Edit service -->
 
-    <!-- Modal Delete Product -->
+    <!-- Modal Delete service -->
     <div class="modal" tabindex="-1" role="dialog" id="modal_confirm_delete">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Excluir Produto</h5>
-                    <button type="button" class="close btn_cancel_product_deletion" data-dismiss="modal"
+                    <h5 class="modal-title">Excluir Servico</h5>
+                    <button type="button" class="close btn_cancel_service_deletion" data-dismiss="modal"
                         aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="txt_delete_product">Tem certeza que deseja excluir o produto?</p>
+                    <p id="txt_delete_service">Tem certeza que deseja excluir o servico?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="btn_confirm_product_deletion">Excluir</button>
-                    <button type="button" class="btn btn-primary btn_cancel_product_deletion"
+                    <button type="button" class="btn btn-danger" id="btn_confirm_service_deletion">Excluir</button>
+                    <button type="button" class="btn btn-primary btn_cancel_service_deletion"
                         data-dismiss="modal">Voltar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Delete Product -->
+    <!-- Modal Delete service -->
 
-    <!-- Modal Confirm Update Product -->
-    <div class="modal" tabindex="-1" role="dialog" id="modal_confirm_update_product">
+    <!-- Modal Confirm Update service -->
+    <div class="modal" tabindex="-1" role="dialog" id="modal_confirm_update_service">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -268,19 +253,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="txt_update_product">Deseja salvar as alterações?</p>
+                    <p id="txt_update_service">Deseja salvar as alterações?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btn_confirm_product_update">Salvar</button>
+                    <button type="button" class="btn btn-primary" id="btn_confirm_service_update">Salvar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Confirm Update Product -->
+    <!-- Modal Confirm Update service -->
 
-    <!-- Modal Update Product Success -->
-    <div class="modal" tabindex="-1" role="dialog" id="modal_update_product_success_message">
+    <!-- Modal Update service Success -->
+    <div class="modal" tabindex="-1" role="dialog" id="modal_update_service_success_message">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -290,40 +275,40 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="txt_update_product">Produto atualizado com sucesso!</p>
+                    <p id="txt_update_service">Servico atualizado com sucesso!</p>
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary" id="modal_close_update_product_success_message"
+                    <button type="button" class="btn btn-primary" id="modal_close_update_service_success_message"
                         data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Update Product Success -->
+    <!-- Modal Update service Success -->
 
-    <!-- Modal Create Product Success -->
-    <div class="modal" tabindex="-1" role="dialog" id="modal_create_product_success_message">
+    <!-- Modal Create service Success -->
+    <div class="modal" tabindex="-1" role="dialog" id="modal_create_service_success_message">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Novo Produto</h5>
+                    <h5 class="modal-title">Novo Servico</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Produto criado com sucesso!</p>
+                    <p>Servico criado com sucesso!</p>
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary" id="modal_close_create_product_success_message"
+                    <button type="button" class="btn btn-primary" id="modal_close_create_service_success_message"
                         data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Create Product Success -->
+    <!-- Modal Create service Success -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
         integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
