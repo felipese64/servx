@@ -112,7 +112,7 @@
     <!-- Modal Create service -->
     <div class="modal" id="modal_create_service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Adicionar</h5>
@@ -136,10 +136,11 @@
                                 <div class="col-md-4"><label for="serv_ts_create">Tempo Estimado(Min)
                                     </label><input id="serv_ts_create" name="serv_ts" type="text" class="form-control">
                                 </div>
-                                <div class="col-md-4"><label for="serv_ts_price_create">Preço/Min(R$) </label><input
-                                        id="serv_ts_price_create" name="serv_ts_price" type="text" class="form-control">
+                                <div class="col-md-4"><label for="serv_ts_price_create"><br />Preço/Min(R$)
+                                    </label><input id="serv_ts_price_create" name="serv_ts_price" type="text"
+                                        class="form-control">
                                 </div>
-                                <div class="col-md-4"><label for="serv_price_create">Preço(R$) </label><input
+                                <div class="col-md-4"><label for="serv_price_create"><br />Preço(R$) </label><input
                                         id="serv_price_create" name="serv_price" type="text" class="form-control"></div>
 
                             </div>
@@ -165,7 +166,7 @@
     <!-- Modal Edit service -->
     <div class="modal" id="modal_edit_service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Editar</h5>
@@ -194,11 +195,11 @@
                                 <div class="col-md-4"><label for="serv_ts">Tempo Estimado(Min)
                                     </label><input id="serv_ts" name="serv_ts" type="text" class="form-control">
                                 </div>
-                                <div class="col-md-4"><label for="serv_ts_price">Preço/Min(R$) </label><input
+                                <div class="col-md-4"><label for="serv_ts_price"><br />Preço/Min(R$) </label><input
                                         id="serv_ts_price" name="serv_ts_price" type="text" class="form-control">
                                 </div>
-                                <div class="col-md-4"><label for="serv_price">Preço(R$) </label><input id="serv_price"
-                                        name="serv_price" type="text" class="form-control"></div>
+                                <div class="col-md-4"><label for="serv_price"><br />Preço(R$) </label><input
+                                        id="serv_price" name="serv_price" type="text" class="form-control"></div>
 
                             </div>
                             <div class="row">

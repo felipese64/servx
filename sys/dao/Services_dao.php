@@ -1,7 +1,7 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/lib/db.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/model/Service.php');
-class Products_dao
+class Services_dao
 {
 
     public function createService(Service $service)
