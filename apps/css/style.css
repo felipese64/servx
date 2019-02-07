@@ -14,12 +14,7 @@ table.dataTable thead .sorting::after, table.dataTable thead .sorting_asc::after
 
 }
 
-#btn_open_create_product_modal{
-    margin-right: 20px;
-    margin-bottom: 2px;
-}
-
-#btn_open_create_service_modal {
+.btn_open_create_modal{
     margin-right: 20px;
     margin-bottom: 2px;
 }

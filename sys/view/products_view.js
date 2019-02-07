@@ -8,7 +8,7 @@ $(document).ready(function () {
         "initComplete": function (settings, json) {
 
             $('#list-products_filter').prepend(
-                '<button type="button" class="btn btn-primary" id="btn_open_create_product_modal">Adicionar Produto</button>'
+                '<button type="button" class="btn btn-primary btn_open_create_modal" id="btn_open_create_product_modal">Adicionar Produto</button>'
             );
 
             $('#btn_open_create_product_modal').on("click", function () {
