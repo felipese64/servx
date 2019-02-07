@@ -51,7 +51,7 @@
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../../index.html">Início<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="../../index.php">Início<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button">OS</a>
@@ -60,10 +60,10 @@
                         <a class="nav-link" href="#" role="button">Clientes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="products_view.html" role="button">Produtos</a>
+                        <a class="nav-link" href="products_view.php" role="button">Produtos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="services_view.html" role="button">Serviços</a>
+                        <a class="nav-link" href="services_view.php" role="button">Serviços</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button">Técnicos</a>

@@ -9,8 +9,8 @@
     <link href="../../apps/css/autocomplete.css" rel="stylesheet">
     <link href="../../apps/css/datatable-custom.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <link href="../../apps/css/style.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js">
@@ -51,19 +51,19 @@
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../../index.html">Início<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="../../index.php">Início<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button">OS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="customers_view.html" role="button">Clientes</a>
+                        <a class="nav-link" href="customers_view.php" role="button">Clientes</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="#" role="button">Produtos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="services_view.html" role="button">Serviços</a>
+                        <a class="nav-link" href="services_view.php" role="button">Serviços</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button">Técnicos</a>
@@ -124,17 +124,19 @@
                             <br />
                             <div class="row">
                                 <div class="col-md-6"><label for="prod_name">Nome
-                                    </label><input id="prod_name_create" name="prod_name" type="text" class="form-control"></div>
-                                <div class="col-md-3 autocomplete"><label for="prod_brand">Marca </label><input id="prod_brand_create"
-                                        name="prod_brand" type="text" class="form-control"></div>
-                                <div class="col-md-3"><label for="prod_group">Grupo </label><input id="prod_group_create"
-                                        name="prod_group" type="text" class="form-control"></div>
+                                    </label><input id="prod_name_create" name="prod_name" type="text"
+                                        class="form-control"></div>
+                                <div class="col-md-3 autocomplete"><label for="prod_brand">Marca </label><input
+                                        id="prod_brand_create" name="prod_brand" type="text" class="form-control"></div>
+                                <div class="col-md-3"><label for="prod_group">Grupo </label><input
+                                        id="prod_group_create" name="prod_group" type="text" class="form-control"></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3"><label for="prod_cost">Custo (R$) </label><input value="0,00"
-                                        style="" id="prod_cost_create" name="prod_cost" type="text" class="form-control"></div>
-                                <div class="col-md-3"><label for="prod_markup">Margem (%) </label><input value="60" id="prod_markup_create"
-                                        name="prod_markup" type="text" class="form-control">
+                                        style="" id="prod_cost_create" name="prod_cost" type="text"
+                                        class="form-control"></div>
+                                <div class="col-md-3"><label for="prod_markup">Margem (%) </label><input value="60"
+                                        id="prod_markup_create" name="prod_markup" type="text" class="form-control">
                                 </div>
                                 <div class="col-md-3"> <label for="prod_price">Preço (R$) </label><input value="0,00"
                                         id="prod_price_create" name="prod_price" type="text" class="form-control"></div>
@@ -148,14 +150,16 @@
                                     </select></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12"><label for="prod_desc">Descrição </label><textarea rows="3" name="prod_desc"
-                                        id="prod_desc_create" cols="30" rows="10" class="form-control"></textarea></div>
+                                <div class="col-md-12"><label for="prod_desc">Descrição </label><textarea rows="3"
+                                        name="prod_desc" id="prod_desc_create" cols="30" rows="10"
+                                        class="form-control"></textarea></div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-danger mr-auto" id="btn_exit_creating_product">Sair</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger mr-auto"
+                        id="btn_exit_creating_product">Sair</button>
                     <button type="button" class="btn btn-primary" id="btn_create_product">Salvar</button>
                 </div>
             </div>
@@ -170,7 +174,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Editar</h5>
-                    <button type="button" class="close" id="btn_close_product_edition" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" id="btn_close_product_edition" data-dismiss="modal"
+                        aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -183,21 +188,21 @@
                                 <div class="col-md-10"></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label for="prod_name">Nome </label><input id="prod_name" name="prod_name"
-                                        type="text" class="form-control"></div>
-                                <div class="col-md-3"><label for="prod_brand">Marca </label><input id="prod_brand" name="prod_brand"
-                                        type="text" class="form-control">
+                                <div class="col-md-6"><label for="prod_name">Nome </label><input id="prod_name"
+                                        name="prod_name" type="text" class="form-control"></div>
+                                <div class="col-md-3"><label for="prod_brand">Marca </label><input id="prod_brand"
+                                        name="prod_brand" type="text" class="form-control">
                                 </div>
-                                <div class="col-md-3"><label for="prod_group">Grupo </label><input id="prod_group" name="prod_group"
-                                        type="text" class="form-control">
+                                <div class="col-md-3"><label for="prod_group">Grupo </label><input id="prod_group"
+                                        name="prod_group" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3"><label for="prod_cost">Custo (R$) </label><input style="" id="prod_cost"
-                                        name="prod_cost" type="text" class="form-control">
+                                <div class="col-md-3"><label for="prod_cost">Custo (R$) </label><input style=""
+                                        id="prod_cost" name="prod_cost" type="text" class="form-control">
                                 </div>
-                                <div class="col-md-3"><label for="prod_markup">Margem (%) </label><input id="prod_markup"
-                                        name="prod_markup" type="text" class="form-control">
+                                <div class="col-md-3"><label for="prod_markup">Margem (%) </label><input
+                                        id="prod_markup" name="prod_markup" type="text" class="form-control">
                                 </div>
                                 <div class="col-md-3"> <label for="prod_price">Preço (R$) </label><input id="prod_price"
                                         name="prod_price" type="text" class="form-control">
@@ -212,8 +217,9 @@
                                     </select></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12"><label for="prod_desc">Descrição </label><textarea rows="3" name="prod_desc"
-                                        id="prod_desc" cols="30" rows="10" class="form-control"></textarea></div>
+                                <div class="col-md-12"><label for="prod_desc">Descrição </label><textarea rows="3"
+                                        name="prod_desc" id="prod_desc" cols="30" rows="10"
+                                        class="form-control"></textarea></div>
                             </div>
                         </div>
                     </form>
@@ -233,7 +239,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Excluir Produto</h5>
-                    <button type="button" class="close btn_cancel_product_deletion" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close btn_cancel_product_deletion" data-dismiss="modal"
+                        aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -242,7 +249,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" id="btn_confirm_product_deletion">Excluir</button>
-                    <button type="button" class="btn btn-primary btn_cancel_product_deletion" data-dismiss="modal">Voltar</button>
+                    <button type="button" class="btn btn-primary btn_cancel_product_deletion"
+                        data-dismiss="modal">Voltar</button>
                 </div>
             </div>
         </div>
@@ -317,12 +325,12 @@
     </div>
     <!-- Modal Create Product Success -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous">
-        </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous">
-        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
 
 </body>
 

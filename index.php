@@ -10,8 +10,8 @@
     <!-- Documentation extras -->
 
     <link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="apps/css/all.min.css" rel="stylesheet">
     <link href="apps/css/style.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -42,17 +42,17 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="sys\view\customers_view.html" role="button">Clientes</a>
+                        <a class="nav-link" href="sys\view\customers_view.php" role="button">Clientes</a>
                     </li>
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="sys\view\products_view.html" role="button">Produtos</a>
+                        <a class="nav-link" href="sys\view\products_view.php" role="button">Produtos</a>
                     </li>
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="sys\view\services_view.html" role="button">Serviços</a>
+                        <a class="nav-link" href="sys\view\services_view.php" role="button">Serviços</a>
                     </li>
 
 
@@ -97,7 +97,7 @@
             </div>
 
             <div class="col-sm-2">
-                <a href="sys\view\customers_view.html">
+                <a href="sys\view\customers_view.php">
                     <div class="panel_button">
                         <h2 class="fas fa-briefcase"></h2><br />
                         <h2 class="icon_description">Clientes</h2>
@@ -106,7 +106,7 @@
             </div>
 
             <div class="col-sm-2">
-                <a href="sys\view\products_view.html">
+                <a href="sys\view\products_view.php">
                     <div class="panel_button">
                         <h2 class="fas fa-shopping-cart"></h2><br />
                         <h2 class="icon_description">Produtos</h2>
@@ -115,7 +115,7 @@
             </div>
 
             <div class="col-sm-2">
-                <a href="sys\view\services_view.html">
+                <a href="sys\view\services_view.php">
                     <div class="panel_button">
                         <h2 class="fas fa-wrench"></h2><br />
                         <h2 class="icon_description">Serviços</h2>
@@ -143,12 +143,12 @@
         </div><!-- row -->
     </div><!-- container -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous">
-        </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous">
-        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
 
 </body>
 
