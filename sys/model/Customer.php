@@ -14,9 +14,10 @@ class customer
     private $customer_cellphone;
     private $customer_registry_date;
     private $customer_obs;
-    private $customer_adress_type;
-    private $customer_adress;
-    private $customer_adress_complements;
+    private $customer_address_type;
+    private $customer_address;
+    private $customer_address_number;
+    private $customer_address_complements;
     private $customer_zone;
     private $customer_state;
     private $customer_city;
@@ -243,61 +244,61 @@ class customer
     }
 
     /**
-     * Get the value of customer_adress_type
+     * Get the value of customer_address_type
      */
-    public function getCustomer_adress_type()
+    public function getCustomer_address_type()
     {
-        return $this->customer_adress_type;
+        return $this->customer_address_type;
     }
 
     /**
-     * Set the value of customer_adress_type
+     * Set the value of customer_address_type
      *
      * @return  self
      */
-    public function setCustomer_adress_type($customer_adress_type)
+    public function setCustomer_address_type($customer_address_type)
     {
-        $this->customer_adress_type = $customer_adress_type;
+        $this->customer_address_type = $customer_address_type;
 
         return $this;
     }
 
     /**
-     * Get the value of customer_adress
+     * Get the value of customer_address
      */
-    public function getCustomer_adress()
+    public function getCustomer_address()
     {
-        return $this->customer_adress;
+        return $this->customer_address;
     }
 
     /**
-     * Set the value of customer_adress
+     * Set the value of customer_address
      *
      * @return  self
      */
-    public function setCustomer_adress($customer_adress)
+    public function setCustomer_address($customer_address)
     {
-        $this->customer_adress = $customer_adress;
+        $this->customer_address = $customer_address;
 
         return $this;
     }
 
     /**
-     * Get the value of customer_adress_complements
+     * Get the value of customer_address_complements
      */
-    public function getCustomer_adress_complements()
+    public function getCustomer_address_complements()
     {
-        return $this->customer_adress_complements;
+        return $this->customer_address_complements;
     }
 
     /**
-     * Set the value of customer_adress_complements
+     * Set the value of customer_address_complements
      *
      * @return  self
      */
-    public function setCustomer_adress_complements($customer_adress_complements)
+    public function setCustomer_address_complements($customer_address_complements)
     {
-        $this->customer_adress_complements = $customer_adress_complements;
+        $this->customer_address_complements = $customer_address_complements;
 
         return $this;
     }
@@ -378,6 +379,26 @@ class customer
     public function setCustomer_cep($customer_cep)
     {
         $this->customer_cep = $customer_cep;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of customer_address_number
+     */
+    public function getCustomer_address_number()
+    {
+        return $this->customer_address_number;
+    }
+
+    /**
+     * Set the value of customer_address_number
+     *
+     * @return  self
+     */
+    public function setCustomer_address_number($customer_address_number)
+    {
+        $this->customer_address_number = $customer_address_number;
 
         return $this;
     }

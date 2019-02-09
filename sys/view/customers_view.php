@@ -154,8 +154,8 @@
                                     </label><input id="customer_cpf_create" name="customer_cpf" type="text"
                                         class="form-control"></div>
 
-                                <div class="col-md-3"><label for="customer_adress_type_create">Tipo de endereço
-                                    </label><select id="customer_adress_type_create" name="customer_adress_type"
+                                <div class="col-md-3"><label for="customer_address_type_create">Tipo de endereço
+                                    </label><select id="customer_address_type_create" name="customer_address_type"
                                         class="form-control">
                                         <option selected value="Residência">Residência</option>
                                         <option value="Apartamento">Apartamento</option>
@@ -165,20 +165,20 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label for="customer_adress_create">Endereço
-                                    </label><input id="customer_adress_create" name="customer_adress" type="text"
+                                <div class="col-md-6"><label for="customer_address_create">Endereço
+                                    </label><input id="customer_address_create" name="customer_address" type="text"
                                         class="form-control"></div>
-                                <div class="col-md-2"><label for="customer_adress_number_create">Nº
-                                    </label><input id="customer_adress_number_create" name="customer_adress_number"
+                                <div class="col-md-2"><label for="customer_address_number_create">Nº
+                                    </label><input id="customer_address_number_create" name="customer_address_number"
                                         type="text" class="form-control"></div>
                                 <div class="col-md-4"><label for="customer_zone_create">Bairro </label><input
                                         id="customer_zone_create" name="customer_zone" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="customer_adress_complements_create">Complemento
-                                    </label><input id="customer_adress_complements_create"
-                                        name="customer_adress_complements" type="text" class="form-control"></div>
+                                <div class="col-md-4"><label for="customer_address_complements_create">Complemento
+                                    </label><input id="customer_address_complements_create"
+                                        name="customer_address_complements" type="text" class="form-control"></div>
 
                                 <div class="col-md-2"><label for="customer_cep_create">CEP </label><input
                                         id="customer_cep_create" name="customer_cep" type="text" class="form-control">
@@ -266,8 +266,8 @@
                                     </label><input id="customer_cpf" name="customer_cpf" type="text"
                                         class="form-control"></div>
 
-                                <div class="col-md-3"><label for="customer_adress_type">Tipo de endereço
-                                    </label><select id="customer_adress_type" name="customer_adress_type"
+                                <div class="col-md-3"><label for="customer_address_type">Tipo de endereço
+                                    </label><select id="customer_address_type" name="customer_address_type"
                                         class="form-control">
                                         <option selected value="Residência">Residência</option>
                                         <option value="Apartamento">Apartamento</option>
@@ -277,19 +277,19 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label for="customer_adress">Endereço
-                                    </label><input id="customer_adress" name="customer_adress" type="text"
+                                <div class="col-md-6"><label for="customer_address">Endereço
+                                    </label><input id="customer_address" name="customer_address" type="text"
                                         class="form-control"></div>
-                                <div class="col-md-2"><label for="customer_adress_number">Nº
-                                    </label><input id="customer_adress_number" name="customer_adress_number" type="text"
-                                        class="form-control"></div>
+                                <div class="col-md-2"><label for="customer_address_number">Nº
+                                    </label><input id="customer_address_number" name="customer_address_number"
+                                        type="text" class="form-control"></div>
                                 <div class="col-md-4"><label for="customer_zone">Bairro </label><input
                                         id="customer_zone" name="customer_zone" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="customer_adress_complements">Complemento
-                                    </label><input id="customer_adress_complements" name="customer_adress_complements"
+                                <div class="col-md-4"><label for="customer_address_complements">Complemento
+                                    </label><input id="customer_address_complements" name="customer_address_complements"
                                         type="text" class="form-control"></div>
 
                                 <div class="col-md-2"><label for="customer_cep">CEP </label><input id="customer_cep"

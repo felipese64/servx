@@ -13,7 +13,7 @@ $columns = array(
 
     0 => 'customer_id',
     1 => 'customer_name',
-    2 => 'customer_adress',
+    2 => 'customer_address',
     3 => 'customer_telephone',
     4 => 'customer_cellphone',
     5 => 'customer_email',
@@ -29,7 +29,7 @@ $rows_number = mysqli_num_rows($tb_results);
 $search_result = "SELECT * FROM tbcustomers WHERE 1=1";
 if (!empty($requestData['search']['value'])) {   // se houver um parâmetro de pesquisa, $requestData['search']['value'] contém o parâmetro de pesquisa
     $search_result .= " AND ( customer_name LIKE '" . $requestData['search']['value'] . "%' ";
-    $search_result .= " OR customer_adress LIKE '" . $requestData['search']['value'] . "%' ";
+    $search_result .= " OR customer_address LIKE '" . $requestData['search']['value'] . "%' ";
     $search_result .= " OR customer_telephone LIKE '" . $requestData['search']['value'] . "%' ";
     $search_result .= " OR customer_cellphone LIKE '" . $requestData['search']['value'] . "%' ";
     $search_result .= " OR customer_email LIKE '" . $requestData['search']['value'] . "%' ";
@@ -48,7 +48,7 @@ while ($tb_row = mysqli_fetch_array($rs)) {
     $data = array();
     $data[] = $tb_row["customer_id"];
     $data[] = $tb_row["customer_name"];
-    $data[] = $tb_row["customer_adress"];
+    $data[] = $tb_row["customer_address"];
     $data[] = $tb_row["customer_telephone"];
     $data[] = $tb_row["customer_cellphone"];
     $data[] = $tb_row["customer_email"];
