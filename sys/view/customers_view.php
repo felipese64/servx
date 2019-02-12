@@ -16,6 +16,23 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js">
     </script>
     <script src="../../apps/js/autocomplete.js"></script>
+    <!-- -->
+    <script src="../../apps/js/jquery.mask.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        $("#customer_cpf_create").focus();
+        if (jQuery().mask) {
+            jQuery("#customer_cpf_create").mask('000.000.000-00');
+            //jQuery('.mkData').mask('00/00/0000');
+            //jQuery('.mkCep').mask('00.000-000');
+            //jQuery('.mkCelular').mask(maskBehavior, options);
+            //jQuery('.mkTelefone').mask('(00) 0000-0000');
+        }
+    });
+    </script>
+
+    <!-- -->
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js">
     </script>
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js">
@@ -233,6 +250,12 @@
                 <div class="modal-body">
                     <form id="form_edit_customer">
                         <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-2"><label for="customer_id">ID </label><input id="customer_id"
+                                        name="customer_id" type="text" class="form-control"
+                                        style="pointer-events: none;" readonly></div>
+                                <div class="col-md-10"></div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6"><label for="customer_name">Nome
                                     </label><input id="customer_name" name="customer_name" type="text"

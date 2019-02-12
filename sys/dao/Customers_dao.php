@@ -60,7 +60,7 @@ class Customers_dao
         $customer->setCustomer_address_type($reg['customer_address_type']);
         $customer->setCustomer_address($reg['customer_address']);
         $customer->setCustomer_address_number($reg['customer_address_number']);
-        $customer->setCustomer_complements($reg['customer_complements']);
+        $customer->setCustomer_address_complements($reg['customer_address_complements']);
         $customer->setCustomer_zone($reg['customer_zone']);
         $customer->setCustomer_state($reg['customer_state']);
         $customer->setCustomer_city($reg['customer_city']);
@@ -80,7 +80,7 @@ class Customers_dao
         $customer_array['customer_address_type'] = $customer->getCustomer_address_type();
         $customer_array['customer_address'] = $customer->getCustomer_address();
         $customer_array['customer_address_number'] = $customer->getCustomer_address_number();
-        $customer_array['customer_complements'] = $customer->getCustomer_complements();
+        $customer_array['customer_address_complements'] = $customer->getCustomer_address_complements();
         $customer_array['customer_zone'] = $customer->getCustomer_zone();
         $customer_array['customer_state'] = $customer->getCustomer_state();
         $customer_array['customer_city'] = $customer->getCustomer_city();

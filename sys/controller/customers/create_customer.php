@@ -19,6 +19,7 @@ $customer->setCustomer_registry_date($_POST['registry_date']);
 $customer->setCustomer_obs($_POST['customer_obs']);
 $customer->setCustomer_address_type($_POST['customer_address_type']);
 $customer->setCustomer_address($_POST['customer_address']);
+$customer->setCustomer_address_number($_POST['customer_address_number']);
 $customer->setCustomer_address_complements($_POST['customer_address_complements']);
 $customer->setCustomer_zone($_POST['customer_zone']);
 $customer->setCustomer_state($_POST['customer_state']);
