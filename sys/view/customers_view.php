@@ -19,18 +19,7 @@
     <!-- -->
     <script src="../../apps/js/jquery.mask.min.js"></script>
 
-    <script>
-    $(document).ready(function() {
-        $("#customer_cpf_create").focus();
-        if (jQuery().mask) {
-            jQuery("#customer_cpf_create").mask('000.000.000-00');
-            //jQuery('.mkData').mask('00/00/0000');
-            //jQuery('.mkCep').mask('00.000-000');
-            //jQuery('.mkCelular').mask(maskBehavior, options);
-            //jQuery('.mkTelefone').mask('(00) 0000-0000');
-        }
-    });
-    </script>
+
 
     <!-- -->
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js">
@@ -126,7 +115,7 @@
     <!-- Modal Create customer -->
     <div class="modal" id="modal_create_customer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Adicionar</h5>
@@ -138,74 +127,89 @@
                     <form id="form_create_customer">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-6"><label for="customer_name_create">Nome
+                                <div class="col-md-4"><label for="customer_name_create">Nome
                                     </label><input id="customer_name_create" name="customer_name" type="text"
                                         class="form-control"></div>
-                                <div class="col-md-3"><label for="customer_natural_legal_create">Tipo </label><select
-                                        id="customer_natural_legal_create" name="customer_natural_legal"
-                                        class="form-control">
-                                        <option selected value="Pessoa Física">Pessoa Física</option>
-                                        <option value="Pessoa Jurídica">Pessoa Jurídica</option>
-                                    </select></div>
-                                <div class="col-md-3"><label for="customer_telephone_create">Telefone
-                                    </label><input id="customer_telephone_create" name="customer_telephone" type="text"
-                                        class="form-control"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6"><label for="customer_trade_name_create">Nome Fantasia/Apelido
+
+                                <div class="col-md-4"><label for="customer_trade_name_create">Nome Fantasia/Apelido
                                     </label><input id="customer_trade_name_create" name="customer_trade_name"
                                         type="text" class="form-control"></div>
-                                <div class="col-md-3"><label for="customer_rg_create">RG </label><input
-                                        id="customer_rg_create" name="customer_rg" type="text" class="form-control">
-                                </div>
-                                <div class="col-md-3"><label for="customer_cellphone_create">Celular
+
+
+                                <div class="col-md-2"><label for="customer_telephone_create">Telefone
+                                    </label><input id="customer_telephone_create" name="customer_telephone" type="text"
+                                        class="form-control" value="67 "></div>
+
+                                <div class="col-md-2"><label for="customer_cellphone_create">Celular
                                     </label><input id="customer_cellphone_create" name="customer_cellphone" type="text"
-                                        class="form-control"></div>
+                                        class="form-control" value="67 "></div>
                             </div>
+
+
                             <div class="row">
-                                <div class="col-md-6"><label for="customer_email_create">E-mail </label><input
+                                <div class="col-md-4"><label for="customer_email_create">E-mail </label><input
                                         id="customer_email_create" name="customer_email" type="text"
                                         class="form-control"></div>
 
-                                <div class="col-md-3"><label for="customer_cpf_create">CPF
+
+                                <div class="col-md-3"><label for="customer_natural_legal_create">Tipo </label><select
+                                        id="customer_natural_legal_create" name="customer_natural_legal"
+                                        class="form-control">
+                                        <option selected value="PESSOA FÍSICA">PESSOA FÍSICA</option>
+                                        <option value="PESSOA JURÍDICA">PESSOA JURÍDICA</option>
+                                    </select></div>
+
+                                <div class="col-md-2"><label for="customer_rg_create">RG </label><input
+                                        id="customer_rg_create" name="customer_rg" type="text" class="form-control">
+                                </div>
+
+                                <div class="col-md-2"><label for="customer_cpf_create">CPF
                                     </label><input id="customer_cpf_create" name="customer_cpf" type="text"
                                         class="form-control"></div>
 
-                                <div class="col-md-3"><label for="customer_address_type_create">Tipo de endereço
-                                    </label><select id="customer_address_type_create" name="customer_address_type"
-                                        class="form-control">
-                                        <option selected value="Residência">Residência</option>
-                                        <option value="Apartamento">Apartamento</option>
-                                        <option value="Comércio">Comércio</option>
-                                        <option value="Industria">Industria</option>
-                                    </select>
-                                </div>
+
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label for="customer_address_create">Endereço
+                                <div class="col-md-4"><label for="customer_address_create">Endereço
                                     </label><input id="customer_address_create" name="customer_address" type="text"
                                         class="form-control"></div>
-                                <div class="col-md-2"><label for="customer_address_number_create">Nº
+                                <div class="col-md-1"><label for="customer_address_number_create">Nº
                                     </label><input id="customer_address_number_create" name="customer_address_number"
                                         type="text" class="form-control"></div>
-                                <div class="col-md-4"><label for="customer_zone_create">Bairro </label><input
+                                <div class="col-md-2"><label for="customer_zone_create">Bairro </label><input
                                         id="customer_zone_create" name="customer_zone" type="text" class="form-control">
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="customer_address_complements_create">Complemento
-                                    </label><input id="customer_address_complements_create"
-                                        name="customer_address_complements" type="text" class="form-control"></div>
+
+
+                                <div class="col-md-2"><label for="customer_address_type_create">Tipo de endereço
+                                    </label><select id="customer_address_type_create" name="customer_address_type"
+                                        class="form-control">
+                                        <option selected value="RESIDÊNCIA">RESIDÊNCIA</option>
+                                        <option value="APARTAMENTO">APARTAMENTO</option>
+                                        <option value="COMÉRCIO">COMÉRCIO</option>
+                                        <option value="INDÚSTRIA">INDÚSTRIA</option>
+                                    </select>
+                                </div>
+
 
                                 <div class="col-md-2"><label for="customer_cep_create">CEP </label><input
                                         id="customer_cep_create" name="customer_cep" type="text" class="form-control">
                                 </div>
-                                <div class="col-md-4"><label for="customer_city_create">Cidade
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6"><label for="customer_address_complements_create">Complemento
+                                    </label><input id="customer_address_complements_create"
+                                        name="customer_address_complements" type="text" class="form-control"></div>
+
+
+                                <div class="col-md-3"><label for="customer_city_create">Cidade
                                     </label>
                                     <select id="customer_city_create" name="customer_city" class="form-control">
-                                        <option selected value="Campo Grande">Campo Grande</option>
-                                        <option value="São Paulo">São Paulo</option>
-                                        <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                        <option selected value="CAMPO GRANDE">CAMPO GRANDE</option>
+                                        <option value="SÃO PAULO">SÃO PAULO</option>
+                                        <option value="RIO DE JANEIRO">RIO DE JANEIRO</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2"><label for="customer_state_create">Estado
@@ -238,7 +242,7 @@
     <!-- Modal Edit customer -->
     <div class="modal" id="modal_edit_customer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Editar</h5>
@@ -251,79 +255,77 @@
                     <form id="form_edit_customer">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-2"><label for="customer_id">ID </label><input id="customer_id"
+                                <div class="col-md-1"><label for="customer_id">ID </label><input id="customer_id"
                                         name="customer_id" type="text" class="form-control"
                                         style="pointer-events: none;" readonly></div>
-                                <div class="col-md-10"></div>
+                                <div class="col-md-2"><label for="customer_registry_date">Data de Registro
+                                    </label><input id="customer_registry_date" name="customer_registry_date" type="text"
+                                        class="form-control" style="pointer-events: none;" readonly></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label for="customer_name">Nome
+                                <div class="col-md-4"><label for="customer_name">Nome
                                     </label><input id="customer_name" name="customer_name" type="text"
                                         class="form-control"></div>
-                                <div class="col-md-3"><label for="customer_natural_legal">Tipo </label><select
-                                        id="customer_natural_legal" name="customer_natural_legal" class="form-control">
-                                        <option selected value="Pessoa Física">Pessoa Física</option>
-                                        <option value="Pessoa Jurídica">Pessoa Jurídica</option>
-                                    </select></div>
-                                <div class="col-md-3"><label for="customer_telephone">Telefone
-                                    </label><input id="customer_telephone" name="customer_telephone" type="text"
-                                        class="form-control"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6"><label for="customer_trade_name">Nome Fantasia/Apelido
+                                <div class="col-md-4"><label for="customer_trade_name">Nome Fantasia/Apelido
                                     </label><input id="customer_trade_name" name="customer_trade_name" type="text"
                                         class="form-control"></div>
-                                <div class="col-md-3"><label for="customer_rg">RG </label><input id="customer_rg"
-                                        name="customer_rg" type="text" class="form-control">
-                                </div>
-                                <div class="col-md-3"><label for="customer_cellphone">Celular
+                                <div class="col-md-2"><label for="customer_telephone">Telefone
+                                    </label><input id="customer_telephone" name="customer_telephone" type="text"
+                                        class="form-control"></div>
+                                <div class="col-md-2"><label for="customer_cellphone">Celular
                                     </label><input id="customer_cellphone" name="customer_cellphone" type="text"
                                         class="form-control"></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label for="customer_email">E-mail </label><input
+                                <div class="col-md-4"><label for="customer_email">E-mail </label><input
                                         id="customer_email" name="customer_email" type="text" class="form-control">
                                 </div>
-
-                                <div class="col-md-3"><label for="customer_cpf">CPF
+                                <div class="col-md-3"><label for="customer_natural_legal">Tipo </label><select
+                                        id="customer_natural_legal" name="customer_natural_legal" class="form-control">
+                                        <option selected value="PESSOA FÍSICA">PESSOA FÍSICA</option>
+                                        <option value="PESSOA JURÍDICA">PESSOA JURÍDICA</option>
+                                    </select></div>
+                                <div class="col-md-2"><label for="customer_rg">RG </label><input id="customer_rg"
+                                        name="customer_rg" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-2"><label for="customer_cpf">CPF
                                     </label><input id="customer_cpf" name="customer_cpf" type="text"
                                         class="form-control"></div>
-
-                                <div class="col-md-3"><label for="customer_address_type">Tipo de endereço
-                                    </label><select id="customer_address_type" name="customer_address_type"
-                                        class="form-control">
-                                        <option selected value="Residência">Residência</option>
-                                        <option value="Apartamento">Apartamento</option>
-                                        <option value="Comércio">Comércio</option>
-                                        <option value="Industria">Industria</option>
-                                    </select>
-                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label for="customer_address">Endereço
+                                <div class="col-md-4"><label for="customer_address">Endereço
                                     </label><input id="customer_address" name="customer_address" type="text"
                                         class="form-control"></div>
-                                <div class="col-md-2"><label for="customer_address_number">Nº
+                                <div class="col-md-1"><label for="customer_address_number">Nº
                                     </label><input id="customer_address_number" name="customer_address_number"
                                         type="text" class="form-control"></div>
-                                <div class="col-md-4"><label for="customer_zone">Bairro </label><input
+                                <div class="col-md-2"><label for="customer_zone">Bairro </label><input
                                         id="customer_zone" name="customer_zone" type="text" class="form-control">
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="customer_address_complements">Complemento
-                                    </label><input id="customer_address_complements" name="customer_address_complements"
-                                        type="text" class="form-control"></div>
-
+                                <div class="col-md-2"><label for="customer_address_type">Tipo de endereço
+                                    </label><select id="customer_address_type" name="customer_address_type"
+                                        class="form-control">
+                                        <option selected value="RESIDÊNCIA">RESIDÊNCIA</option>
+                                        <option value="APARTAMENTO">APARTAMENTO</option>
+                                        <option value="COMÉRCIO">COMÉRCIO</option>
+                                        <option value="INDÚSTRIA">INDÚSTRIA</option>
+                                    </select>
+                                </div>
                                 <div class="col-md-2"><label for="customer_cep">CEP </label><input id="customer_cep"
                                         name="customer_cep" type="text" class="form-control">
                                 </div>
-                                <div class="col-md-4"><label for="customer_city">Cidade
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6"><label for="customer_address_complements">Complemento
+                                    </label><input id="customer_address_complements" name="customer_address_complements"
+                                        type="text" class="form-control"></div>
+
+                                <div class="col-md-3"><label for="customer_city">Cidade
                                     </label>
                                     <select id="customer_city" name="customer_city" class="form-control">
-                                        <option selected value="Campo Grande">Campo Grande</option>
-                                        <option value="São Paulo">São Paulo</option>
-                                        <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                        <option selected value="CAMPO GRANDE">CAMPO GRANDE</option>
+                                        <option value="SÃO PAULO">SÃO PAULO</option>
+                                        <option value="RIO DE JANEIRO">RIO DE JANEIRO</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2"><label for="customer_state">Estado

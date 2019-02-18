@@ -7,7 +7,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/model/Customer.php');
 $customer_id = $_POST['customer_id'];
 $customer = new Customer();
 $customersDao = new Customers_dao();
-$customer->setProd_id($customer_id);
+$customer->setCustomer_id($customer_id);
 $customersDao->deleteCustomer($customer);
 
 ?>

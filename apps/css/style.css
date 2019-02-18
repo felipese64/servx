@@ -82,9 +82,7 @@ label,h5,h1,p, th, td, div {
         moz-touch-callout: none;
     }
     
-    div.modal-content {
-        width: 900px;
-    }
+  
     /*==========================Navbar=============================*/
 
     nav.navbar {

@@ -18,7 +18,6 @@ class Customers_dao
         $customer_rg = $customer->getCustomer_rg();
         $customer_telephone = $customer->getCustomer_telephone();
         $customer_cellphone = $customer->getCustomer_cellphone();
-        $customer_registry_date = $customer->getCustomer_registry_date();
         $customer_obs = $customer->getCustomer_obs();
         $customer_address_type = $customer->getCustomer_address_type();
         $customer_address = $customer->getCustomer_address();
@@ -31,7 +30,7 @@ class Customers_dao
 
 
 
-        $sql = "INSERT INTO `servx`.`tbcustomers` (`customer_name`, `customer_trade_name`, `customer_email`, `customer_cpf`, `customer_natural_legal`, `customer_rg`, `customer_telephone`, `customer_cellphone`, `customer_registry_date`, `customer_obs`, `customer_address_type`, `customer_address`, `customer_address_number`, `customer_address_complements`, `customer_zone`, `customer_state`, `customer_city`, `customer_cep`) VALUES (`$customer_name`, `$customer_trade_name`, `$customer_email`, `$customer_cpf`, `$customer_natural_legal`, `$customer_rg`, `$customer_telephone`, `$customer_cellphone`, `$customer_registry_date`, `$customer_obs`, `$customer_address_type`, `$customer_address`, `$customer_address_number`, `$customer_address_complements`, `$customer_zone`, `$customer_state`, `$customer_city`, `$customer_cep`)";
+        $sql = "INSERT INTO `servx`.`tbcustomers` (`customer_name`, `customer_trade_name`, `customer_email`, `customer_cpf`, `customer_natural_legal`, `customer_rg`, `customer_telephone`, `customer_cellphone`, `customer_obs`, `customer_address_type`, `customer_address`, `customer_address_number`, `customer_address_complements`, `customer_zone`, `customer_state`, `customer_city`, `customer_cep`) VALUES ('$customer_name', '$customer_trade_name', '$customer_email', '$customer_cpf', '$customer_natural_legal', '$customer_rg', '$customer_telephone', '$customer_cellphone', '$customer_obs', '$customer_address_type', '$customer_address', '$customer_address_number', '$customer_address_complements', '$customer_zone', '$customer_state', '$customer_city', '$customer_cep')";
 
         $rs = mysqli_query($link, $sql);
     }
@@ -75,7 +74,8 @@ class Customers_dao
         $customer_array['customer_rg'] = $customer->getCustomer_rg();
         $customer_array['customer_telephone'] = $customer->getCustomer_telephone();
         $customer_array['customer_cellphone'] = $customer->getCustomer_cellphone();
-        $customer_array['customer_registry_date'] = $customer->getCustomer_registry_date();
+        $customer_registry_date = strtotime($customer->getCustomer_registry_date());
+        $customer_array['customer_registry_date'] = date('d-m-Y', $customer_registry_date);
         $customer_array['customer_obs'] = $customer->getCustomer_obs();
         $customer_array['customer_address_type'] = $customer->getCustomer_address_type();
         $customer_array['customer_address'] = $customer->getCustomer_address();
@@ -104,7 +104,6 @@ class Customers_dao
         $customer_rg = $customer->getCustomer_rg();
         $customer_telephone = $customer->getCustomer_telephone();
         $customer_cellphone = $customer->getCustomer_cellphone();
-        $customer_registry_date = $customer->getCustomer_registry_date();
         $customer_obs = $customer->getCustomer_obs();
         $customer_address_type = $customer->getCustomer_address_type();
         $customer_address = $customer->getCustomer_address();
@@ -115,7 +114,7 @@ class Customers_dao
         $customer_city = $customer->getCustomer_city();
         $customer_cep = $customer->getCustomer_cep();
 
-        $sql = "UPDATE `servx`.`tbcustomers` SET `customer_name`= '$customer_name', `customer_trade_name`= '$customer_trade_name', `customer_email`='$customer_email', `customer_cpf`='$customer_cpf', `customer_natural_legal`='$customer_natural_legal', `customer_rg`='$customer_rg', `customer_telephone`='$customer_telephone', `customer_cellphone`='$customer_cellphone', `customer_registry_date`='$customer_registry_date', `customer_obs`= '$customer_obs', `customer_address_type`= '$customer_address_type', `customer_address`='$customer_address', `customer_address_number`='$customer_address_number', `customer_address_complements`='$customer_address_complements', `customer_zone`='$customer_zone', `customer_state`='$customer_state', `customer_city`='$customer_city', `customer_cep`='$customer_cep' WHERE `customer_id`='$customer_id'";
+        $sql = "UPDATE `servx`.`tbcustomers` SET `customer_name`= '$customer_name', `customer_trade_name`= '$customer_trade_name', `customer_email`='$customer_email', `customer_cpf`='$customer_cpf', `customer_natural_legal`='$customer_natural_legal', `customer_rg`='$customer_rg', `customer_telephone`='$customer_telephone', `customer_cellphone`='$customer_cellphone', `customer_obs`= '$customer_obs', `customer_address_type`= '$customer_address_type', `customer_address`='$customer_address', `customer_address_number`='$customer_address_number', `customer_address_complements`='$customer_address_complements', `customer_zone`='$customer_zone', `customer_state`='$customer_state', `customer_city`='$customer_city', `customer_cep`='$customer_cep' WHERE `customer_id`='$customer_id'";
         $rs = mysqli_query($link, $sql);
     }
 
@@ -127,7 +126,9 @@ class Customers_dao
 
         $customer_id = $customer->getCustomer_id();
         $sql = "DELETE FROM `servx`.`tbcustomers` WHERE `customer_id`='$customer_id'";
+
         $rs = mysqli_query($link, $sql);
+        echo (mysqli_error($link));
     }
 
 
