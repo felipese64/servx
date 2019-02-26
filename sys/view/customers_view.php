@@ -159,15 +159,13 @@
                                         <option value="PESSOA JURÍDICA">PESSOA JURÍDICA</option>
                                     </select></div>
 
-                                <div class="col-md-2"><label for="customer_rg_create">RG </label><input
-                                        id="customer_rg_create" name="customer_rg" type="text" class="form-control">
-                                </div>
-
-                                <div class="col-md-2"><label for="customer_cpf_create">CPF
+                                <div class="col-md-3"><label for="customer_cpf_create">CPF
                                     </label><input id="customer_cpf_create" name="customer_cpf" type="text"
                                         class="form-control"></div>
 
-
+                                <div class="col-md-2"><label for="customer_rg_create">RG </label><input
+                                        id="customer_rg_create" name="customer_rg" type="text" class="form-control">
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="customer_address_create">Endereço
@@ -266,7 +264,8 @@
                                 <div class="col-md-4"><label for="customer_name">Nome
                                     </label><input id="customer_name" name="customer_name" type="text"
                                         class="form-control"></div>
-                                <div class="col-md-4"><label for="customer_trade_name">Nome Fantasia/Apelido
+                                <div class="col-md-4"><label id="label_customer_trade_name"
+                                        for="customer_trade_name">Nome Fantasia/Apelido
                                     </label><input id="customer_trade_name" name="customer_trade_name" type="text"
                                         class="form-control"></div>
                                 <div class="col-md-2"><label for="customer_telephone">Telefone
@@ -285,12 +284,13 @@
                                         <option selected value="PESSOA FÍSICA">PESSOA FÍSICA</option>
                                         <option value="PESSOA JURÍDICA">PESSOA JURÍDICA</option>
                                     </select></div>
-                                <div class="col-md-2"><label for="customer_rg">RG </label><input id="customer_rg"
-                                        name="customer_rg" type="text" class="form-control">
-                                </div>
-                                <div class="col-md-2"><label for="customer_cpf">CPF
+                                <div class="col-md-3"><label id="label_customer_cpf" for="customer_cpf">CPF
                                     </label><input id="customer_cpf" name="customer_cpf" type="text"
                                         class="form-control"></div>
+
+                                <div class="col-md-2"><label id="label_customer_rg" for="customer_rg">RG </label><input
+                                        id="customer_rg" name="customer_rg" type="text" class="form-control">
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="customer_address">Endereço

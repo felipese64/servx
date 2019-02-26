@@ -4,6 +4,9 @@
 // mudar a formatação do cnpj/cpf
 // customer_cpf_cnpj
 //validar só campos necessarios
+//negar criação de cliente quando nomes forem iguais, tem que fazer ajax?
+//duas modais, uma p pessoa juridica e outra p fisica?
+//validar rg só depois de preenchido
 
 
 $(document).ready(function () {
@@ -33,14 +36,36 @@ $(document).ready(function () {
         }
     });
 
+
+    function change_customer_natural_legal() {
+
+        var customer_natural_legal = $('#customer_natural_legal').val();
+
+        if (customer_natural_legal == 'PESSOA FÍSICA') {
+            $('#label_customer_trade_name').html('Apelido');
+            $('#label_customer_rg').html('RG');
+            $('#label_customer_cpf').html('CPF');
+            jQuery("#customer_cpf").mask('000.000.000-00');
+        }
+
+        if (customer_natural_legal == 'PESSOA JURÍDICA') {
+            $('#label_customer_trade_name').html('Nome Fantasia');
+            $('#label_customer_rg').html('Inscrição Estadual');
+            $('#label_customer_cpf').html('CNPJ');
+            jQuery("#customer_cpf").mask('00.000.000/0000-00');
+
+        }
+
+    };
+
     jQuery("#customer_cpf_create").mask('000.000.000-00');
-    //jQuery("#customer_cpf_create").mask('00.000.000/0000-00');
+    jQuery("#customer_rg_create").mask('00.000.000-0');
     jQuery('#customer_cep_create').mask('00000-000');
     jQuery('#customer_telephone_create').mask('(00) 0000-0000');
     jQuery('#customer_cellphone_create').mask('(00) 00-000-0000');
 
-    jQuery("#customer_cpf").mask('000.000.000-00');
-    //jQuery("#customer_cpf").mask('00.000.000/0000-00');
+    //jQuery("#customer_cpf").mask('000.000.000-00');
+    jQuery("#customer_rg").mask('00.000.000-0');
     jQuery('#customer_cep').mask('00000-000');
     jQuery('#customer_telephone').mask('(00) 0000-0000');
     jQuery('#customer_cellphone').mask('(00) 00-000-0000');
@@ -76,6 +101,7 @@ $(document).ready(function () {
                 $('#customer_email').val(customer_row['customer_email']);
                 $('#customer_cpf').val(customer_row['customer_cpf']);
                 $('#customer_natural_legal').val(customer_row['customer_natural_legal']);
+                change_customer_natural_legal();
                 $('#customer_rg').val(customer_row['customer_rg']);
                 $('#customer_telephone').val(customer_row['customer_telephone']);
                 $('#customer_cellphone').val(customer_row['customer_cellphone']);
@@ -213,6 +239,14 @@ $(document).ready(function () {
     });
 
 
+
+
+    $('#customer_natural_legal').change(function () {
+
+        change_customer_natural_legal();
+
+    });
+
     $('#btn_update_customer').click(function () {
 
         var customer_id = $('#customer_id').val();
@@ -311,32 +345,49 @@ $(document).ready(function () {
                         form_ok = false;
                     }
 
-                    if (customer_trade_name) {
-                        document.getElementById('customer_trade_name').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_trade_name').style.boxShadow =
+                    // if (customer_trade_name) {
+                    //     document.getElementById('customer_trade_name').style.boxShadow =
+                    //         "0px 0px";
+                    // } else {
+                    //     document.getElementById('customer_trade_name').style.boxShadow =
+                    //         "0 0 0 .2rem rgba(255,0,0,.25)";
+                    //     form_ok = false;
+                    // }
+
+
+                    var regexp_email = /\@/;
+
+                    if (customer_email && !regexp_email.test(customer_email)) {
+
+                        document.getElementById('customer_email').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
+
+                    } else {
+                        document.getElementById('customer_email').style.boxShadow =
+                            "0px 0px";
+
+                    }
+
+                    if (customer_natural_legal == 'PESSOA FÍSICA' && customer_cpf && customer_cpf.length != 14) {
+                        document.getElementById('customer_cpf').style.boxShadow =
+                            "0 0 0 .2rem rgba(255,0,0,.25)";
+                        form_ok = false;
+
+                    } else if (customer_natural_legal == 'PESSOA JURÍDICA' && customer_cpf && customer_cpf.length != 18) {
+                        document.getElementById('customer_cpf').style.boxShadow =
+                            "0 0 0 .2rem rgba(255,0,0,.25)";
+                        form_ok = false;
+
+                    } else {
+                        document.getElementById('customer_cpf').style.boxShadow =
+                            "0px 0px";
                     }
 
 
-                    if (customer_email) {
-                        document.getElementById('customer_email').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_email').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
-                    if (customer_cpf) {
-                        document.getElementById('customer_cpf').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_cpf').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
+
+
+
                     if (customer_natural_legal) {
                         document.getElementById('customer_natural_legal').style.boxShadow =
                             "0px 0px";
@@ -345,39 +396,45 @@ $(document).ready(function () {
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
-                    if (customer_rg) {
-                        document.getElementById('customer_rg').style.boxShadow =
-                            "0px 0px";
-                    } else {
+
+
+                    if (customer_rg && customer_rg.length != 12) {
                         document.getElementById('customer_rg').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
+                    } else {
+                        document.getElementById('customer_rg').style.boxShadow = "0px 0px";
                     }
-                    if (customer_telephone) {
+
+
+                    if (customer_telephone && customer_telephone.length == 14) {
                         document.getElementById('customer_telephone').style.boxShadow =
                             "0px 0px";
+
                     } else {
                         document.getElementById('customer_telephone').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
-                    if (customer_cellphone) {
-                        document.getElementById('customer_cellphone').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_cellphone').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
 
-                    if (customer_obs) {
-                        document.getElementById('customer_obs').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_obs').style.boxShadow =
+
+                    if (customer_cellphone && customer_cellphone.length != 16) {
+                        document.getElementById('customer_cellphone').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
+                    } else {
+                        document.getElementById('customer_cellphone').style.boxShadow =
+                            "0px 0px";
                     }
+
+                    // if (customer_obs) {
+                    //     document.getElementById('customer_obs').style.boxShadow =
+                    //         "0px 0px";
+                    // } else {
+                    //     document.getElementById('customer_obs').style.boxShadow =
+                    //         "0 0 0 .2rem rgba(255,0,0,.25)";
+                    //     form_ok = false;
+                    // }
 
 
                     if (customer_address_type) {
@@ -398,7 +455,8 @@ $(document).ready(function () {
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
-                    if (customer_address_number) {
+
+                    if (customer_address_number == parseInt(customer_address_number)) {
                         document.getElementById('customer_address_number').style.boxShadow =
                             "0px 0px";
                     } else {
@@ -406,14 +464,14 @@ $(document).ready(function () {
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
-                    if (customer_address_complements) {
-                        document.getElementById('customer_address_complements').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_address_complements').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
+                    // if (customer_address_complements) {
+                    //     document.getElementById('customer_address_complements').style.boxShadow =
+                    //         "0px 0px";
+                    // } else {
+                    //     document.getElementById('customer_address_complements').style.boxShadow =
+                    //         "0 0 0 .2rem rgba(255,0,0,.25)";
+                    //     form_ok = false;
+                    // }
                     if (customer_zone) {
                         document.getElementById('customer_zone').style.boxShadow =
                             "0px 0px";
@@ -439,13 +497,13 @@ $(document).ready(function () {
                         form_ok = false;
                     }
 
-                    if (customer_cep) {
-                        document.getElementById('customer_cep').style.boxShadow =
-                            "0px 0px";
-                    } else {
+                    if (customer_cep && customer_cep.length != 9) {
                         document.getElementById('customer_cep').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
+                    } else {
+                        document.getElementById('customer_cep').style.boxShadow =
+                            "0px 0px";
                     }
 
                     if (form_ok) {
@@ -806,6 +864,7 @@ $(document).ready(function () {
     function clean_modal_edit_customer() {
 
         document.getElementById('customer_name').style.boxShadow = "0px 0px";
+        document.getElementById('customer_trade_name').style.boxShadow = "0px 0px";
         document.getElementById('customer_email').style.boxShadow = "0px 0px";
         document.getElementById('customer_cpf').style.boxShadow = "0px 0px";
         document.getElementById('customer_natural_legal').style.boxShadow = "0px 0px";
