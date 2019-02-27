@@ -131,7 +131,8 @@
                                     </label><input id="customer_name_create" name="customer_name" type="text"
                                         class="form-control"></div>
 
-                                <div class="col-md-4"><label for="customer_trade_name_create">Nome Fantasia/Apelido
+                                <div class="col-md-4"><label id="label_customer_trade_name_create"
+                                        for="customer_trade_name_create">Nome Fantasia/Apelido
                                     </label><input id="customer_trade_name_create" name="customer_trade_name"
                                         type="text" class="form-control"></div>
 
@@ -159,12 +160,14 @@
                                         <option value="PESSOA JURÍDICA">PESSOA JURÍDICA</option>
                                     </select></div>
 
-                                <div class="col-md-3"><label for="customer_cpf_create">CPF
+                                <div class="col-md-3"><label id="label_customer_cpf_create"
+                                        for="customer_cpf_create">CPF
                                     </label><input id="customer_cpf_create" name="customer_cpf" type="text"
                                         class="form-control"></div>
 
-                                <div class="col-md-2"><label for="customer_rg_create">RG </label><input
-                                        id="customer_rg_create" name="customer_rg" type="text" class="form-control">
+                                <div class="col-md-2"><label id="label_customer_rg_create" for="customer_rg_create">RG
+                                    </label><input id="customer_rg_create" name="customer_rg" type="text"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="row">
