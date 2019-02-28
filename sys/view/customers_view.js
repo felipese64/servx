@@ -2,6 +2,10 @@
 // mudar a formatação do cnpj/cpf
 // customer_cpf_cnpj
 //negar criação de cliente quando nomes forem iguais, tem que fazer ajax?
+//celular esta pedindo os dois no create
+//nao esta buscando por numeros corretamente, fazer replace pra gravar só os numeros, ou mudar search no datatables
+//datatable procura por dado da tabela ou database?
+//manipulação de modais de update_customer dentro do success do ajax, funcao misturada
 
 
 $(document).ready(function () {
@@ -62,8 +66,6 @@ $(document).ready(function () {
 
     }
 
-
-
     $("#modal_edit_customer").on('hide.bs.modal', function () {
 
         autocomplete_customer_zones('customer_zone');
@@ -80,8 +82,6 @@ $(document).ready(function () {
             success: function (data) {
 
                 var form_changed = form_edit_customer_changed(data);
-                //var modal_confirm_delete_is_hidden = !($(modal_confirm_delete).data('bs.modal') || {})._isShown;
-                //var modal_confirm_delete_is_hidden = !$(modal_confirm_delete).hasClass('show');
 
                 if (form_changed && !$(modal_confirm_delete).hasClass('show')) {
 
@@ -91,6 +91,217 @@ $(document).ready(function () {
             }
         });
     });
+
+
+    function validate_form_edit_customers() {
+
+        var customer_name = $('#customer_name').val().toUpperCase();
+        var customer_email = $('#customer_email').val().toUpperCase();
+        var customer_cpf = $('#customer_cpf').val();
+        var customer_natural_legal = $('#customer_natural_legal').val();
+        var customer_rg = $('#customer_rg').val();
+        var customer_telephone = $('#customer_telephone').val();
+        var customer_cellphone = $('#customer_cellphone').val();
+        var customer_address_type = $('#customer_address_type').val();
+        var customer_address = $('#customer_address').val().toUpperCase();
+        var customer_address_number = $('#customer_address_number').val();
+        var customer_zone = $('#customer_zone').val().toUpperCase();
+        var customer_state = $('#customer_state').val();
+        var customer_city = $('#customer_city').val();
+        var customer_cep = $('#customer_cep').val();
+        var form_ok = true;
+
+        if (customer_name) {
+            document.getElementById('customer_name').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_name').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        var regexp_email = /\@/;
+        if (customer_email && !regexp_email.test(customer_email)) {
+            document.getElementById('customer_email').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        } else {
+            document.getElementById('customer_email').style.boxShadow =
+                "0px 0px";
+        }
+
+        if (customer_natural_legal == 'PESSOA FÍSICA' && customer_cpf && customer_cpf.length != 14) {
+            document.getElementById('customer_cpf').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        } else if (customer_natural_legal == 'PESSOA JURÍDICA' && customer_cpf && customer_cpf.length != 18) {
+            document.getElementById('customer_cpf').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        } else {
+            document.getElementById('customer_cpf').style.boxShadow =
+                "0px 0px";
+        }
+
+        if (customer_natural_legal) {
+            document.getElementById('customer_natural_legal').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_natural_legal').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_rg && customer_rg.length != 12) {
+            document.getElementById('customer_rg').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        } else {
+            document.getElementById('customer_rg').style.boxShadow = "0px 0px";
+        }
+
+        if (customer_telephone && customer_telephone.length == 14) {
+            document.getElementById('customer_telephone').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_telephone').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_cellphone && customer_cellphone.length != 16) {
+            document.getElementById('customer_cellphone').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        } else {
+            document.getElementById('customer_cellphone').style.boxShadow =
+                "0px 0px";
+        }
+
+        if (customer_address_type) {
+            document.getElementById('customer_address_type').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_address_type').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_address) {
+            document.getElementById('customer_address').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_address').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_address_number == parseInt(customer_address_number)) {
+            document.getElementById('customer_address_number').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_address_number').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_zone) {
+            document.getElementById('customer_zone').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_zone').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_state) {
+            document.getElementById('customer_state').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_state').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_city) {
+            document.getElementById('customer_city').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_city').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_cep && customer_cep.length != 9) {
+            document.getElementById('customer_cep').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        } else {
+            document.getElementById('customer_cep').style.boxShadow =
+                "0px 0px";
+        }
+
+        return form_ok;
+    }
+
+
+    function send_form_update_customer() {
+
+        var customer_id = $('#customer_id').val();
+        var customer_name = $('#customer_name').val().toUpperCase();
+        var customer_trade_name = $('#customer_trade_name').val().toUpperCase();
+        var customer_email = $('#customer_email').val().toUpperCase();
+        var customer_cpf = $('#customer_cpf').val();
+        var customer_natural_legal = $('#customer_natural_legal').val();
+        var customer_rg = $('#customer_rg').val();
+        var customer_telephone = $('#customer_telephone').val();
+        var customer_cellphone = $('#customer_cellphone').val();
+        var customer_obs = $('#customer_obs').val().toUpperCase();
+        var customer_address_type = $('#customer_address_type').val();
+        var customer_address = $('#customer_address').val().toUpperCase();
+        var customer_address_number = $('#customer_address_number').val();
+        var customer_address_complements = $('#customer_address_complements').val().toUpperCase();
+        var customer_zone = $('#customer_zone').val().toUpperCase();
+        var customer_state = $('#customer_state').val();
+        var customer_city = $('#customer_city').val();
+        var customer_cep = $('#customer_cep').val();
+
+        $.ajax({
+
+            url: '../controller/customers/update_customer.php',
+            method: 'post',
+            data: {
+                customer_id: customer_id,
+                customer_name: customer_name,
+                customer_trade_name: customer_trade_name,
+                customer_email: customer_email,
+                customer_cpf: customer_cpf,
+                customer_natural_legal: customer_natural_legal,
+                customer_rg: customer_rg,
+                customer_telephone: customer_telephone,
+                customer_cellphone: customer_cellphone,
+                customer_obs: customer_obs,
+                customer_address_type: customer_address_type,
+                customer_address: customer_address,
+                customer_address_number: customer_address_number,
+                customer_address_complements: customer_address_complements,
+                customer_zone: customer_zone,
+                customer_state: customer_state,
+                customer_city: customer_city,
+                customer_cep: customer_cep
+
+            },
+
+            success: function (data) {
+
+                $('#list-customers').DataTable().ajax.reload();
+                $('#modal_edit_customer').modal('hide');
+                $('#modal_update_customer_success_message').modal(
+                    'show');
+            }
+        });
+
+    }
 
 
     $('#btn_update_customer').click(function () {
@@ -106,288 +317,18 @@ $(document).ready(function () {
             },
             success: function (data) {
 
-                var customer_row = JSON.parse(data);
+                var form_changed = form_edit_customer_changed(data);
 
-                var validate_customer_id = customer_row['customer_id'] == $('#customer_id').val();
-                var validate_customer_name = customer_row['customer_name'] == $('#customer_name')
-                    .val().toUpperCase();
-                var validate_customer_trade_name = customer_row['customer_trade_name'] == $('#customer_trade_name')
-                    .val().toUpperCase();
-                var validate_customer_email = customer_row['customer_email'] == $(
-                    '#customer_email').val().toUpperCase();
-                var validate_customer_cpf = customer_row['customer_cpf'] == $(
-                    '#customer_cpf').val();
-                var validate_customer_natural_legal = customer_row['customer_natural_legal'] == $('#customer_natural_legal').val();
-                var validate_customer_rg = customer_row['customer_rg'] == $(
-                    '#customer_rg').val();
-                var validate_customer_telephone = customer_row['customer_telephone'] ==
-                    $('#customer_telephone').val();
-                var validate_customer_cellphone = customer_row['customer_cellphone'] == $(
-                    '#customer_cellphone').val();
-                var validate_customer_obs = customer_row['customer_obs'] == $('#customer_obs')
-                    .val().toUpperCase();
-                var validate_customer_address_type = customer_row['customer_address_type'] == $('#customer_address_type')
-                    .val().toUpperCase();
-                var validate_customer_address = customer_row['customer_address'] == $(
-                    '#customer_address').val().toUpperCase();
-                var validate_customer_address_number = customer_row['customer_address_number'] == $(
-                    '#customer_address_number').val();
-                var validate_customer_address_complements = customer_row['customer_address_complements'] == $('#customer_address_complements').val();
-                var validate_customer_zone = customer_row['customer_zone'] == $(
-                    '#customer_zone').val();
-                var validate_customer_state = customer_row['customer_state'] ==
-                    $('#customer_state').val();
-                var validate_customer_city = customer_row['customer_city'] == $(
-                    '#customer_city').val();
-                var validate_customer_cep = customer_row['customer_cep'] == $(
-                    '#customer_cep').val();
+                if (form_changed && !$(modal_confirm_delete).hasClass('show')) {
 
+                    if (validate_form_edit_customers()) {
 
-                if (validate_customer_id && validate_customer_name && validate_customer_trade_name &&
-                    validate_customer_email && validate_customer_cpf &&
-                    validate_customer_natural_legal && validate_customer_rg &&
-                    validate_customer_telephone && validate_customer_cellphone && validate_customer_obs && validate_customer_address_type &&
-                    validate_customer_address && validate_customer_address_number &&
-                    validate_customer_address_complements && validate_customer_zone &&
-                    validate_customer_state && validate_customer_city && validate_customer_cep) {
-                    var form_equals_db = true;
-                } else {
-                    var form_equals_db = false;
+                        send_form_update_customer();
+                        // $('#list-customers').DataTable().ajax.reload();
+                        // $('#modal_edit_customer').modal('hide');
+                        // $('#modal_update_customer_success_message').modal(
+                        //     'show');
 
-                }
-
-                var style = getComputedStyle(modal_confirm_delete);
-
-                var display = style.display;
-
-                if (display == 'none' && !form_equals_db) {
-
-                    var customer_id = $('#customer_id').val();
-                    var customer_name = $('#customer_name').val().toUpperCase();
-                    var customer_trade_name = $('#customer_trade_name').val().toUpperCase();
-                    var customer_email = $('#customer_email').val().toUpperCase();
-                    var customer_cpf = $('#customer_cpf').val();
-                    var customer_natural_legal = $('#customer_natural_legal').val();
-                    var customer_rg = $('#customer_rg').val();
-                    var customer_telephone = $('#customer_telephone').val();
-                    var customer_cellphone = $('#customer_cellphone').val();
-                    var customer_obs = $('#customer_obs').val().toUpperCase();
-                    var customer_address_type = $('#customer_address_type').val();
-                    var customer_address = $('#customer_address').val().toUpperCase();
-                    var customer_address_number = $('#customer_address_number').val();
-                    var customer_address_complements = $('#customer_address_complements').val().toUpperCase();
-                    var customer_zone = $('#customer_zone').val().toUpperCase();
-                    var customer_state = $('#customer_state').val();
-                    var customer_city = $('#customer_city').val();
-                    var customer_cep = $('#customer_cep').val();
-                    var form_ok = true;
-
-                    if (customer_name) {
-                        document.getElementById('customer_name').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_name').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
-
-                    // if (customer_trade_name) {
-                    //     document.getElementById('customer_trade_name').style.boxShadow =
-                    //         "0px 0px";
-                    // } else {
-                    //     document.getElementById('customer_trade_name').style.boxShadow =
-                    //         "0 0 0 .2rem rgba(255,0,0,.25)";
-                    //     form_ok = false;
-                    // }
-
-
-                    var regexp_email = /\@/;
-
-                    if (customer_email && !regexp_email.test(customer_email)) {
-
-                        document.getElementById('customer_email').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-
-                    } else {
-                        document.getElementById('customer_email').style.boxShadow =
-                            "0px 0px";
-
-                    }
-
-                    if (customer_natural_legal == 'PESSOA FÍSICA' && customer_cpf && customer_cpf.length != 14) {
-                        document.getElementById('customer_cpf').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-
-                    } else if (customer_natural_legal == 'PESSOA JURÍDICA' && customer_cpf && customer_cpf.length != 18) {
-                        document.getElementById('customer_cpf').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-
-                    } else {
-                        document.getElementById('customer_cpf').style.boxShadow =
-                            "0px 0px";
-                    }
-
-
-
-
-
-                    if (customer_natural_legal) {
-                        document.getElementById('customer_natural_legal').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_natural_legal').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
-
-
-                    if (customer_rg && customer_rg.length != 12) {
-                        document.getElementById('customer_rg').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    } else {
-                        document.getElementById('customer_rg').style.boxShadow = "0px 0px";
-                    }
-
-
-                    if (customer_telephone && customer_telephone.length == 14) {
-                        document.getElementById('customer_telephone').style.boxShadow =
-                            "0px 0px";
-
-                    } else {
-                        document.getElementById('customer_telephone').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
-
-
-                    if (customer_cellphone && customer_cellphone.length != 16) {
-                        document.getElementById('customer_cellphone').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    } else {
-                        document.getElementById('customer_cellphone').style.boxShadow =
-                            "0px 0px";
-                    }
-
-                    // if (customer_obs) {
-                    //     document.getElementById('customer_obs').style.boxShadow =
-                    //         "0px 0px";
-                    // } else {
-                    //     document.getElementById('customer_obs').style.boxShadow =
-                    //         "0 0 0 .2rem rgba(255,0,0,.25)";
-                    //     form_ok = false;
-                    // }
-
-
-                    if (customer_address_type) {
-                        document.getElementById('customer_address_type').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_address_type').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
-
-
-                    if (customer_address) {
-                        document.getElementById('customer_address').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_address').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
-
-                    if (customer_address_number == parseInt(customer_address_number)) {
-                        document.getElementById('customer_address_number').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_address_number').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
-                    // if (customer_address_complements) {
-                    //     document.getElementById('customer_address_complements').style.boxShadow =
-                    //         "0px 0px";
-                    // } else {
-                    //     document.getElementById('customer_address_complements').style.boxShadow =
-                    //         "0 0 0 .2rem rgba(255,0,0,.25)";
-                    //     form_ok = false;
-                    // }
-                    if (customer_zone) {
-                        document.getElementById('customer_zone').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_zone').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
-                    if (customer_state) {
-                        document.getElementById('customer_state').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_state').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
-                    if (customer_city) {
-                        document.getElementById('customer_city').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_city').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
-
-                    if (customer_cep && customer_cep.length != 9) {
-                        document.getElementById('customer_cep').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    } else {
-                        document.getElementById('customer_cep').style.boxShadow =
-                            "0px 0px";
-                    }
-
-                    if (form_ok) {
-
-                        $.ajax({
-
-                            url: '../controller/customers/update_customer.php',
-                            method: 'post',
-                            data: {
-                                customer_id: customer_id,
-                                customer_name: customer_name,
-                                customer_trade_name: customer_trade_name,
-                                customer_email: customer_email,
-                                customer_cpf: customer_cpf,
-                                customer_natural_legal: customer_natural_legal,
-                                customer_rg: customer_rg,
-                                customer_telephone: customer_telephone,
-                                customer_cellphone: customer_cellphone,
-                                customer_obs: customer_obs,
-                                customer_address_type: customer_address_type,
-                                customer_address: customer_address,
-                                customer_address_number: customer_address_number,
-                                customer_address_complements: customer_address_complements,
-                                customer_zone: customer_zone,
-                                customer_state: customer_state,
-                                customer_city: customer_city,
-                                customer_cep: customer_cep
-
-                            },
-
-                            success: function (data) {
-
-                                $('#list-customers').DataTable().ajax.reload();
-                                $('#modal_edit_customer').modal('hide');
-                                $('#modal_update_customer_success_message').modal(
-                                    'show');
-                            }
-                        });
                     }
                 }
             }
@@ -397,6 +338,158 @@ $(document).ready(function () {
 
 
     //--------------------------------------------CREATE--------------------------------------------------------------------
+
+    function validate_form_create_customers() {
+
+        var customer_name = $('#customer_name_create').val().toUpperCase();
+        var customer_email = $('#customer_email_create').val().toUpperCase();
+        var customer_cpf = $('#customer_cpf_create').val();
+        var customer_natural_legal = $('#customer_natural_legal_create').val();
+        var customer_rg = $('#customer_rg_create').val();
+        var customer_telephone = $('#customer_telephone_create').val();
+        var customer_cellphone = $('#customer_cellphone_create').val();
+        var customer_address_type = $('#customer_address_type_create').val();
+        var customer_address = $('#customer_address_create').val().toUpperCase();
+        var customer_address_number = $('#customer_address_number_create').val();
+        var customer_zone = $('#customer_zone_create').val().toUpperCase();
+        var customer_state = $('#customer_state_create').val();
+        var customer_city = $('#customer_city_create').val();
+        var customer_cep = $('#customer_cep_create').val();
+        var form_ok = true;
+
+        if (customer_name) {
+            document.getElementById('customer_name_create').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_name_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        var regexp_email = /\@/;
+        if (customer_email && !regexp_email.test(customer_email)) {
+            document.getElementById('customer_email_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        } else {
+            document.getElementById('customer_email_create').style.boxShadow =
+                "0px 0px";
+        }
+
+        if (customer_natural_legal == 'PESSOA FÍSICA' && customer_cpf && customer_cpf.length != 14) {
+            document.getElementById('customer_cpf_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        } else if (customer_natural_legal == 'PESSOA JURÍDICA' && customer_cpf && customer_cpf.length != 18) {
+            document.getElementById('customer_cpf_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        } else {
+            document.getElementById('customer_cpf_create').style.boxShadow =
+                "0px 0px";
+        }
+
+        if (customer_natural_legal) {
+            document.getElementById('customer_natural_legal_create').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_natural_legal_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_rg && customer_rg.length != 12) {
+            document.getElementById('customer_rg_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        } else {
+            document.getElementById('customer_rg_create').style.boxShadow = "0px 0px";
+        }
+
+        if (customer_telephone && customer_telephone.length == 14) {
+            document.getElementById('customer_telephone_create').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_telephone_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_cellphone && customer_cellphone.length != 16) {
+            document.getElementById('customer_cellphone_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        } else {
+            document.getElementById('customer_cellphone_create').style.boxShadow =
+                "0px 0px";
+        }
+
+        if (customer_address_type) {
+            document.getElementById('customer_address_type_create').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_address_type_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_address) {
+            document.getElementById('customer_address_create').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_address_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_address_number == parseInt(customer_address_number)) {
+            document.getElementById('customer_address_number_create').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_address_number_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_zone) {
+            document.getElementById('customer_zone_create').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_zone_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_state) {
+            document.getElementById('customer_state_create').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_state_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_city) {
+            document.getElementById('customer_city_create').style.boxShadow =
+                "0px 0px";
+        } else {
+            document.getElementById('customer_city_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        }
+
+        if (customer_cep && customer_cep.length != 9) {
+            document.getElementById('customer_cep_create').style.boxShadow =
+                "0 0 0 .2rem rgba(255,0,0,.25)";
+            form_ok = false;
+        } else {
+            document.getElementById('customer_cep_create').style.boxShadow =
+                "0px 0px";
+        }
+
+        return form_ok;
+    }
+
 
     $("#btn_create_customer").click(function () {
 
@@ -419,130 +512,7 @@ $(document).ready(function () {
         var customer_cep = $('#customer_cep_create').val();
 
 
-
-        var form_ok = true;
-
-
-        if (customer_name) {
-            document.getElementById('customer_name_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_name_create').style.boxShadow = "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_trade_name) {
-            document.getElementById('customer_trade_name_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_trade_name_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_email) {
-            document.getElementById('customer_email_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_email_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_cpf) {
-            document.getElementById('customer_cpf_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_cpf_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_natural_legal) {
-            document.getElementById('customer_natural_legal_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_natural_legal_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_rg) {
-            document.getElementById('customer_rg_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_rg_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_telephone) {
-            document.getElementById('customer_telephone_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_telephone_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_cellphone) {
-            document.getElementById('customer_cellphone_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_cellphone_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_obs) {
-            document.getElementById('customer_obs_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_obs_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_address_type) {
-            document.getElementById('customer_address_type_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_address_type_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_address) {
-            document.getElementById('customer_address_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_address_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_address_number) {
-            document.getElementById('customer_address_number_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_address_number_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_address_complements) {
-            document.getElementById('customer_address_complements_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_address_complements_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_zone) {
-            document.getElementById('customer_zone_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_zone_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_state) {
-            document.getElementById('customer_state_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_state_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_city) {
-            document.getElementById('customer_city_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_city_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (customer_cep) {
-            document.getElementById('customer_cep_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('customer_cep_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-
-        if (form_ok) {
+        if (validate_form_create_customers()) {
 
             $.ajax({
                 url: '../controller/customers/create_customer.php',
@@ -593,34 +563,40 @@ $(document).ready(function () {
             },
             success: function (data) {
 
-                var customer_row = JSON.parse(data);
-
-                $('#customer_id').val(customer_row['customer_id']);
-                $('#customer_name').val(customer_row['customer_name']);
-                $('#customer_trade_name').val(customer_row['customer_trade_name']);
-                $('#customer_email').val(customer_row['customer_email']);
-                $('#customer_cpf').val(customer_row['customer_cpf']);
-                $('#customer_natural_legal').val(customer_row['customer_natural_legal']);
-                change_customer_natural_legal();
-                $('#customer_rg').val(customer_row['customer_rg']);
-                $('#customer_telephone').val(customer_row['customer_telephone']);
-                $('#customer_cellphone').val(customer_row['customer_cellphone']);
-                $('#customer_registry_date').val(customer_row['customer_registry_date']);
-                $('#customer_obs').val(customer_row['customer_obs']);
-                $('#customer_address_type').val(customer_row['customer_address_type']);
-                $('#customer_address').val(customer_row['customer_address']);
-                $('#customer_address_number').val(customer_row['customer_address_number']);
-                $('#customer_address_complements').val(customer_row['customer_address_complements']);
-                $('#customer_zone').val(customer_row['customer_zone']);
-                $('#customer_state').val(customer_row['customer_state']);
-                $('#customer_city').val(customer_row['customer_city']);
-                $('#customer_cep').val(customer_row['customer_cep']);
+                insert_data_on_modal_edit_customer(data);
 
                 $('#modal_edit_customer').modal('show');
 
             }
         });
     });
+
+    function insert_data_on_modal_edit_customer(data) {
+
+        var customer_row = JSON.parse(data);
+
+        $('#customer_id').val(customer_row['customer_id']);
+        $('#customer_name').val(customer_row['customer_name']);
+        $('#customer_trade_name').val(customer_row['customer_trade_name']);
+        $('#customer_email').val(customer_row['customer_email']);
+        $('#customer_cpf').val(customer_row['customer_cpf']);
+        $('#customer_natural_legal').val(customer_row['customer_natural_legal']);
+        change_customer_natural_legal();
+        $('#customer_rg').val(customer_row['customer_rg']);
+        $('#customer_telephone').val(customer_row['customer_telephone']);
+        $('#customer_cellphone').val(customer_row['customer_cellphone']);
+        $('#customer_registry_date').val(customer_row['customer_registry_date']);
+        $('#customer_obs').val(customer_row['customer_obs']);
+        $('#customer_address_type').val(customer_row['customer_address_type']);
+        $('#customer_address').val(customer_row['customer_address']);
+        $('#customer_address_number').val(customer_row['customer_address_number']);
+        $('#customer_address_complements').val(customer_row['customer_address_complements']);
+        $('#customer_zone').val(customer_row['customer_zone']);
+        $('#customer_state').val(customer_row['customer_state']);
+        $('#customer_city').val(customer_row['customer_city']);
+        $('#customer_cep').val(customer_row['customer_cep']);
+
+    }
 
 
     //--------------------------------------------UPDATE--------------------------------------------------------------------
@@ -638,299 +614,24 @@ $(document).ready(function () {
             },
             success: function (data) {
 
-                var customer_row = JSON.parse(data);
+                var form_changed = form_edit_customer_changed(data);
 
-                var validate_customer_id = customer_row['customer_id'] == $('#customer_id').val();
-                var validate_customer_name = customer_row['customer_name'] == $('#customer_name')
-                    .val().toUpperCase();
-                var validate_customer_trade_name = customer_row['customer_trade_name'] == $('#customer_trade_name')
-                    .val().toUpperCase();
-                var validate_customer_email = customer_row['customer_email'] == $(
-                    '#customer_email').val().toUpperCase();
-                var validate_customer_cpf = customer_row['customer_cpf'] == $(
-                    '#customer_cpf').val();
-                var validate_customer_natural_legal = customer_row['customer_natural_legal'] == $('#customer_natural_legal').val();
-                var validate_customer_rg = customer_row['customer_rg'] == $(
-                    '#customer_rg').val();
-                var validate_customer_telephone = customer_row['customer_telephone'] ==
-                    $('#customer_telephone').val();
-                var validate_customer_cellphone = customer_row['customer_cellphone'] == $(
-                    '#customer_cellphone').val();
-                var validate_customer_obs = customer_row['customer_obs'] == $('#customer_obs')
-                    .val().toUpperCase();
-                var validate_customer_address_type = customer_row['customer_address_type'] == $('#customer_address_type')
-                    .val().toUpperCase();
-                var validate_customer_address = customer_row['customer_address'] == $(
-                    '#customer_address').val().toUpperCase();
-                var validate_customer_address_number = customer_row['customer_address_number'] == $(
-                    '#customer_address_number').val();
-                var validate_customer_address_complements = customer_row['customer_address_complements'] == $('#customer_address_complements').val();
-                var validate_customer_zone = customer_row['customer_zone'] == $(
-                    '#customer_zone').val();
-                var validate_customer_state = customer_row['customer_state'] ==
-                    $('#customer_state').val();
-                var validate_customer_city = customer_row['customer_city'] == $(
-                    '#customer_city').val();
-                var validate_customer_cep = customer_row['customer_cep'] == $(
-                    '#customer_cep').val();
+                if (form_changed && !$(modal_confirm_delete).hasClass('show')) {
 
+                    if (validate_form_edit_customers()) {
 
-                if (validate_customer_id && validate_customer_name && validate_customer_trade_name &&
-                    validate_customer_email && validate_customer_cpf &&
-                    validate_customer_natural_legal && validate_customer_rg &&
-                    validate_customer_telephone && validate_customer_cellphone && validate_customer_obs && validate_customer_address_type &&
-                    validate_customer_address && validate_customer_address_number &&
-                    validate_customer_address_complements && validate_customer_zone &&
-                    validate_customer_state && validate_customer_city && validate_customer_cep) {
-                    var form_equals_db = true;
-                } else {
-                    var form_equals_db = false;
-
-                }
-
-                var style = getComputedStyle(modal_confirm_delete);
-
-                var display = style.display;
-
-                if (display == 'none' && !form_equals_db) {
-
-                    var customer_id = $('#customer_id').val();
-                    var customer_name = $('#customer_name').val().toUpperCase();
-                    var customer_trade_name = $('#customer_trade_name').val().toUpperCase();
-                    var customer_email = $('#customer_email').val().toUpperCase();
-                    var customer_cpf = $('#customer_cpf').val();
-                    var customer_natural_legal = $('#customer_natural_legal').val();
-                    var customer_rg = $('#customer_rg').val();
-                    var customer_telephone = $('#customer_telephone').val();
-                    var customer_cellphone = $('#customer_cellphone').val();
-                    var customer_obs = $('#customer_obs').val().toUpperCase();
-                    var customer_address_type = $('#customer_address_type').val();
-                    var customer_address = $('#customer_address').val().toUpperCase();
-                    var customer_address_number = $('#customer_address_number').val();
-                    var customer_address_complements = $('#customer_address_complements').val().toUpperCase();
-                    var customer_zone = $('#customer_zone').val().toUpperCase();
-                    var customer_state = $('#customer_state').val();
-                    var customer_city = $('#customer_city').val();
-                    var customer_cep = $('#customer_cep').val();
-                    var form_ok = true;
-
-                    if (customer_name) {
-                        document.getElementById('customer_name').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_name').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
+                        send_form_update_customer();
+                        //alert(send_form_update_customer());
+                        //$('#list-customers').DataTable().ajax.reload();
+                        //$('#modal_edit_customer').modal('hide');
                         $('#modal_confirm_update_customer').modal('hide');
+                        //$('#modal_update_customer_success_message').modal('show');
+
+                    } else {
                         $('#modal_edit_customer').modal('show');
-                        form_ok = false;
+                        $('#modal_confirm_update_customer').modal('hide');
                     }
 
-                    if (customer_trade_name) {
-                        document.getElementById('customer_trade_name').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_trade_name').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-
-
-                    if (customer_email) {
-                        document.getElementById('customer_email').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_email').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-                    if (customer_cpf) {
-                        document.getElementById('customer_cpf').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_cpf').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-                    if (customer_natural_legal) {
-                        document.getElementById('customer_natural_legal').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_natural_legal').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-                    if (customer_rg) {
-                        document.getElementById('customer_rg').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_rg').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-                    if (customer_telephone) {
-                        document.getElementById('customer_telephone').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_telephone').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-                    if (customer_cellphone) {
-                        document.getElementById('customer_cellphone').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_cellphone').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-
-                    if (customer_obs) {
-                        document.getElementById('customer_obs').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_obs').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-
-
-                    if (customer_address_type) {
-                        document.getElementById('customer_address_type').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_address_type').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-
-
-                    if (customer_address) {
-                        document.getElementById('customer_address').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_address').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-                    if (customer_address_number) {
-                        document.getElementById('customer_address_number').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_address_number').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-                    if (customer_address_complements) {
-                        document.getElementById('customer_address_complements').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_address_complements').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-                    if (customer_zone) {
-                        document.getElementById('customer_zone').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_zone').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-                    if (customer_state) {
-                        document.getElementById('customer_state').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_state').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-                    if (customer_city) {
-                        document.getElementById('customer_city').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_city').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-
-                    if (customer_cep) {
-                        document.getElementById('customer_cep').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('customer_cep').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        $('#modal_confirm_update_customer').modal('hide');
-                        $('#modal_edit_customer').modal('show');
-                        form_ok = false;
-                    }
-
-                    if (form_ok) {
-
-                        $.ajax({
-
-                            url: '../controller/customers/update_customer.php',
-                            method: 'post',
-                            data: {
-                                customer_id: customer_id,
-                                customer_name: customer_name,
-                                customer_trade_name: customer_trade_name,
-                                customer_email: customer_email,
-                                customer_cpf: customer_cpf,
-                                customer_natural_legal: customer_natural_legal,
-                                customer_rg: customer_rg,
-                                customer_telephone: customer_telephone,
-                                customer_cellphone: customer_cellphone,
-                                customer_obs: customer_obs,
-                                customer_address_type: customer_address_type,
-                                customer_address: customer_address,
-                                customer_address_number: customer_address_number,
-                                customer_address_complements: customer_address_complements,
-                                customer_zone: customer_zone,
-                                customer_state: customer_state,
-                                customer_city: customer_city,
-                                customer_cep: customer_cep
-
-                            },
-
-                            success: function (data) {
-
-                                $('#list-customers').DataTable().ajax.reload();
-                                $('#modal_edit_customer').modal('hide');
-                                $('#modal_confirm_update_customer').modal('hide');
-                                $('#modal_update_customer_success_message').modal('show');
-                            }
-                        });
-                    }
                 }
             }
         });

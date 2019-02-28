@@ -30,8 +30,8 @@ $search_result = "SELECT * FROM tbcustomers WHERE 1=1";
 if (!empty($requestData['search']['value'])) {   // se houver um parâmetro de pesquisa, $requestData['search']['value'] contém o parâmetro de pesquisa
     $search_result .= " AND ( customer_name LIKE '" . $requestData['search']['value'] . "%' ";
     $search_result .= " OR customer_address LIKE '" . $requestData['search']['value'] . "%' ";
-    $search_result .= " OR customer_telephone LIKE '" . $requestData['search']['value'] . "%' ";
-    $search_result .= " OR customer_cellphone LIKE '" . $requestData['search']['value'] . "%' ";
+    $search_result .= " OR customer_telephone LIKE '%" . $requestData['search']['value'] . "%' ";
+    $search_result .= " OR customer_cellphone LIKE '%" . $requestData['search']['value'] . "%' ";
     $search_result .= " OR customer_email LIKE '" . $requestData['search']['value'] . "%' ";
     $search_result .= " OR customer_cpf LIKE '" . $requestData['search']['value'] . "%' )";
 }
@@ -60,10 +60,10 @@ while ($tb_row = mysqli_fetch_array($rs)) {
 //Cria o array de informações a serem retornadas para o Javascript
 $json_data = array(
 
-    "draw" => intval($requestData['draw']),//para cada requisição é enviado um número como parâmetro
+    "draw" => intval($requestData['draw']), //para cada requisição é enviado um número como parâmetro
     "recordsTotal" => intval($rows_number),  //Quantidade de registros que há no banco de dados
     "recordsFiltered" => intval($totalFiltered), //Total de registros quando houver pesquisa
     "data" => $tb_data   //Array de dados completo dos dados retornados da tabela 
 );
 
-echo json_encode($json_data);  //enviar dados como formato json
+echo json_encode($json_data);  
