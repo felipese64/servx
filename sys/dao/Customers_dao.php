@@ -33,6 +33,7 @@ class Customers_dao
         $sql = "INSERT INTO `servx`.`tbcustomers` (`customer_name`, `customer_trade_name`, `customer_email`, `customer_cpf`, `customer_natural_legal`, `customer_rg`, `customer_telephone`, `customer_cellphone`, `customer_obs`, `customer_address_type`, `customer_address`, `customer_address_number`, `customer_address_complements`, `customer_zone`, `customer_state`, `customer_city`, `customer_cep`) VALUES ('$customer_name', '$customer_trade_name', '$customer_email', '$customer_cpf', '$customer_natural_legal', '$customer_rg', '$customer_telephone', '$customer_cellphone', '$customer_obs', '$customer_address_type', '$customer_address', '$customer_address_number', '$customer_address_complements', '$customer_zone', '$customer_state', '$customer_city', '$customer_cep')";
 
         $rs = mysqli_query($link, $sql);
+        echo (mysqli_error($link));
     }
 
     public function readCustomer(Customer $customer)
@@ -163,6 +164,5 @@ class Customers_dao
         }
         return $brands;
     }
-
 };
-?>
+ 

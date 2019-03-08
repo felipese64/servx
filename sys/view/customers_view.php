@@ -127,7 +127,8 @@
                     <form id="form_create_customer">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-4"><label for="customer_name_create">Nome
+                                <div class="col-md-4"><label id="label_customer_name_create"
+                                        for="customer_name_create">Nome
                                     </label><input id="customer_name_create" name="customer_name" type="text"
                                         class="form-control"></div>
 
@@ -264,7 +265,7 @@
                                         class="form-control" style="pointer-events: none;" readonly></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="customer_name">Nome
+                                <div class="col-md-4"><label id="label_customer_name" for="customer_name">Nome
                                     </label><input id="customer_name" name="customer_name" type="text"
                                         class="form-control"></div>
                                 <div class="col-md-4"><label id="label_customer_trade_name"

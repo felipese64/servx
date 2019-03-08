@@ -26,6 +26,5 @@ $customer->setCustomer_city($_POST['customer_city']);
 $customer->setCustomer_cep($_POST['customer_cep']);
 
 
-$customersDao->createCustomer($customer);
-
-?>
+echo ($customersDao->createCustomer($customer));
+ 
