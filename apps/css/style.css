@@ -14,6 +14,11 @@ table.dataTable thead .sorting::after, table.dataTable thead .sorting_asc::after
 
 }
 
+input{
+
+    text-transform: uppercase;
+}
+
 .btn_open_create_modal{
     margin-right: 20px;
     margin-bottom: 2px;

@@ -28,12 +28,12 @@ $rows_number = mysqli_num_rows($tb_results);
 //Obter os dados a serem apresentados
 $search_result = "SELECT * FROM tbcustomers WHERE 1=1";
 if (!empty($requestData['search']['value'])) {   // se houver um parâmetro de pesquisa, $requestData['search']['value'] contém o parâmetro de pesquisa
-    $search_result .= " AND ( customer_name LIKE '" . $requestData['search']['value'] . "%' ";
-    $search_result .= " OR customer_address LIKE '" . $requestData['search']['value'] . "%' ";
+    $search_result .= " AND ( customer_name LIKE '%" . $requestData['search']['value'] . "%' ";
+    $search_result .= " OR customer_address LIKE '%" . $requestData['search']['value'] . "%' ";
     $search_result .= " OR customer_telephone LIKE '%" . $requestData['search']['value'] . "%' ";
     $search_result .= " OR customer_cellphone LIKE '%" . $requestData['search']['value'] . "%' ";
-    $search_result .= " OR customer_email LIKE '" . $requestData['search']['value'] . "%' ";
-    $search_result .= " OR customer_cpf LIKE '" . $requestData['search']['value'] . "%' )";
+    $search_result .= " OR customer_email LIKE '%" . $requestData['search']['value'] . "%' ";
+    $search_result .= " OR customer_cpf LIKE '%" . $requestData['search']['value'] . "%' )";
 }
 
 $rs = mysqli_query($link, $search_result);

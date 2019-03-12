@@ -140,17 +140,17 @@
 
                                 <div class="col-md-2"><label for="customer_telephone_create">Telefone
                                     </label><input id="customer_telephone_create" name="customer_telephone" type="text"
-                                        class="form-control" value="67 "></div>
+                                        class="form-control"></div>
 
                                 <div class="col-md-2"><label for="customer_cellphone_create">Celular
                                     </label><input id="customer_cellphone_create" name="customer_cellphone" type="text"
-                                        class="form-control" value="67 "></div>
+                                        class="form-control"></div>
                             </div>
 
 
                             <div class="row">
                                 <div class="col-md-4"><label for="customer_email_create">E-mail </label><input
-                                        id="customer_email_create" name="customer_email" type="text"
+                                        id="customer_email_create" name="customer_email" type="email"
                                         class="form-control"></div>
 
 

@@ -373,11 +373,11 @@ $(document).ready(function () {
         var customer_name = $('#customer_name_create').val().toUpperCase();
         var customer_trade_name = $('#customer_trade_name_create').val().toUpperCase();
         var customer_email = $('#customer_email_create').val().toUpperCase();
-        var customer_cpf = $('#customer_cpf_create').val();
+        var customer_cpf = $('#customer_cpf_create').val().replace(/[.]/g, "").replace("-", "").replace("/", "");
         var customer_natural_legal = $('#customer_natural_legal_create').val();
-        var customer_rg = $('#customer_rg_create').val();
-        var customer_telephone = $('#customer_telephone_create').val();
-        var customer_cellphone = $('#customer_cellphone_create').val();
+        var customer_rg = $('#customer_rg_create').val().replace(/[.]/g, "").replace("-", "");
+        var customer_telephone = $('#customer_telephone_create').val().replace(/[ ]/g, "").replace("\(", "").replace("\)", "");
+        var customer_cellphone = $('#customer_cellphone_create').val().replace(/[ ]/g, "").replace("\(", "").replace("\)", "");
         customer_cellphone == '(67) ' ? customer_cellphone = '' : 0;
         var customer_obs = $('#customer_obs_create').val().toUpperCase();
         var customer_address_type = $('#customer_address_type_create').val();
@@ -445,8 +445,8 @@ $(document).ready(function () {
         $('#customer_cpf_create').val('');
         $('#customer_natural_legal_create').val('PESSOA FÍSICA');
         $('#customer_rg_create').val('');
-        $('#customer_telephone_create').val('\(67\) ');
-        $('#customer_cellphone_create').val('\(67\) ');
+        //$('#customer_telephone_create').val('\(67\) ');
+        //$('#customer_cellphone_create').val('\(67\) ');
         $('#customer_obs_create').val('');
         $('#customer_address_type_create').val('RESIDÊNCIA');
         $('#customer_address_create').val('');
@@ -489,8 +489,8 @@ $(document).ready(function () {
         jQuery("#customer_cpf_create").mask('000.000.000-00');
         jQuery("#customer_rg_create").mask('00.000.000-0');
         jQuery('#customer_cep_create').mask('00000-000');
-        jQuery('#customer_telephone_create').mask('(00) 0000-0000');
-        jQuery('#customer_cellphone_create').mask('(00) 00-000-0000');
+        jQuery('#customer_telephone_create').mask('(00) 0000 0000');
+        jQuery('#customer_cellphone_create').mask('(00) 00 000 0000');
     });
 
     $('#customer_natural_legal_create').change(function () {
@@ -594,6 +594,8 @@ $(document).ready(function () {
                     if (validate_form_edit_customers()) {
 
                         send_form_update_customer();
+                        //hide_modal_edit_customer();
+                        setTimeout(hide_modal_edit_customer, 50);
 
                     }
                 }
@@ -710,20 +712,26 @@ $(document).ready(function () {
             success: function (data) {
 
                 $('#list-customers').DataTable().ajax.reload();
-                $('#modal_edit_customer').modal('hide');
+                //$('#modal_edit_customer').modal('hide');
                 $('#modal_update_customer_success_message').modal('show');
             }
         });
 
     }
 
+    function hide_modal_edit_customer() {
+        $('#modal_edit_customer').modal('hide');
+
+    }
+
+
     $("#modal_edit_customer").on('shown.bs.modal', function () {
         autocomplete_customer_zones('customer_zone');
         autocomplete_customer_adresses('customer_address');
         jQuery("#customer_rg").mask('00.000.000-0');
         jQuery('#customer_cep').mask('00000-000');
-        jQuery('#customer_telephone').mask('(00) 0000-0000');
-        jQuery('#customer_cellphone').mask('(00) 00-000-0000');
+        jQuery('#customer_telephone').mask('(00) 0000 0000');
+        jQuery('#customer_cellphone').mask('(00) 00 000 0000');
     });
 
     function clean_modal_edit_customer() {
@@ -873,5 +881,20 @@ $(document).ready(function () {
             }
         });
     };
+
+
+    //--------------------------------------------OTHERS---------------------------------------------------------------------
+
+
+
+
+    $('#customer_telephone_create').focus(function () {
+        $('#customer_telephone_create').val('\(67\) ');
+    });
+
+    $('#customer_cellphone_create').focus(function () {
+        $('#customer_cellphone_create').val('\(67\) ');
+    });
+
 
 });
