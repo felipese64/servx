@@ -124,13 +124,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_create_customer">
+                    <form id="form_create_customer" method="post">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-4"><label id="label_customer_name_create"
                                         for="customer_name_create">Nome
                                     </label><input id="customer_name_create" name="customer_name" type="text"
-                                        class="form-control"></div>
+                                        class="form-control" required></div>
 
                                 <div class="col-md-4"><label id="label_customer_trade_name_create"
                                         for="customer_trade_name_create">Nome Fantasia/Apelido
@@ -139,11 +139,11 @@
 
 
                                 <div class="col-md-2"><label for="customer_telephone_create">Telefone
-                                    </label><input id="customer_telephone_create" name="customer_telephone" type="text"
-                                        class="form-control"></div>
+                                    </label><input id="customer_telephone_create" name="customer_telephone" type="tel"
+                                        class="form-control" required></div>
 
                                 <div class="col-md-2"><label for="customer_cellphone_create">Celular
-                                    </label><input id="customer_cellphone_create" name="customer_cellphone" type="text"
+                                    </label><input id="customer_cellphone_create" name="customer_cellphone" type="tel"
                                         class="form-control"></div>
                             </div>
 
@@ -157,8 +157,8 @@
                                 <div class="col-md-3"><label for="customer_natural_legal_create">Tipo </label><select
                                         id="customer_natural_legal_create" name="customer_natural_legal"
                                         class="form-control">
-                                        <option selected value="PESSOA FÍSICA">PESSOA FÍSICA</option>
-                                        <option value="PESSOA JURÍDICA">PESSOA JURÍDICA</option>
+                                        <option>PESSOA FÍSICA</option>
+                                        <option>PESSOA JURÍDICA</option>
                                     </select></div>
 
                                 <div class="col-md-3"><label id="label_customer_cpf_create"
@@ -174,22 +174,23 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="customer_address_create">Endereço
                                     </label><input id="customer_address_create" name="customer_address" type="text"
-                                        class="form-control"></div>
+                                        class="form-control" required></div>
                                 <div class="col-md-1"><label for="customer_address_number_create">Nº
                                     </label><input id="customer_address_number_create" name="customer_address_number"
-                                        type="text" class="form-control"></div>
+                                        type="text" class="form-control" required></div>
                                 <div class="col-md-2"><label for="customer_zone_create">Bairro </label><input
-                                        id="customer_zone_create" name="customer_zone" type="text" class="form-control">
+                                        id="customer_zone_create" name="customer_zone" type="text" class="form-control"
+                                        required>
                                 </div>
 
 
                                 <div class="col-md-2"><label for="customer_address_type_create">Tipo de endereço
                                     </label><select id="customer_address_type_create" name="customer_address_type"
                                         class="form-control">
-                                        <option selected value="RESIDÊNCIA">RESIDÊNCIA</option>
-                                        <option value="APARTAMENTO">APARTAMENTO</option>
-                                        <option value="COMÉRCIO">COMÉRCIO</option>
-                                        <option value="INDÚSTRIA">INDÚSTRIA</option>
+                                        <option>RESIDÊNCIA</option>
+                                        <option>APARTAMENTO</option>
+                                        <option>COMÉRCIO</option>
+                                        <option>INDÚSTRIA</option>
                                     </select>
                                 </div>
 
@@ -209,17 +210,17 @@
                                 <div class="col-md-3"><label for="customer_city_create">Cidade
                                     </label>
                                     <select id="customer_city_create" name="customer_city" class="form-control">
-                                        <option selected value="CAMPO GRANDE">CAMPO GRANDE</option>
-                                        <option value="SÃO PAULO">SÃO PAULO</option>
-                                        <option value="RIO DE JANEIRO">RIO DE JANEIRO</option>
+                                        <option>CAMPO GRANDE</option>
+                                        <option>SÃO PAULO</option>
+                                        <option>RIO DE JANEIRO</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2"><label for="customer_state_create">Estado
                                     </label>
                                     <select id="customer_state_create" name="customer_state" class="form-control">
-                                        <option selected value="MS">MS</option>
-                                        <option value="SP">SP</option>
-                                        <option value="RJ">RJ</option>
+                                        <option>MS</option>
+                                        <option>SP</option>
+                                        <option>RJ</option>
                                     </select>
                                 </div>
                             </div>
@@ -234,7 +235,8 @@
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-danger mr-auto"
                         id="btn_exit_creating_customer">Sair</button>
-                    <button type="button" class="btn btn-primary" id="btn_create_customer">Salvar</button>
+                    <button type="submit" form="form_create_customer" class="btn btn-primary"
+                        id="btn_create_customer">Salvar</button>
                 </div>
             </div>
         </div>
@@ -254,7 +256,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_edit_customer">
+                    <form id="form_edit_customer" method="post">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-1"><label for="customer_id">ID </label><input id="customer_id"
@@ -267,26 +269,26 @@
                             <div class="row">
                                 <div class="col-md-4"><label id="label_customer_name" for="customer_name">Nome
                                     </label><input id="customer_name" name="customer_name" type="text"
-                                        class="form-control"></div>
+                                        class="form-control" required></div>
                                 <div class="col-md-4"><label id="label_customer_trade_name"
                                         for="customer_trade_name">Nome Fantasia/Apelido
                                     </label><input id="customer_trade_name" name="customer_trade_name" type="text"
                                         class="form-control"></div>
                                 <div class="col-md-2"><label for="customer_telephone">Telefone
-                                    </label><input id="customer_telephone" name="customer_telephone" type="text"
-                                        class="form-control"></div>
+                                    </label><input id="customer_telephone" name="customer_telephone" type="tel"
+                                        class="form-control" required></div>
                                 <div class="col-md-2"><label for="customer_cellphone">Celular
-                                    </label><input id="customer_cellphone" name="customer_cellphone" type="text"
+                                    </label><input id="customer_cellphone" name="customer_cellphone" type="tel"
                                         class="form-control"></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="customer_email">E-mail </label><input
-                                        id="customer_email" name="customer_email" type="text" class="form-control">
+                                        id="customer_email" name="customer_email" type="email" class="form-control">
                                 </div>
                                 <div class="col-md-3"><label for="customer_natural_legal">Tipo </label><select
                                         id="customer_natural_legal" name="customer_natural_legal" class="form-control">
-                                        <option selected value="PESSOA FÍSICA">PESSOA FÍSICA</option>
-                                        <option value="PESSOA JURÍDICA">PESSOA JURÍDICA</option>
+                                        <option>PESSOA FÍSICA</option>
+                                        <option>PESSOA JURÍDICA</option>
                                     </select></div>
                                 <div class="col-md-3"><label id="label_customer_cpf" for="customer_cpf">CPF
                                     </label><input id="customer_cpf" name="customer_cpf" type="text"
@@ -299,20 +301,21 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="customer_address">Endereço
                                     </label><input id="customer_address" name="customer_address" type="text"
-                                        class="form-control"></div>
+                                        class="form-control" required></div>
                                 <div class="col-md-1"><label for="customer_address_number">Nº
                                     </label><input id="customer_address_number" name="customer_address_number"
-                                        type="text" class="form-control"></div>
+                                        type="text" class="form-control" required></div>
                                 <div class="col-md-2"><label for="customer_zone">Bairro </label><input
-                                        id="customer_zone" name="customer_zone" type="text" class="form-control">
+                                        id="customer_zone" name="customer_zone" type="text" class="form-control"
+                                        required>
                                 </div>
                                 <div class="col-md-2"><label for="customer_address_type">Tipo de endereço
                                     </label><select id="customer_address_type" name="customer_address_type"
                                         class="form-control">
-                                        <option selected value="RESIDÊNCIA">RESIDÊNCIA</option>
-                                        <option value="APARTAMENTO">APARTAMENTO</option>
-                                        <option value="COMÉRCIO">COMÉRCIO</option>
-                                        <option value="INDÚSTRIA">INDÚSTRIA</option>
+                                        <option value="RESIDÊNCIA">RESIDÊNCIA</option>
+                                        <option>APARTAMENTO</option>
+                                        <option>COMÉRCIO</option>
+                                        <option>INDÚSTRIA</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2"><label for="customer_cep">CEP </label><input id="customer_cep"
@@ -327,17 +330,17 @@
                                 <div class="col-md-3"><label for="customer_city">Cidade
                                     </label>
                                     <select id="customer_city" name="customer_city" class="form-control">
-                                        <option selected value="CAMPO GRANDE">CAMPO GRANDE</option>
-                                        <option value="SÃO PAULO">SÃO PAULO</option>
-                                        <option value="RIO DE JANEIRO">RIO DE JANEIRO</option>
+                                        <option>CAMPO GRANDE</option>
+                                        <option>SÃO PAULO</option>
+                                        <option>RIO DE JANEIRO</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2"><label for="customer_state">Estado
                                     </label>
                                     <select id="customer_state" name="customer_state" class="form-control">
-                                        <option selected value="MS">MS</option>
-                                        <option value="SP">SP</option>
-                                        <option value="RJ">RJ</option>
+                                        <option>MS</option>
+                                        <option>SP</option>
+                                        <option>RJ</option>
                                     </select>
                                 </div>
                             </div>
@@ -351,7 +354,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger mr-auto" id="btn_delete_customer">Excluir</button>
-                    <button type="button" class="btn btn-primary" id="btn_update_customer">Salvar</button>
+                    <button type="submit" form="form_edit_customer" class="btn btn-primary"
+                        id="btn_update_customer">Salvar</button>
                 </div>
             </div>
         </div>
@@ -396,7 +400,8 @@
                     <p id="txt_update_customer">Deseja salvar as alterações?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btn_confirm_customer_update">Salvar</button>
+                    <button type="submit" form="form_edit_customer" class="btn btn-primary"
+                        id="btn_confirm_customer_update">Salvar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
                 </div>
             </div>
