@@ -44,8 +44,10 @@ $(document).ready(function () {
         customer_row['customer_cpf'] == $('#customer_cpf').val().replace(/[.]/g, "").replace("-", "").replace("/", "") ? 0 : changed = true;
         customer_row['customer_natural_legal'] == $('#customer_natural_legal').val() ? 0 : changed = true;
         customer_row['customer_rg'] == $('#customer_rg').val().replace(/[.]/g, "").replace("-", "") ? 0 : changed = true;
-        customer_row['customer_telephone'] == $('#customer_telephone').val().replace(/[ ]/g, "").replace("\(", "").replace("\)", "") ? 0 : changed = true;
-        customer_row['customer_cellphone'] == $('#customer_cellphone').val().replace(/[ ]/g, "").replace("\(", "").replace("\)", "") ? 0 : changed = true;
+        customer_row['customer_telephone'] == $('#customer_telephone').val().replace(/[ ]/g, "").replace("\(", "").replace("\)", "").replace("-", "") ? 0 : changed = true;
+        customer_row['customer_cellphone'] == $('#customer_cellphone').val().replace(/[ ]/g, "").replace("\(", "").replace("\)", "").replace("-", "") ? 0 : changed = true;
+
+
         customer_row['customer_obs'] == $('#customer_obs').val().toUpperCase() ? 0 : changed = true;
         customer_row['customer_address_type'] == $('#customer_address_type').val().toUpperCase() ? 0 : changed = true;
         customer_row['customer_address'] == $('#customer_address').val().toUpperCase() ? 0 : changed = true;
@@ -64,7 +66,18 @@ $(document).ready(function () {
     //--------------------------------------------CREATE--------------------------------------------------------------------
 
 
+
+
+    $("#btn_create_customer").click(function () {
+
+        if ($('#customer_cellphone_create').val()) {
+            document.getElementById("customer_telephone_create").required = false;
+        }
+
+    });
+
     $("#form_create_customer").on('submit', function (e) {
+
 
         e.preventDefault();
         var data = $(this).serialize();
@@ -144,6 +157,11 @@ $(document).ready(function () {
     });
 
     $("#modal_create_customer").on('shown.bs.modal', function () {
+
+
+        document.getElementById("customer_telephone_create").required = true;
+
+
         autocomplete_customer_zones('customer_zone_create');
         autocomplete_customer_adresses('customer_address_create');
 
@@ -151,8 +169,8 @@ $(document).ready(function () {
         jQuery("#customer_cpf_create").mask('000.000.000-00');
         jQuery("#customer_rg_create").mask('00.000.000-0');
         jQuery('#customer_cep_create').mask('00000-000');
-        jQuery('#customer_telephone_create').mask('(00) 0000 0000');
-        jQuery('#customer_cellphone_create').mask('(00) 00 000 0000');
+        jQuery('#customer_telephone_create').mask('(00) 0000-0000');
+        jQuery('#customer_cellphone_create').mask('(00) 00000-0000');
     });
 
     $('#customer_natural_legal_create').change(function () {
@@ -234,8 +252,8 @@ $(document).ready(function () {
         //separar como funcao
         jQuery("#customer_rg").mask('00.000.000-0');
         jQuery('#customer_cep').mask('00000-000');
-        jQuery('#customer_telephone').mask('(00) 0000 0000');
-        jQuery('#customer_cellphone').mask('(00) 00 000 0000');
+        jQuery('#customer_telephone').mask('(00) 0000-0000');
+        jQuery('#customer_cellphone').mask('(00) 00000-0000');
 
     }
 
@@ -369,6 +387,10 @@ $(document).ready(function () {
             $('#label_customer_rg').html('RG');
             $('#label_customer_cpf').html('CPF');
             jQuery("#customer_cpf").mask('000.000.000-00');
+
+            $("#customer_rg").attr("title", "Digite a RG no formato xx.xxx.xxx-x");
+            $("#customer_cpf").attr("title", "Digite o CPF no formato xxx.xxx.xxx-xx");
+            $("#customer_cpf").attr("pattern", "[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}");
         }
 
         if (customer_natural_legal == 'PESSOA JURÍDICA') {
@@ -377,6 +399,10 @@ $(document).ready(function () {
             $('#label_customer_rg').html('Inscrição Estadual');
             $('#label_customer_cpf').html('CNPJ');
             jQuery("#customer_cpf").mask('00.000.000/0000-00');
+
+            $("#customer_rg").attr("title", "Digite a IE no formato xx.xxx.xxx-x");
+            $("#customer_cpf").attr("title", "Digite o CNPJ no formato xxx.xxx.xxx-xx");
+            $("#customer_cpf").attr("pattern", "[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}");
 
         }
 

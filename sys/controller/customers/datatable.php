@@ -1,6 +1,7 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/lib/db.class.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/lib/functions.php');
 
 $objDb = new db();
 $link = $objDb->mysql_connect();
@@ -49,11 +50,17 @@ while ($tb_row = mysqli_fetch_array($rs)) {
     $data[] = $tb_row["customer_id"];
     $data[] = $tb_row["customer_name"];
     $data[] = $tb_row["customer_address"];
-    $data[] = $tb_row["customer_telephone"];
-    $data[] = $tb_row["customer_cellphone"];
+    $data[] = mask($tb_row["customer_telephone"], "(##) ####-####");
+    $data[] = mask($tb_row["customer_cellphone"], "(##) #####-####");
     $data[] = $tb_row["customer_email"];
-    $data[] = $tb_row["customer_cpf"];
-
+    
+    if (strlen ($tb_row["customer_cpf"]) == 11) {
+        $data[] = mask($tb_row["customer_cpf"], "###.###.###-##");
+    }
+    else{
+        $data[] = mask($tb_row["customer_cpf"], "##.###.###/####-##");
+    }
+  
     $tb_data[] = $data;
 }
 
