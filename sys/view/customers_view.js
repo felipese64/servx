@@ -41,11 +41,11 @@ $(document).ready(function () {
         customer_row['customer_name'] == $('#customer_name').val().toUpperCase() ? 0 : changed = true;
         customer_row['customer_trade_name'] == $('#customer_trade_name').val().toUpperCase() ? 0 : changed = true;
         customer_row['customer_email'] == $('#customer_email').val().toUpperCase() ? 0 : changed = true;
-        customer_row['customer_cpf'] == $('#customer_cpf').val().replace(/[.]/g, "").replace("-", "").replace("/", "") ? 0 : changed = true;
+        customer_row['customer_cpf'] == $('#customer_cpf').val() ? 0 : changed = true;
         customer_row['customer_natural_legal'] == $('#customer_natural_legal').val() ? 0 : changed = true;
-        customer_row['customer_rg'] == $('#customer_rg').val().replace(/[.]/g, "").replace("-", "") ? 0 : changed = true;
-        customer_row['customer_telephone'] == $('#customer_telephone').val().replace(/[ ]/g, "").replace("\(", "").replace("\)", "").replace("-", "") ? 0 : changed = true;
-        customer_row['customer_cellphone'] == $('#customer_cellphone').val().replace(/[ ]/g, "").replace("\(", "").replace("\)", "").replace("-", "") ? 0 : changed = true;
+        customer_row['customer_rg'] == $('#customer_rg').val() ? 0 : changed = true;
+        customer_row['customer_telephone'] == $('#customer_telephone').val() ? 0 : changed = true;
+        customer_row['customer_cellphone'] == $('#customer_cellphone').val() ? 0 : changed = true;
 
 
         customer_row['customer_obs'] == $('#customer_obs').val().toUpperCase() ? 0 : changed = true;
@@ -56,7 +56,7 @@ $(document).ready(function () {
         customer_row['customer_zone'] == $('#customer_zone').val() ? 0 : changed = true;
         customer_row['customer_state'] == $('#customer_state').val() ? 0 : changed = true;
         customer_row['customer_city'] == $('#customer_city').val() ? 0 : changed = true;
-        customer_row['customer_cep'] == $('#customer_cep').val().replace("-", "") ? 0 : changed = true;
+        customer_row['customer_cep'] == $('#customer_cep').val() ? 0 : changed = true;
 
         return changed;
 
@@ -112,23 +112,25 @@ $(document).ready(function () {
 
     function clean_modal_create_customer() {
 
-        $('#customer_name_create').val('');
-        $('#customer_trade_name_create').val('');
-        $('#customer_email_create').val('');
-        $('#customer_cpf_create').val('');
-        $('#customer_natural_legal_create').val('PESSOA FÍSICA');
-        $('#customer_rg_create').val('');
-        $('#customer_telephone_create').val('');
-        $('#customer_cellphone_create').val('');
-        $('#customer_obs_create').val('');
-        $('#customer_address_type_create').val('RESIDÊNCIA');
-        $('#customer_address_create').val('');
-        $('#customer_address_number_create').val('');
-        $('#customer_address_complements_create').val('');
-        $('#customer_zone_create').val('');
-        $('#customer_state_create').val('MS');
-        $('#customer_city_create').val('CAMPO GRANDE');
-        $('#customer_cep_create').val('');
+        // $('#customer_name_create').val(null);
+        // $('#customer_trade_name_create').val(null);
+        // $('#customer_email_create').val(null);
+        // $('#customer_cpf_create').val(null);
+        // $('#customer_natural_legal_create').val('PESSOA FÍSICA');
+        // $('#customer_rg_create').val(null);
+        // $('#customer_telephone_create').val(null);
+        // $('#customer_cellphone_create').val(null);
+        // $('#customer_obs_create').val(null);
+        // $('#customer_address_type_create').val('RESIDÊNCIA');
+        // $('#customer_address_create').val(null);
+        // $('#customer_address_number_create').val(null);
+        // $('#customer_address_complements_create').val(null);
+        // $('#customer_zone_create').val(null);
+        // $('#customer_state_create').val('MS');
+        // $('#customer_city_create').val('CAMPO GRANDE');
+        // $('#customer_cep_create').val(null);
+
+        document.getElementById("form_create_customer").reset();
 
         // document.getElementById('customer_name_create').style.boxShadow = "0px 0px";
         // document.getElementById('customer_trade_name_create').style.boxShadow = "0px 0px";
@@ -161,16 +163,16 @@ $(document).ready(function () {
 
         document.getElementById("customer_telephone_create").required = true;
 
+        // document.getElementById("customer_telephone_create").required = true;
+        // document.getElementById("customer_telephone_create").required = true;
+        // document.getElementById("customer_telephone_create").required = true;
+        // document.getElementById("customer_telephone_create").required = true;
+        // document.getElementById("customer_telephone_create").required = true;
+
 
         autocomplete_customer_zones('customer_zone_create');
         autocomplete_customer_adresses('customer_address_create');
 
-        //fazer funcao separada?
-        jQuery("#customer_cpf_create").mask('000.000.000-00');
-        jQuery("#customer_rg_create").mask('00.000.000-0');
-        jQuery('#customer_cep_create').mask('00000-000');
-        jQuery('#customer_telephone_create').mask('(00) 0000-0000');
-        jQuery('#customer_cellphone_create').mask('(00) 00000-0000');
     });
 
     $('#customer_natural_legal_create').change(function () {
@@ -250,10 +252,7 @@ $(document).ready(function () {
         $('#customer_cep').val(customer_row['customer_cep']);
 
         //separar como funcao
-        jQuery("#customer_rg").mask('00.000.000-0');
-        jQuery('#customer_cep').mask('00000-000');
-        jQuery('#customer_telephone').mask('(00) 0000-0000');
-        jQuery('#customer_cellphone').mask('(00) 00000-0000');
+
 
     }
 
@@ -280,7 +279,7 @@ $(document).ready(function () {
 
                     send_form_update_customer();
                     //$('#modal_confirm_update_customer').modal('hide');
-
+                    document.getElementById("form_edit_customer").reset();
 
 
                 }
@@ -388,7 +387,7 @@ $(document).ready(function () {
             $('#label_customer_cpf').html('CPF');
             jQuery("#customer_cpf").mask('000.000.000-00');
 
-            $("#customer_rg").attr("title", "Digite a RG no formato xx.xxx.xxx-x");
+            $("#customer_rg").attr("title", "Digite o RG no formato xx.xxx.xxx-x");
             $("#customer_cpf").attr("title", "Digite o CPF no formato xxx.xxx.xxx-xx");
             $("#customer_cpf").attr("pattern", "[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}");
         }
@@ -508,6 +507,104 @@ $(document).ready(function () {
 
 
     //--------------------------------------------OTHERS---------------------------------------------------------------------
+
+
+
+    $("#customer_cellphone").keyup(function () {
+
+
+        jQuery('#customer_cellphone').mask('(00) 00000-0000');
+
+    });
+
+
+    $("#customer_telephone").keyup(function () {
+
+
+        jQuery('#customer_telephone').mask('(00) 0000-0000');
+
+    });
+
+
+    $("#customer_rg").keyup(function () {
+
+        jQuery("#customer_rg").mask('00.000.000-0');
+
+
+    });
+
+
+    $("#customer_cep").keyup(function () {
+
+        jQuery('#customer_cep').mask('00000-000');
+
+
+    });
+
+    $("#customer_cellphone_create").keyup(function () {
+
+        jQuery('#customer_cellphone_create').mask('(00) 00000-0000');
+
+
+    });
+
+    $("#customer_telephone_create").keyup(function () {
+
+        jQuery('#customer_telephone_create').mask('(00) 0000-0000');
+
+
+    });
+
+    $("#customer_cep_create").keyup(function () {
+
+
+        jQuery('#customer_cep_create').mask('00000-000');
+
+    });
+
+    $("#customer_rg_create").keyup(function () {
+
+        jQuery("#customer_rg_create").mask('00.000.000-0');
+
+
+    });
+
+    $("#customer_cpf").keyup(function () {
+
+        var customer_natural_legal = $('#customer_natural_legal').val();
+
+        if (customer_natural_legal == 'PESSOA FÍSICA') {
+            jQuery("#customer_cpf").mask('000.000.000-00');
+
+        }
+
+        if (customer_natural_legal == 'PESSOA JURÍDICA') {
+
+            jQuery("#customer_cpf").mask('00.000.000/0000-00');
+
+        }
+
+    });
+
+
+    $("#customer_cpf_create").keyup(function () {
+
+        var customer_natural_legal = $('#customer_natural_legal_create').val();
+
+        if (customer_natural_legal == 'PESSOA FÍSICA') {
+            jQuery("#customer_cpf_create").mask('000.000.000-00');
+        }
+
+        if (customer_natural_legal == 'PESSOA JURÍDICA') {
+            jQuery("#customer_cpf_create").mask('00.000.000/0000-00');
+
+        }
+
+    });
+
+
+
+
 
 
     $('#customer_telephone_create').focus(function () {

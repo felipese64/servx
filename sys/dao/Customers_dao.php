@@ -1,6 +1,7 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/lib/db.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/model/customer.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/lib/functions.php');
 class Customers_dao
 {
 
@@ -13,20 +14,20 @@ class Customers_dao
         $symbols_to_replace = ["(", ")", ".", "-", "/", " "];
         $replace_null   = [""];
      
-        $customer_name = strtoupper ($customer->getCustomer_name());
-        $customer_trade_name = $customer->getCustomer_trade_name();
-        $customer_email = $customer->getCustomer_email();
+        $customer_name = mb_strtoupper ($customer->getCustomer_name(), 'UTF-8');
+        $customer_trade_name = mb_strtoupper ($customer->getCustomer_trade_name(), 'UTF-8');
+        $customer_email = mb_strtoupper ($customer->getCustomer_email(), 'UTF-8');
         $customer_cpf = str_replace($symbols_to_replace, $replace_null, $customer->getCustomer_cpf());
         $customer_natural_legal = $customer->getCustomer_natural_legal();
         $customer_rg = str_replace($symbols_to_replace, $replace_null, $customer->getCustomer_rg());
         $customer_telephone = str_replace($symbols_to_replace, $replace_null, $customer->getCustomer_telephone());
         $customer_cellphone = str_replace($symbols_to_replace, $replace_null, $customer->getCustomer_cellphone());
-        $customer_obs = $customer->getCustomer_obs();
+        $customer_obs = mb_strtoupper ($customer->getCustomer_obs(), 'UTF-8');
         $customer_address_type = $customer->getCustomer_address_type();
-        $customer_address = $customer->getCustomer_address();
+        $customer_address = mb_strtoupper ($customer->getCustomer_address(), 'UTF-8');
         $customer_address_number = $customer->getCustomer_address_number();
-        $customer_address_complements = $customer->getCustomer_address_complements();
-        $customer_zone = $customer->getCustomer_zone();
+        $customer_address_complements = mb_strtoupper ($customer->getCustomer_address_complements(), 'UTF-8');
+        $customer_zone = mb_strtoupper ($customer->getCustomer_zone(), 'UTF-8');
         $customer_state = $customer->getCustomer_state();
         $customer_city = $customer->getCustomer_city();
         $customer_cep = str_replace($symbols_to_replace, $replace_null, $customer->getCustomer_cep());
@@ -53,11 +54,11 @@ class Customers_dao
         $customer->setCustomer_name($reg['customer_name']);
         $customer->setCustomer_trade_name($reg['customer_trade_name']);
         $customer->setCustomer_email($reg['customer_email']);
-        $customer->setCustomer_cpf($reg['customer_cpf']);
+        $customer->setCustomer_cpf(mask($reg['customer_cpf'], "###.###.###-##"));
         $customer->setCustomer_natural_legal($reg['customer_natural_legal']);
-        $customer->setCustomer_rg($reg['customer_rg']);
-        $customer->setCustomer_telephone($reg['customer_telephone']);
-        $customer->setCustomer_cellphone($reg['customer_cellphone']);
+        $customer->setCustomer_rg(mask($reg['customer_rg'], "##.###.###-#"));
+        $customer->setCustomer_telephone(mask($reg['customer_telephone'], "(##) ####-####"));
+        $customer->setCustomer_cellphone(mask($reg['customer_cellphone'], "(##) #####-####"));
         $customer->setCustomer_registry_date($reg['customer_registry_date']);
         $customer->setCustomer_obs($reg['customer_obs']);
         $customer->setCustomer_address_type($reg['customer_address_type']);
@@ -67,7 +68,7 @@ class Customers_dao
         $customer->setCustomer_zone($reg['customer_zone']);
         $customer->setCustomer_state($reg['customer_state']);
         $customer->setCustomer_city($reg['customer_city']);
-        $customer->setCustomer_cep($reg['customer_cep']);
+        $customer->setCustomer_cep(mask($reg['customer_cep'], "#####-###"));
 
         $customer_array['customer_id'] = $customer->getCustomer_id();
         $customer_array['customer_name'] = $customer->getCustomer_name();
@@ -103,20 +104,20 @@ class Customers_dao
         $replace_null   = [""];
 
         $customer_id = $customer->getCustomer_id();
-        $customer_name = strtoupper ($customer->getCustomer_name());
-        $customer_trade_name = $customer->getCustomer_trade_name();
-        $customer_email = $customer->getCustomer_email();
+        $customer_name = mb_strtoupper ($customer->getCustomer_name(), 'UTF-8');
+        $customer_trade_name = mb_strtoupper ($customer->getCustomer_trade_name(), 'UTF-8');
+        $customer_email = mb_strtoupper ($customer->getCustomer_email(), 'UTF-8');
         $customer_cpf = str_replace($symbols_to_replace, $replace_null, $customer->getCustomer_cpf());
         $customer_natural_legal = $customer->getCustomer_natural_legal();
         $customer_rg = str_replace($symbols_to_replace, $replace_null, $customer->getCustomer_rg());
         $customer_telephone = str_replace($symbols_to_replace, $replace_null, $customer->getCustomer_telephone());
         $customer_cellphone = str_replace($symbols_to_replace, $replace_null, $customer->getCustomer_cellphone());
-        $customer_obs = $customer->getCustomer_obs();
+        $customer_obs = mb_strtoupper ($customer->getCustomer_obs(), 'UTF-8');
         $customer_address_type = $customer->getCustomer_address_type();
-        $customer_address = $customer->getCustomer_address();
+        $customer_address = mb_strtoupper ($customer->getCustomer_address(), 'UTF-8');
         $customer_address_number = $customer->getCustomer_address_number();
-        $customer_address_complements = $customer->getCustomer_address_complements();
-        $customer_zone = $customer->getCustomer_zone();
+        $customer_address_complements = mb_strtoupper ($customer->getCustomer_address_complements(), 'UTF-8');
+        $customer_zone = mb_strtoupper ($customer->getCustomer_zone(), 'UTF-8');
         $customer_state = $customer->getCustomer_state();
         $customer_city = $customer->getCustomer_city();
         $customer_cep = str_replace($symbols_to_replace, $replace_null, $customer->getCustomer_cep());
