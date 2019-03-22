@@ -259,7 +259,17 @@ $(document).ready(function () {
 
     //--------------------------------------------UPDATE--------------------------------------------------------------------
 
+    // $("#form_edit_customer").blur(function () {
+
+    //     alert("change");
+    //    alert($("#form_edit_customer").blur());
+    // });
+
     $("#form_edit_customer").on('submit', function (e) {
+        //alert("Handler for .submit() called.");
+
+
+
 
         e.preventDefault();
         var customer_id = $('#customer_id').val();
@@ -279,13 +289,30 @@ $(document).ready(function () {
 
                     send_form_update_customer();
                     //$('#modal_confirm_update_customer').modal('hide');
-                    document.getElementById("form_edit_customer").reset();
+                    //document.getElementById("form_edit_customer").reset();
 
 
                 }
             }
         });
     });
+
+
+    $('#btn_confirm_customer_update').click(function () {
+
+        form = document.getElementById("form_edit_customer");
+        //alert(form.reportValidity());
+
+        if (!form.reportValidity()) {
+
+            $('#modal_edit_customer').modal('show');
+            $('#modal_confirm_update_customer').modal('hide');
+        }
+
+    });
+
+
+
 
     // $('#btn_update_customer').click(function () {
 
@@ -410,6 +437,8 @@ $(document).ready(function () {
     enter_to_send_form('modal_edit_customer', 'btn_update_customer');
     enter_to_send_form('modal_update_customer_success_message', 'modal_close_update_customer_success_message');
     enter_to_send_form('modal_confirm_update_customer', 'btn_confirm_customer_update');
+
+
 
 
     //--------------------------------------------DELETE--------------------------------------------------------------------
