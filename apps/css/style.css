@@ -14,7 +14,7 @@ table.dataTable thead .sorting::after, table.dataTable thead .sorting_asc::after
 
 }
 
-input{
+input, textarea{
 
     text-transform: uppercase;
 }
@@ -25,7 +25,7 @@ input{
     margin-bottom: 2px;
 }
 
-label,h5,h1,p, th, td, div {
+label,h5,h1,p,div {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;

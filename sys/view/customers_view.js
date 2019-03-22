@@ -112,44 +112,23 @@ $(document).ready(function () {
 
     function clean_modal_create_customer() {
 
-        // $('#customer_name_create').val(null);
-        // $('#customer_trade_name_create').val(null);
-        // $('#customer_email_create').val(null);
-        // $('#customer_cpf_create').val(null);
-        // $('#customer_natural_legal_create').val('PESSOA FÍSICA');
-        // $('#customer_rg_create').val(null);
-        // $('#customer_telephone_create').val(null);
-        // $('#customer_cellphone_create').val(null);
-        // $('#customer_obs_create').val(null);
-        // $('#customer_address_type_create').val('RESIDÊNCIA');
-        // $('#customer_address_create').val(null);
-        // $('#customer_address_number_create').val(null);
-        // $('#customer_address_complements_create').val(null);
-        // $('#customer_zone_create').val(null);
-        // $('#customer_state_create').val('MS');
-        // $('#customer_city_create').val('CAMPO GRANDE');
-        // $('#customer_cep_create').val(null);
+        form_length = document.getElementById("form_create_customer").length;
+
+        for (let index = 0; index < form_length; index++) {
+            var input = document.getElementById("form_create_customer").elements[index]['id'];
+            document.getElementById(input).value = '';
+        }
 
         document.getElementById("form_create_customer").reset();
 
-        // document.getElementById('customer_name_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_trade_name_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_email_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_cpf_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_natural_legal_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_rg_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_telephone_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_cellphone_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_obs_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_address_type_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_address_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_address_number_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_address_complements_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_zone_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_state_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_city_create').style.boxShadow = "0px 0px";
-        // document.getElementById('customer_cep_create').style.boxShadow = "0px 0px";
+
     };
+
+
+
+
+
+
 
     $("#modal_create_customer").on('hidden.bs.modal', function () {
         clean_modal_create_customer();
