@@ -54,8 +54,9 @@ class Customers_dao
         $customer->setCustomer_name($reg['customer_name']);
         $customer->setCustomer_trade_name($reg['customer_trade_name']);
         $customer->setCustomer_email($reg['customer_email']);
-        $customer->setCustomer_cpf(mask($reg['customer_cpf'], "###.###.###-##"));
+        $customer->setCustomer_cpf(mask($reg['customer_cpf'], "###.###.###-##"));      
         $customer->setCustomer_natural_legal($reg['customer_natural_legal']);
+        $customer->getCustomer_natural_legal() == 'PESSOA FÍSICA' ? $customer->setCustomer_cpf(mask($reg['customer_cpf'], "###.###.###-##")) : $customer->setCustomer_cpf(mask($reg['customer_cpf'], "##.###.###/####-##"));  
         $customer->setCustomer_rg(mask($reg['customer_rg'], "##.###.###-#"));
         $customer->setCustomer_telephone(mask($reg['customer_telephone'], "(##) ####-####"));
         $customer->setCustomer_cellphone(mask($reg['customer_cellphone'], "(##) #####-####"));
@@ -92,6 +93,7 @@ class Customers_dao
         $customer_array['customer_cep'] = $customer->getCustomer_cep();
 
         return $customer_array;
+        
     }
 
 

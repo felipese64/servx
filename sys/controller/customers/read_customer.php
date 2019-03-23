@@ -10,5 +10,4 @@ $customersDao = new Customers_dao();
 
 $customer->setCustomer_id($customer_id);
 echo json_encode($customersDao->readCustomer($customer));
-
-?>
+ 

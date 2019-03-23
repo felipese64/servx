@@ -140,7 +140,7 @@ $(document).ready(function () {
     $("#modal_create_customer").on('shown.bs.modal', function () {
 
 
-        document.getElementById("customer_telephone_create").required = true;
+        //document.getElementById("customer_telephone_create").required = true;
 
         // document.getElementById("customer_telephone_create").required = true;
         // document.getElementById("customer_telephone_create").required = true;
@@ -393,9 +393,10 @@ $(document).ready(function () {
             $('#label_customer_cpf').html('CPF');
             jQuery("#customer_cpf").mask('000.000.000-00');
 
-            $("#customer_rg").attr("title", "Digite o RG no formato xx.xxx.xxx-x");
-            $("#customer_cpf").attr("title", "Digite o CPF no formato xxx.xxx.xxx-xx");
-            $("#customer_cpf").attr("pattern", "[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}");
+
+            $("#customer_cpf").attr("title", "000.000.000-00");
+            //$("#customer_cpf").attr("pattern", "[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}");
+            // $("#customer_cpf").attr("pattern", "([0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2})|([0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2})");
         }
 
         if (customer_natural_legal == 'PESSOA JURÍDICA') {
@@ -405,9 +406,8 @@ $(document).ready(function () {
             $('#label_customer_cpf').html('CNPJ');
             jQuery("#customer_cpf").mask('00.000.000/0000-00');
 
-            $("#customer_rg").attr("title", "Digite a IE no formato xx.xxx.xxx-x");
-            $("#customer_cpf").attr("title", "Digite o CNPJ no formato xxx.xxx.xxx-xx");
-            $("#customer_cpf").attr("pattern", "[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}");
+            $("#customer_cpf").attr("title", "00.000.000/0000-00");
+            //$("#customer_cpf").attr("pattern", "[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}");
 
         }
 
@@ -515,6 +515,39 @@ $(document).ready(function () {
 
 
     //--------------------------------------------OTHERS---------------------------------------------------------------------
+
+    $("#customer_name").attr("title", "Até 60 caracteres alfanuméricos");
+    $("#customer_trade_name").attr("title", "Até 60 caracteres alfanuméricos");
+    $("#customer_cpf").attr("title", "000.000.000-00");
+    $("#customer_rg").attr("title", "00.000.000-0");
+    $("#customer_telephone").attr("title", "(00) 0000-0000");
+    $("#customer_cellphone").attr("title", "(00) 00000-0000");
+    $("#customer_address").attr("title", "Até 50 caracteres alfanuméricos");
+    $("#customer_address_number").attr("title", "Até 11 caracteres numéricos");
+    $("#customer_address_complements").attr("title", "Até 50 caracteres alfanuméricos");
+    $("#customer_cep").attr("title", "00000-000");
+    $("#customer_obs").attr("title", "Até 100 caracteres alfanuméricos");
+
+    $("#customer_name").attr("pattern", "[A-Za-zÀ-ú0-9. ]{1,60}");
+    $("#customer_trade_name").attr("pattern", "[A-Za-zÀ-ú0-9. ]{1,60}");
+    $("#customer_cpf").attr("pattern", "([0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2})|([0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2})");
+    $("#customer_rg").attr("pattern", "[0-9]{2}[\.][0-9]{3}[\.][0-9]{3}[\-][0-9]{1}$");
+    $("#customer_telephone").attr("pattern", "[\(][0-9]{2}[\)] [0-9]{4}[\-][0-9]{4}$");
+    $("#customer_cellphone").attr("pattern", "[\(][0-9]{2}[\)] [0-9]{5}[\-][0-9]{4}$");
+    $("#customer_address").attr("pattern", "[A-Za-zÀ-ú0-9. ]{1,50}");
+    $("#customer_address_number").attr("pattern", "[0-9]{1,11}");
+    $("#customer_address_complements").attr("pattern", "[A-Za-zÀ-ú0-9. ]{1,50}");
+    $("#customer_cep").attr("pattern", "[0-9]{5}[\-]?[0-9]{3}");
+    $("#customer_obs").attr("pattern", "[A-Za-zÀ-ú0-9. ]{1,100}");
+
+
+
+
+
+
+
+
+
 
 
 

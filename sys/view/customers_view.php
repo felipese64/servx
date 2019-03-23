@@ -270,7 +270,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label id="label_customer_name" for="customer_name">Nome
                                     </label><input id="customer_name" name="customer_name" type="text"
-                                        class="form-control" pattern="[A-Za-zÀ-ú0-9., -]{1,60}" required></div>
+                                        class="form-control" required></div>
                                 <div class="col-md-4"><label id="label_customer_trade_name"
                                         for="customer_trade_name">Nome Fantasia/Apelido
                                     </label><input id="customer_trade_name" name="customer_trade_name" type="text"
@@ -296,8 +296,7 @@
                                         class="form-control"></div>
 
                                 <div class="col-md-2"><label id="label_customer_rg" for="customer_rg">RG </label><input
-                                        id="customer_rg" name="customer_rg" type="text" class="form-control"
-                                        pattern="\d{2}\.\d{3}\.\d{3}-\d{1}" title="Digite o RG no formato xx.xxx.xxx-x">
+                                        id="customer_rg" name="customer_rg" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
