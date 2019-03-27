@@ -244,20 +244,20 @@
     </div>
     <!-- /Modal Create customer -->
 
-    <!-- Modal Edit customer -->
-    <div class="modal" id="modal_edit_customer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- Modal Update customer -->
+    <div class="modal" id="modal_update_customer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-dialog modal-xl" id="modal-xl-update-customer" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Editar</h5>
-                    <button type="button" class="close" id="btn_close_customer_edition" data-dismiss="modal"
+                    <button type="button" class="close" id="btn_close_customer_update" data-dismiss="modal"
                         aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_edit_customer" method="post">
+                    <form id="form_update_customer" method="post">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-1"><label for="customer_id">ID </label><input id="customer_id"
@@ -355,13 +355,13 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger mr-auto" id="btn_delete_customer">Excluir</button>
-                    <button type="submit" form="form_edit_customer" class="btn btn-primary"
+                    <button type="submit" form="form_update_customer" class="btn btn-primary"
                         id="btn_update_customer">Salvar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /Modal Edit customer -->
+    <!-- /Modal Update customer -->
 
     <!-- Modal Delete customer -->
     <div class="modal" tabindex="-1" role="dialog" id="modal_confirm_delete">
@@ -401,7 +401,7 @@
                     <p id="txt_update_customer">Deseja salvar as alterações?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" form="form_edit_customer" class="btn btn-primary"
+                    <button type="submit" form="form_update_customer" class="btn btn-primary"
                         id="btn_confirm_customer_update">Salvar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
                 </div>

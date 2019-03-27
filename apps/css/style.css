@@ -14,9 +14,18 @@ table.dataTable thead .sorting::after, table.dataTable thead .sorting_asc::after
 
 }
 
+label{
+    font-size: 0.9rem;
+}
+
 input, textarea{
 
     text-transform: uppercase;
+}
+
+#modal-xl-update-customer{
+    margin: 0px auto;
+    height: 600px;
 }
 
 
@@ -38,6 +47,7 @@ label,h5,h1,p,div {
 
     body {
         background: #FFF;
+        /* font-size: 0.9rem; */
         /*
         background: #F2F2F2;
         */
