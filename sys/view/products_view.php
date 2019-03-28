@@ -32,6 +32,7 @@
     </script>
     <script src="../../sys/lib/functions.js"></script>
     <script src="products_view.js"></script>
+    <script src="../../apps/js/jquery.mask.min.js"></script>
 
 </head>
 
@@ -142,11 +143,11 @@
                                         id="prod_price_create" name="prod_price" type="text" class="form-control"></div>
                                 <div class="col-md-3"> <label for="prod_unit">Unidade</label>
                                     <select id="prod_unit_create" name="prod_unit" class="form-control">
-                                        <option selected>Escolha...</option>
-                                        <option value="Pç.">Pç.</option>
-                                        <option value="m">m</option>
-                                        <option value="Pct.">Pct.</option>
-                                        <option value="Cx.">Cx.</option>
+                                        <option>Escolha...</option>
+                                        <option>Pç.</option>
+                                        <option>m</option>
+                                        <option>Pct.</option>
+                                        <option>Cx.</option>
                                     </select></div>
                             </div>
                             <div class="row">
@@ -167,20 +168,20 @@
     </div>
     <!-- /Modal Create Product -->
 
-    <!-- Modal Edit Product -->
-    <div class="modal" id="modal_edit_product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- Modal Update Product -->
+    <div class="modal" id="modal_update_product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Editar</h5>
-                    <button type="button" class="close" id="btn_close_product_edition" data-dismiss="modal"
+                    <button type="button" class="close" id="btn_close_product_update" data-dismiss="modal"
                         aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_edit_product">
+                    <form id="form_update_product">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-2"><label for="prod_id">ID </label><input id="prod_id" name="prod_id"
@@ -209,11 +210,11 @@
                                 </div>
                                 <div class="col-md-3"> <label for="prod_unit">Unidade</label>
                                     <select id="prod_unit" name="prod_unit" class="form-control">
-                                        <option selected>Escolha...</option>
-                                        <option value="Pç.">Pç.</option>
-                                        <option value="m">m</option>
-                                        <option value="Pct.">Pct.</option>
-                                        <option value="Cx.">Cx.</option>
+                                        <option>Escolha...</option>
+                                        <option>Pç.</option>
+                                        <option>m</option>
+                                        <option>Pct.</option>
+                                        <option>Cx.</option>
                                     </select></div>
                             </div>
                             <div class="row">
