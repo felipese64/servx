@@ -126,24 +126,28 @@
                             <div class="row">
                                 <div class="col-md-6"><label for="prod_name">Nome
                                     </label><input id="prod_name_create" name="prod_name" type="text"
-                                        class="form-control"></div>
+                                        class="form-control" autocomplete="off" required></div>
                                 <div class="col-md-3 autocomplete"><label for="prod_brand">Marca </label><input
-                                        id="prod_brand_create" name="prod_brand" type="text" class="form-control"></div>
+                                        id="prod_brand_create" name="prod_brand" type="text" class="form-control"
+                                        autocomplete="off" required></div>
                                 <div class="col-md-3"><label for="prod_group">Grupo </label><input
-                                        id="prod_group_create" name="prod_group" type="text" class="form-control"></div>
+                                        id="prod_group_create" name="prod_group" type="text" class="form-control"
+                                        autocomplete="off" required></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3"><label for="prod_cost">Custo (R$) </label><input value="0,00"
-                                        style="" id="prod_cost_create" name="prod_cost" type="text"
-                                        class="form-control"></div>
+                                <div class="col-md-3"><label for="prod_cost">Custo (R$) </label><input
+                                        id="prod_cost_create" name="prod_cost" type="text" class="form-control"
+                                        required></div>
                                 <div class="col-md-3"><label for="prod_markup">Margem (%) </label><input value="60"
-                                        id="prod_markup_create" name="prod_markup" type="text" class="form-control">
+                                        id="prod_markup_create" name="prod_markup" type="text" class="form-control"
+                                        required>
                                 </div>
-                                <div class="col-md-3"> <label for="prod_price">Preço (R$) </label><input value="0,00"
-                                        id="prod_price_create" name="prod_price" type="text" class="form-control"></div>
+                                <div class="col-md-3"> <label for="prod_price">Preço (R$) </label><input
+                                        id="prod_price_create" name="prod_price" type="text" class="form-control"
+                                        required></div>
                                 <div class="col-md-3"> <label for="prod_unit">Unidade</label>
-                                    <select id="prod_unit_create" name="prod_unit" class="form-control">
-                                        <option>Escolha...</option>
+                                    <select id="prod_unit_create" name="prod_unit" class="form-control" required>
+                                        <option value="">Escolha...</option>
                                         <option>Pç.</option>
                                         <option>m</option>
                                         <option>Pct.</option>
@@ -161,7 +165,8 @@
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-danger mr-auto"
                         id="btn_exit_creating_product">Sair</button>
-                    <button type="button" class="btn btn-primary" id="btn_create_product">Salvar</button>
+                    <button type="submit" form="form_create_product" class="btn btn-primary"
+                        id="btn_create_product">Salvar</button>
                 </div>
             </div>
         </div>
@@ -190,27 +195,27 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6"><label for="prod_name">Nome </label><input id="prod_name"
-                                        name="prod_name" type="text" class="form-control"></div>
+                                        name="prod_name" type="text" class="form-control" autocomplete="off" required>
+                                </div>
                                 <div class="col-md-3"><label for="prod_brand">Marca </label><input id="prod_brand"
-                                        name="prod_brand" type="text" class="form-control">
+                                        name="prod_brand" type="text" class="form-control" autocomplete="off" required>
                                 </div>
                                 <div class="col-md-3"><label for="prod_group">Grupo </label><input id="prod_group"
-                                        name="prod_group" type="text" class="form-control">
+                                        name="prod_group" type="text" class="form-control" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3"><label for="prod_cost">Custo (R$) </label><input style=""
-                                        id="prod_cost" name="prod_cost" type="text" class="form-control">
+                                        id="prod_cost" name="prod_cost" type="text" class="form-control" required>
                                 </div>
                                 <div class="col-md-3"><label for="prod_markup">Margem (%) </label><input
-                                        id="prod_markup" name="prod_markup" type="text" class="form-control">
+                                        id="prod_markup" name="prod_markup" type="text" class="form-control" required>
                                 </div>
                                 <div class="col-md-3"> <label for="prod_price">Preço (R$) </label><input id="prod_price"
-                                        name="prod_price" type="text" class="form-control">
+                                        name="prod_price" type="text" class="form-control" required>
                                 </div>
                                 <div class="col-md-3"> <label for="prod_unit">Unidade</label>
-                                    <select id="prod_unit" name="prod_unit" class="form-control">
-                                        <option>Escolha...</option>
+                                    <select id="prod_unit" name="prod_unit" class="form-control" required>
                                         <option>Pç.</option>
                                         <option>m</option>
                                         <option>Pct.</option>
@@ -227,7 +232,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger mr-auto" id="btn_delete_product">Excluir</button>
-                    <button type="button" class="btn btn-primary" id="btn_update_product">Salvar</button>
+                    <button type="submit" form="form_update_product" class="btn btn-primary"
+                        id="btn_update_product">Salvar</button>
                 </div>
             </div>
         </div>
@@ -272,7 +278,8 @@
                     <p id="txt_update_product">Deseja salvar as alterações?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btn_confirm_product_update">Salvar</button>
+                    <button type="submit" form="form_update_product" class="btn btn-primary"
+                        id="btn_confirm_product_update">Salvar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
                 </div>
             </div>

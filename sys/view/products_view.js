@@ -53,14 +53,6 @@ $(document).ready(function () {
 
     //--------------------------------------------CREATE----------------------------------------------------------
 
-    $("#btn_create_product").click(function () {
-
-        if ($('#prod_unit_create').val()) {
-            document.getElementById("prod_price_create").required = false;
-        }
-
-    });
-
     $("#form_create_product").on('submit', function (e) {
 
         e.preventDefault();
@@ -106,9 +98,10 @@ $(document).ready(function () {
     };
 
     $("#modal_create_product").on('hidden.bs.modal', function () {
-        clean_modal_create_product();
+
         autocomplete_product_groups('prod_group_create');
         autocomplete_product_brands('prod_brand_create');
+        clean_modal_create_product();
 
     });
 
@@ -116,7 +109,6 @@ $(document).ready(function () {
 
         autocomplete_product_groups('prod_group_create');
         autocomplete_product_brands('prod_brand_create');
-
     });
 
 
@@ -334,11 +326,16 @@ $(document).ready(function () {
     //--------------------------------------------AUTOCOMPLETE----------------------------------------------------
 
     function autocomplete_product_groups(input) {
+
+        //console.log(document.getElementById('prod_group').style.width);
+
         $.ajax({
 
             url: '../controller/products/read_product_groups.php',
             method: 'post',
             success: function (data) {
+
+
 
                 var groups = JSON.parse(data);
                 for (var i = 0; i < groups.length; i++) {
@@ -368,6 +365,8 @@ $(document).ready(function () {
 
     //--------------------------------------------OTHERS----------------------------------------------------------
 
+
+
     $('#prod_cost').mask('000.000,00', { reverse: true });
     $('#prod_price').mask('000.000,00', { reverse: true });
     $('#prod_markup').mask('0000');
@@ -385,6 +384,7 @@ $(document).ready(function () {
     $("#prod_cost").attr("pattern", "([0-9]{1,3}\.)?([0-9]{1,3}\.)?([0-9]{1,3}\.)?([0-9]{1,3}\.)?[0-9]{1,3},[0-9]{2}$");
     $("#prod_markup").attr("pattern", "[0-9]{1,}");
     $("#prod_price").attr("pattern", "([0-9]{1,3}\.)?([0-9]{1,3}\.)?([0-9]{1,3}\.)?([0-9]{1,3}\.)?[0-9]{1,3},[0-9]{2}$");
+    $("#prod_unit").attr("pattern", "/[^(escolha)]/i");
 
     $('#prod_cost_create').mask('000.000,00', { reverse: true });
     $('#prod_price_create').mask('000.000,00', { reverse: true });
@@ -434,7 +434,7 @@ $(document).ready(function () {
         var prod_cost_double = brl_to_float(prod_cost);
         var price_toBrl = float_to_brl(parseFloat(price_toFloat));
         var prod_markup = ((price_toFloat / prod_cost_double) - 1) * 100;
-        prod_markup > 1000 ? prod_markup = 1000 : prod_markup = prod_markup;
+        prod_markup > 9999 ? prod_markup = 9999 : prod_markup = prod_markup;
 
         if (prod_markup < 1 || isNaN(prod_markup) || prod_markup ==
             Infinity) {
@@ -449,7 +449,48 @@ $(document).ready(function () {
     });
 
 
+    $("#prod_cost_create").keyup(function () {
+
+        var prod_cost = brl_to_float($("#prod_cost_create").val());
+        var prod_markup = $("#prod_markup_create").val();
+        var prod_price = prod_cost * ((prod_markup / 100) + 1);
+        $("#prod_cost_create").val(float_to_brl(parseFloat(prod_cost)));
+        $("#prod_price_create").val(float_to_brl(prod_price));
+
+    });
 
 
+    $("#prod_markup_create").keyup(function () {
+
+        var prod_cost = brl_to_float($("#prod_cost_create").val());
+        var prod_markup = $("#prod_markup_create").val();
+        var prod_price = prod_cost * ((prod_markup / 100) + 1);
+        $("#prod_price_create").val(float_to_brl(prod_price));
+    });
+
+
+    $("#prod_price_create").keyup(function () {
+
+        var prod_cost = brl_to_float($("#prod_cost_create").val());
+        var prod_price = $("#prod_price_create").val();
+        var price_toFloat = brl_to_float(prod_price);
+        var prod_cost_double = brl_to_float(prod_cost);
+        var price_toBrl = float_to_brl(parseFloat(price_toFloat));
+        var prod_markup = ((price_toFloat / prod_cost_double) - 1) * 100;
+        prod_markup > 9999 ? prod_markup = 9999 : prod_markup = prod_markup;
+
+        if (prod_markup < 1 || isNaN(prod_markup) || prod_markup ==
+            Infinity) {
+            $("#prod_markup_create").val('0');
+        } else {
+            $("#prod_markup_create").val(parseInt(prod_markup));
+        }
+
+        isNaN(parseFloat(price_toBrl)) ? $("#prod_price_create").val('0,00') : $(
+            "#prod_price_create").val(
+                price_toBrl);
+    });
+
+    clean_modal_create_product();
 
 });

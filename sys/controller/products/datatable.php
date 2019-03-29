@@ -29,12 +29,12 @@ $rows_number = mysqli_num_rows($tb_results);
 //Obter os dados a serem apresentados
 $search_result = "SELECT * FROM tbproducts WHERE 1=1";
 if (!empty($requestData['search']['value'])) {   // se houver um parâmetro de pesquisa, $requestData['search']['value'] contém o parâmetro de pesquisa
-	$search_result .= " AND ( prod_name LIKE '" . $requestData['search']['value'] . "%' ";
-	$search_result .= " OR prod_desc LIKE '" . $requestData['search']['value'] . "%' ";
-	$search_result .= " OR prod_group LIKE '" . $requestData['search']['value'] . "%' ";
-	$search_result .= " OR prod_brand LIKE '" . $requestData['search']['value'] . "%' ";
-	$search_result .= " OR prod_cost LIKE '" . $requestData['search']['value'] . "%' ";
-	$search_result .= " OR prod_price LIKE '" . $requestData['search']['value'] . "%' )";
+	$search_result .= " AND ( prod_name LIKE '%" . $requestData['search']['value'] . "%' ";
+	$search_result .= " OR prod_desc LIKE '%" . $requestData['search']['value'] . "%' ";
+	$search_result .= " OR prod_group LIKE '%" . $requestData['search']['value'] . "%' ";
+	$search_result .= " OR prod_brand LIKE '%" . $requestData['search']['value'] . "%' ";
+	$search_result .= " OR prod_cost LIKE '%" . $requestData['search']['value'] . "%' ";
+	$search_result .= " OR prod_price LIKE '%" . $requestData['search']['value'] . "%' )";
 }
 
 $rs = mysqli_query($link, $search_result);
@@ -62,10 +62,10 @@ while ($tb_row = mysqli_fetch_array($rs)) {
 //Cria o array de informações a serem retornadas para o Javascript
 $json_data = array(
 
-	"draw" => intval($requestData['draw']),//para cada requisição é enviado um número como parâmetro
+	"draw" => intval($requestData['draw']), //para cada requisição é enviado um número como parâmetro
 	"recordsTotal" => intval($rows_number),  //Quantidade de registros que há no banco de dados
 	"recordsFiltered" => intval($totalFiltered), //Total de registros quando houver pesquisa
 	"data" => $tb_data   //Array de dados completo dos dados retornados da tabela 
 );
 
-echo json_encode($json_data);  //enviar dados como formato json
+echo json_encode($json_data);  

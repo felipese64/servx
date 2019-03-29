@@ -22,6 +22,7 @@ class Products_dao
         $sql = "INSERT INTO `servx`.`tbproducts` (`prod_name`, `prod_group`, `prod_desc`, `prod_brand`, `prod_cost`, `prod_markup`, `prod_price`, `prod_unit`) VALUES ('$prod_name', '$prod_group', '$prod_desc', '$prod_brand', '$prod_cost', '$prod_markup', '$prod_price', '$prod_unit')";
 
         $rs = mysqli_query($link, $sql);
+        echo (mysqli_error($link));
     }
 
     public function readProduct(Product $product)
@@ -44,17 +45,7 @@ class Products_dao
         $product->setProd_price($reg['prod_price']);
         $product->setProd_unit($reg['prod_unit']);
 
-        $prod_array['prod_id'] = $product->getProd_id();
-        $prod_array['prod_name'] = $product->getProd_name();
-        $prod_array['prod_desc'] = $product->getProd_desc();
-        $prod_array['prod_brand'] = $product->getProd_brand();
-        $prod_array['prod_group'] = $product->getProd_group();
-        $prod_array['prod_cost'] = $product->getProd_cost();
-        $prod_array['prod_markup'] = $product->getProd_markup();
-        $prod_array['prod_price'] = $product->getProd_price();
-        $prod_array['prod_unit'] = $product->getProd_unit();
-
-        return $prod_array;
+        return $product;
     }
 
 
@@ -107,6 +98,7 @@ class Products_dao
 
         $sql = "UPDATE `servx`.`tbproducts` SET `prod_name`= '$prod_name', `prod_desc`= '$prod_desc', `prod_group`='$prod_group', `prod_brand`='$prod_brand', `prod_cost`='$prod_cost', `prod_markup`='$prod_markup', `prod_price`='$prod_price', `prod_unit`='$prod_unit' WHERE `prod_id`='$prod_id'";
         $rs = mysqli_query($link, $sql);
+        echo (mysqli_error($link));
     }
 
 
@@ -120,4 +112,4 @@ class Products_dao
         $rs = mysqli_query($link, $sql);
     }
 };
-?>
+ 

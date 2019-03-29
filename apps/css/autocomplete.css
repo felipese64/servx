@@ -33,10 +33,10 @@
         border-top: none;
         z-index: 99;
         /*position the autocomplete items to be the same width as the container:*/
-        width: 194px;
+        width: 100%;
         top: 100%;
         left: 15px;
-        right: 0;
+        /* right: 15px; */
       }
       .autocomplete-items div {
         padding: 10px;
