@@ -107,7 +107,8 @@ $(document).ready(function () {
 
         for (let index = 0; index < form_length; index++) {
             var input = document.getElementById("form_create_customer").elements[index]['id'];
-            document.getElementById(input).value = '';
+            //alert(input);
+            document.getElementById(input).value = "";
         }
 
         document.getElementById("customer_telephone_create").required = true;
