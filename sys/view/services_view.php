@@ -34,6 +34,7 @@
 
     <script src="../../sys/lib/functions.js"></script>
     <script src="services_view.js"></script>
+    <script src="../../apps/js/jquery.mask.min.js"></script>
 
 
 
@@ -127,7 +128,7 @@
                             <div class="row">
                                 <div class="col-md-12"><label for="serv_name_create">Nome
                                     </label><input id="serv_name_create" name="serv_name" type="text"
-                                        class="form-control" autocomplete="off"></div>
+                                        class="form-control" autocomplete="off" required></div>
 
                             </div>
 
@@ -158,27 +159,28 @@
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-danger mr-auto"
                         id="btn_exit_creating_service">Sair</button>
-                    <button type="button" class="btn btn-primary" id="btn_create_service">Salvar</button>
+                    <button type="submit" form="form_create_service" class="btn btn-primary"
+                        id="btn_create_service">Salvar</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- /Modal Create service -->
 
-    <!-- Modal Edit service -->
-    <div class="modal" id="modal_edit_service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- Modal Update service -->
+    <div class="modal" id="modal_update_service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Editar</h5>
-                    <button type="button" class="close" id="btn_close_service_edition" data-dismiss="modal"
+                    <button type="button" class="close" id="btn_close_service_update" data-dismiss="modal"
                         aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_edit_service">
+                    <form id="form_update_service">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-2"><label for="serv_id">ID </label><input id="serv_id" name="serv_id"
@@ -188,7 +190,7 @@
                             <div class="row">
                                 <div class="col-md-12"><label for="serv_name">Nome
                                     </label><input id="serv_name" name="serv_name" type="text" class="form-control"
-                                        autocomplete="off">
+                                        autocomplete="off" required>
                                 </div>
 
                             </div>
@@ -215,12 +217,13 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger mr-auto" id="btn_delete_service">Excluir</button>
-                    <button type="button" class="btn btn-primary" id="btn_update_service">Salvar</button>
+                    <button type="submit" form="form_update_service" class="btn btn-primary"
+                        id="btn_update_service">Salvar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /Modal Edit service -->
+    <!-- /Modal Update service -->
 
     <!-- Modal Delete service -->
     <div class="modal" tabindex="-1" role="dialog" id="modal_confirm_delete">
@@ -260,7 +263,8 @@
                     <p id="txt_update_service">Deseja salvar as alterações?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btn_confirm_service_update">Salvar</button>
+                    <button type="submit" form="form_update_service" class="btn btn-primary"
+                        id="btn_confirm_service_update">Salvar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
                 </div>
             </div>

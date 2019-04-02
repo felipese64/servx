@@ -81,21 +81,11 @@ $(document).ready(function () {
             data: data,
             success: function (data) {
 
-                if (data) {
-                    var error = data;
-                    var regExp = /Duplicate entry/;
-                    var name_already_used = regExp.test(error);
-                    if (name_already_used) {
-                        alert("Não é possível cadastrar dois clientes com o mesmo nome.");
-                    }
+                $('#list-customers').DataTable().ajax.reload();
+                $('#modal_create_customer').modal('hide');
+                $('#modal_create_customer_success_message').modal('show');
+                clean_modal_create_customer();
 
-                } else {
-
-                    $('#list-customers').DataTable().ajax.reload();
-                    $('#modal_create_customer').modal('hide');
-                    $('#modal_create_customer_success_message').modal('show');
-                    clean_modal_create_customer();
-                }
             }
         });
 
@@ -285,23 +275,10 @@ $(document).ready(function () {
 
             success: function (data) {
 
-                if (data) {
-                    var error = data;
-                    var regExp = /Duplicate entry/;
-                    var name_already_used = regExp.test(error);
-                    if (name_already_used) {
-                        $('#modal_update_customer').modal('show');
-                        $('#modal_confirm_update_customer').modal('hide');
-                        alert("Não é possível cadastrar dois clientes com o mesmo nome.");
-                    }
-
-                } else {
-
-                    $('#list-customers').DataTable().ajax.reload();
-                    $('#modal_update_customer').modal('hide');
-                    $('#modal_confirm_update_customer').modal('hide');
-                    $('#modal_update_customer_success_message').modal('show');
-                }
+                $('#list-customers').DataTable().ajax.reload();
+                $('#modal_update_customer').modal('hide');
+                $('#modal_confirm_update_customer').modal('hide');
+                $('#modal_update_customer_success_message').modal('show');
             }
         });
 
@@ -449,6 +426,7 @@ $(document).ready(function () {
     $("#customer_telephone").attr("title", "(00) 0000-0000");
     $("#customer_cellphone").attr("title", "(00) 00000-0000");
     $("#customer_address").attr("title", "Até 50 caracteres alfanuméricos");
+    $("#customer_zone").attr("title", "Até 50 caracteres alfanuméricos");
     $("#customer_address_number").attr("title", "Até 11 caracteres numéricos");
     $("#customer_address_complements").attr("title", "Até 50 caracteres alfanuméricos");
     $("#customer_cep").attr("title", "00000-000");
@@ -460,6 +438,7 @@ $(document).ready(function () {
     $("#customer_telephone").attr("pattern", "[\(][0-9]{2}[\)] [0-9]{4}[\-][0-9]{4}$");
     $("#customer_cellphone").attr("pattern", "[\(][0-9]{2}[\)] [0-9]{5}[\-][0-9]{4}$");
     $("#customer_address").attr("pattern", "[A-Za-zÀ-ú0-9. ]{1,50}");
+    $("#customer_zone").attr("pattern", "[A-Za-zÀ-ú0-9. ]{1,50}");
     $("#customer_address_number").attr("pattern", "[0-9]{1,11}");
     $("#customer_address_complements").attr("pattern", "[A-Za-zÀ-ú0-9. ]{1,50}");
     $("#customer_cep").attr("pattern", "[0-9]{5}[\-]?[0-9]{3}");
@@ -471,6 +450,7 @@ $(document).ready(function () {
     $("#customer_telephone_create").attr("title", "(00) 0000-0000");
     $("#customer_cellphone_create").attr("title", "(00) 00000-0000");
     $("#customer_address_create").attr("title", "Até 50 caracteres alfanuméricos");
+    $("#customer_zone_create").attr("title", "Até 50 caracteres alfanuméricos");
     $("#customer_address_number_create").attr("title", "Até 11 caracteres numéricos");
     $("#customer_address_complements_create").attr("title", "Até 50 caracteres alfanuméricos");
     $("#customer_cep_create").attr("title", "00000-000");
@@ -482,6 +462,7 @@ $(document).ready(function () {
     $("#customer_telephone_create").attr("pattern", "[\(][0-9]{2}[\)] [0-9]{4}[\-][0-9]{4}$");
     $("#customer_cellphone_create").attr("pattern", "[\(][0-9]{2}[\)] [0-9]{5}[\-][0-9]{4}$");
     $("#customer_address_create").attr("pattern", "[A-Za-zÀ-ú0-9. ]{1,50}");
+    $("#customer_zone_create").attr("pattern", "[A-Za-zÀ-ú0-9. ]{1,50}");
     $("#customer_address_number_create").attr("pattern", "[0-9]{1,11}");
     $("#customer_address_complements_create").attr("pattern", "[A-Za-zÀ-ú0-9. ]{1,50}");
     $("#customer_cep_create").attr("pattern", "[0-9]{5}[\-]?[0-9]{3}");
@@ -503,6 +484,10 @@ $(document).ready(function () {
         jQuery('#customer_cep').mask('00000-000');
     });
 
+    $("#customer_address_number").keyup(function () {
+        jQuery('#customer_address_number').mask('00000');
+    });
+
     $("#customer_cellphone_create").keyup(function () {
         jQuery('#customer_cellphone_create').mask('(00) 00000-0000');
     });
@@ -513,6 +498,10 @@ $(document).ready(function () {
 
     $("#customer_cep_create").keyup(function () {
         jQuery('#customer_cep_create').mask('00000-000');
+    });
+
+    $("#customer_address_number_create").keyup(function () {
+        jQuery('#customer_address_number_create').mask('00000');
     });
 
     $("#customer_rg_create").keyup(function () {

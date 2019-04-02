@@ -381,9 +381,9 @@ $(document).ready(function () {
     $("#prod_name").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{1,60}");
     $("#prod_group").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{1,30}");
     $("#prod_brand").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{1,30}");
-    $("#prod_cost").attr("pattern", "^((?!0\,00).)*$");
+    $("#prod_cost").attr("pattern", "^((?!(^0\,00$)).)*$");
     $("#prod_markup").attr("pattern", "[0-9]{1,}");
-    $("#prod_price").attr("pattern", "^((?!0\,00).)*$");
+    $("#prod_price").attr("pattern", "^((?!(^0\,00$)).)*$");
     $("#prod_unit").attr("pattern", "/[^(escolha)]/i");
 
     $('#prod_cost_create').mask('000.000,00', { reverse: true });
@@ -400,9 +400,9 @@ $(document).ready(function () {
     $("#prod_name_create").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{1,60}");
     $("#prod_group_create").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{1,30}");
     $("#prod_brand_create").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{1,30}");
-    $("#prod_cost_create").attr("pattern", "^((?!0\,00).)*$");
+    $("#prod_cost_create").attr("pattern", "^((?!(^0\,00$)).)*$");
     $("#prod_markup_create").attr("pattern", "[0-9]{1,}");
-    $("#prod_price_create").attr("pattern", "^((?!0\,00).)*$");
+    $("#prod_price_create").attr("pattern", "^((?!(^0\,00$)).)*$");
 
 
 

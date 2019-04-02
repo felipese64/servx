@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var table = $('#list-products').DataTable({
+    var table = $('#list-services').DataTable({
         "processing": true,
         "serverSide": true,
         "language": {
@@ -7,111 +7,98 @@ $(document).ready(function () {
         },
         "initComplete": function (settings, json) {
 
-            $('#list-products_filter').prepend(
-                '<button type="button" class="btn btn-primary btn_open_create_modal" id="btn_open_create_product_modal">Adicionar Produto</button>'
+            $('#list-services_filter').prepend(
+                '<button type="button" class="btn btn-primary btn_open_create_modal" id="btn_open_create_service_modal">Adicionar Serviço</button>'
             );
 
-            $('#btn_open_create_product_modal').on("click", function () {
+            $('#btn_open_create_service_modal').on("click", function () {
 
-                $('#modal_create_product').modal('show');
+                $('#modal_create_service').modal('show');
 
             });
 
         },
 
         "ajax": {
-            "url": "../controller/products/datatable.php",
+            "url": "../controller/services/datatable.php",
             "type": "POST"
         }
     });
 
-
-    enter_to_send_form('modal_edit_product', 'btn_update_product');
-    enter_to_send_form('modal_create_product', 'btn_create_product');
-    enter_to_send_form('modal_create_product_success_message', 'modal_close_create_product_success_message');
-    enter_to_send_form('modal_update_product_success_message', 'modal_close_update_product_success_message');
-    enter_to_send_form('modal_confirm_update_product', 'btn_confirm_product_update');
-    enter_to_send_form('modal_confirm_delete', 'btn_confirm_product_deletion');
+    enter_to_send_form('modal_edit_service', 'btn_update_service');
+    enter_to_send_form('modal_create_service', 'btn_create_service');
+    enter_to_send_form('modal_create_service_success_message', 'modal_close_create_service_success_message');
+    enter_to_send_form('modal_update_service_success_message', 'modal_close_update_service_success_message');
+    enter_to_send_form('modal_confirm_update_service', 'btn_confirm_service_update');
+    enter_to_send_form('modal_confirm_delete', 'btn_confirm_service_deletion');
 
 
     $('#table_body').on('click', 'tr', function () {
 
         var data = table.row(this).data();
-        var prod_id = data[0];
+        var serv_id = data[0];
 
         $.ajax({
 
-            url: '../controller/products/read_product.php',
+            url: '../controller/services/read_service.php',
             method: 'post',
             data: {
-                prod_id: prod_id
+                serv_id: serv_id
             },
             success: function (data) {
 
-                var product_row = JSON.parse(data);
+                var serv_row = JSON.parse(data);
 
-                $('#prod_id').val(product_row['prod_id']);
-                $('#prod_name').val(product_row['prod_name']);
-                $('#prod_desc').val(product_row['prod_desc']);
-                $('#prod_brand').val(product_row['prod_brand']);
-                $('#prod_group').val(product_row['prod_group']);
-                $('#prod_cost').val(float_to_brl(parseFloat(product_row[
-                    'prod_cost'])));
-                $('#prod_markup').val(product_row['prod_markup']);
-                $('#prod_price').val(float_to_brl(parseFloat(product_row['prod_price'])));
-                $('#prod_unit').val(product_row['prod_unit']);
-                $('#modal_edit_product').modal('show');
+                $('#serv_id').val(serv_row['serv_id']);
+                $('#serv_name').val(serv_row['serv_name']);
+                $('#serv_desc').val(serv_row['serv_desc']);
+                $('#serv_ts').val(serv_row['serv_ts']);
+                $('#serv_ts_price').val(float_to_brl(parseFloat(serv_row[
+                    'serv_ts_price'])));
+                $('#serv_price').val(float_to_brl(parseFloat(serv_row['serv_price'])));
+                $('#modal_edit_service').modal('show');
 
             }
         });
     });
 
-
-    $(".btn_cancel_product_deletion").click(function () {
-        $('#modal_edit_product').modal('show');
+    $(".btn_cancel_service_deletion").click(function () {
+        $('#modal_edit_service').modal('show');
     });
 
 
-    $("#modal_edit_product").on('hide.bs.modal', function () {
 
-        autocomplete_product_groups('prod_group');
-        autocomplete_product_brands('prod_brand');
-        var prod_id = $('#prod_id').val();
+    $("#modal_edit_service").on('hide.bs.modal', function () {
+
+        var serv_id = $('#serv_id').val();
 
         $.ajax({
 
-            url: '../controller/products/read_product.php',
+            url: '../controller/services/read_service.php',
             method: 'post',
             data: {
-                prod_id: prod_id
+                serv_id: serv_id
             },
             success: function (data) {
 
-                var product_row = JSON.parse(data);
-                var validate_prod_id = product_row['prod_id'] == $('#prod_id').val();
-                var validate_prod_name = product_row['prod_name'] == $('#prod_name')
+                var service_row = JSON.parse(data);
+                var validate_serv_id = service_row['serv_id'] == $('#serv_id').val();
+                var validate_serv_name = service_row['serv_name'] == $('#serv_name')
                     .val().toUpperCase();
-                var validate_prod_desc = product_row['prod_desc'] == $('#prod_desc')
+                var validate_serv_desc = service_row['serv_desc'] == $('#serv_desc')
                     .val().toUpperCase();
-                var validate_prod_brand = product_row['prod_brand'] == $(
-                    '#prod_brand').val().toUpperCase();
-                var validate_prod_group = product_row['prod_group'] == $(
-                    '#prod_group').val().toUpperCase();
-                var validate_prod_cost = product_row['prod_cost'] ==
+                var validate_serv_ts = service_row['serv_ts'] == $('#serv_ts').val();
+                var validate_serv_ts_price = service_row['serv_ts_price'] ==
                     brl_to_float($(
-                        '#prod_cost').val());
-                var validate_prod_markup = product_row['prod_markup'] == $(
-                    '#prod_markup').val();
-                var validate_prod_price = product_row['prod_price'] ==
+                        '#serv_ts_price').val());
+                var validate_serv_price = service_row['serv_price'] ==
                     brl_to_float($(
-                        '#prod_price').val());
-                var validate_prod_unit = product_row['prod_unit'] == $(
-                    '#prod_unit').val();
+                        '#serv_price').val());
 
-                if (validate_prod_id && validate_prod_name && validate_prod_desc &&
-                    validate_prod_brand && validate_prod_group &&
-                    validate_prod_cost && validate_prod_markup &&
-                    validate_prod_price && validate_prod_unit) {
+
+
+                if (validate_serv_id && validate_serv_name && validate_serv_desc &&
+                    validate_serv_ts && validate_serv_ts_price && validate_serv_price) {
                     var form_equals_db = true;
                 } else {
                     var form_equals_db = false;
@@ -124,36 +111,53 @@ $(document).ready(function () {
 
                 if (display == 'none' && !form_equals_db) {
 
-                    clean_modal_edit_product();
-                    $('#modal_confirm_update_product').modal('show');
+                    clean_modal_edit_service();
+                    $('#modal_confirm_update_service').modal('show');
                 }
             }
         });
     });
 
 
-    $("#modal_edit_product").on('shown.bs.modal', function () {
-        autocomplete_product_groups('prod_group');
-        autocomplete_product_brands('prod_brand');
-    });
+    function clean_modal_edit_service() {
+
+        document.getElementById('serv_name').style.boxShadow = "0px 0px";
+        document.getElementById('serv_ts').style.boxShadow = "0px 0px";
+        document.getElementById('serv_ts_price').style.boxShadow = "0px 0px";
+        document.getElementById('serv_price').style.boxShadow = "0px 0px";
+    };
+
+    function clean_modal_create_service() {
+        $('#serv_name_create').val('');
+        $('#serv_desc_create').val('');
+        $('#serv_ts_create').val('60');
+        $('#serv_ts_price_create').val('1,00');
+        $('#serv_price_create').val('0,00');
+
+        document.getElementById('serv_name').style.boxShadow = "0px 0px";
+        document.getElementById('serv_ts').style.boxShadow = "0px 0px";
+        document.getElementById('serv_ts_price').style.boxShadow = "0px 0px";
+        document.getElementById('serv_price').style.boxShadow = "0px 0px";
+    };
 
 
-    $("#btn_confirm_product_deletion").click(function () {
 
-        var prod_id = $('#prod_id').val();
+    $("#btn_confirm_service_deletion").click(function () {
+
+        var serv_id = $('#serv_id').val();
 
         $.ajax({
 
-            url: '../controller/products/delete_product.php',
+            url: '../controller/services/delete_service.php',
             method: 'post',
             data: {
-                prod_id: prod_id
+                serv_id: serv_id
             },
             success: function (data) {
 
 
                 $('#modal_confirm_delete').modal('hide');
-                $('#list-products').DataTable().ajax.reload();
+                $('#list-services').DataTable().ajax.reload();
 
 
             }
@@ -161,45 +165,38 @@ $(document).ready(function () {
     });
 
 
-    $('#btn_update_product').click(function () {
+    $('#btn_update_service').click(function () {
 
-        var prod_id = $('#prod_id').val();
+        var serv_id = $('#serv_id').val();
 
         $.ajax({
 
-            url: '../controller/products/read_product.php',
+            url: '../controller/services/read_service.php',
             method: 'post',
             data: {
-                prod_id: prod_id
+                serv_id: serv_id
             },
             success: function (data) {
 
-                var product_row = JSON.parse(data);
+                var service_row = JSON.parse(data);
 
-                var validate_prod_id = product_row['prod_id'] == $('#prod_id').val();
-                var validate_prod_name = product_row['prod_name'] == $('#prod_name')
+                var validate_serv_id = service_row['serv_id'] == $('#serv_id').val();
+                var validate_serv_name = service_row['serv_name'] == $('#serv_name')
                     .val().toUpperCase();
-                var validate_prod_desc = product_row['prod_desc'] == $('#prod_desc')
+                var validate_serv_desc = service_row['serv_desc'] == $('#serv_desc')
                     .val().toUpperCase();
-                var validate_prod_brand = product_row['prod_brand'] == $(
-                    '#prod_brand').val().toUpperCase();
-                var validate_prod_group = product_row['prod_group'] == $(
-                    '#prod_group').val().toUpperCase();
-                var validate_prod_cost = product_row['prod_cost'] ==
+                var validate_serv_ts = service_row['serv_ts'] == $('#serv_ts').val();
+                var validate_serv_ts_price = service_row['serv_ts_price'] ==
                     brl_to_float($(
-                        '#prod_cost').val());
-                var validate_prod_markup = product_row['prod_markup'] == $(
-                    '#prod_markup').val();
-                var validate_prod_price = product_row['prod_price'] ==
+                        '#serv_ts_price').val());
+                var validate_serv_price = service_row['serv_price'] ==
                     brl_to_float($(
-                        '#prod_price').val());
-                var validate_prod_unit = product_row['prod_unit'] == $(
-                    '#prod_unit').val();
+                        '#serv_price').val());
 
-                if (validate_prod_id && validate_prod_name && validate_prod_desc &&
-                    validate_prod_brand && validate_prod_group &&
-                    validate_prod_cost && validate_prod_markup &&
-                    validate_prod_price && validate_prod_unit) {
+
+
+                if (validate_serv_id && validate_serv_name && validate_serv_desc &&
+                    validate_serv_ts && validate_serv_ts_price && validate_serv_price) {
                     var form_equals_db = true;
                 } else {
                     var form_equals_db = false;
@@ -212,70 +209,43 @@ $(document).ready(function () {
 
                 if (display == 'none' && !form_equals_db) {
 
-                    var prod_id = $('#prod_id').val();
-                    var prod_name = $('#prod_name').val().toUpperCase();
-                    var prod_brand = $('#prod_brand').val().toUpperCase();
-                    var prod_group = $('#prod_group').val().toUpperCase();
-                    var prod_cost = brl_to_float($('#prod_cost').val());
-                    var prod_markup = $('#prod_markup').val();
-                    var prod_price = brl_to_float($('#prod_price').val());
-                    var prod_unit = $('#prod_unit').val();
-                    var prod_desc = $('#prod_desc').val().toUpperCase();
+                    var serv_id = $('#serv_id').val();
+                    var serv_name = $('#serv_name').val().toUpperCase();
+                    var serv_ts = $('#serv_ts').val();
+                    var serv_ts_price = brl_to_float($('#serv_ts_price').val());
+                    var serv_price = brl_to_float($('#serv_price').val());
+                    var serv_desc = $('#serv_desc').val().toUpperCase();
                     var form_ok = true;
 
-                    if (prod_name) {
-                        document.getElementById('prod_name').style.boxShadow =
+                    if (serv_name) {
+                        document.getElementById('serv_name').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('prod_name').style.boxShadow =
+                        document.getElementById('serv_name').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
-                    if (prod_brand) {
-                        document.getElementById('prod_brand').style.boxShadow =
+                    if (serv_ts) {
+                        document.getElementById('serv_ts').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('prod_brand').style.boxShadow =
+                        document.getElementById('serv_ts').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
-                    if (prod_group) {
-                        document.getElementById('prod_group').style.boxShadow =
+                    if (serv_ts_price && isFloat(serv_ts_price)) {
+                        document.getElementById('serv_ts_price').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('prod_group').style.boxShadow =
+                        document.getElementById('serv_ts_price').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
-                    if (prod_cost && isFloat(prod_cost)) {
-                        document.getElementById('prod_cost').style.boxShadow =
+                    if (serv_price && isFloat(serv_price)) {
+                        document.getElementById('serv_price').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('prod_cost').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
-                    if (prod_markup && isFloat(prod_markup)) {
-                        document.getElementById('prod_markup').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('prod_markup').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
-                    if (prod_price && isFloat(prod_price)) {
-                        document.getElementById('prod_price').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('prod_price').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                    }
-                    if (prod_unit && prod_unit != 'Escolha...') {
-                        document.getElementById('prod_unit').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('prod_unit').style.boxShadow =
+                        document.getElementById('serv_price').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
                     }
@@ -284,25 +254,22 @@ $(document).ready(function () {
 
                         $.ajax({
 
-                            url: '../controller/products/update_product.php',
+                            url: '../controller/services/update_service.php',
                             method: 'post',
                             data: {
-                                prod_id: prod_id,
-                                prod_name: prod_name,
-                                prod_desc: prod_desc,
-                                prod_brand: prod_brand,
-                                prod_group: prod_group,
-                                prod_cost: prod_cost,
-                                prod_markup: prod_markup,
-                                prod_price: prod_price,
-                                prod_unit: prod_unit
+                                serv_id: serv_id,
+                                serv_name: serv_name,
+                                serv_desc: serv_desc,
+                                serv_ts: serv_ts,
+                                serv_ts_price: serv_ts_price,
+                                serv_price: serv_price
                             },
 
                             success: function (data) {
 
-                                $('#list-products').DataTable().ajax.reload();
-                                $('#modal_edit_product').modal('hide');
-                                $('#modal_update_product_success_message').modal(
+                                $('#list-services').DataTable().ajax.reload();
+                                $('#modal_edit_service').modal('hide');
+                                $('#modal_update_service_success_message').modal(
                                     'show');
                             }
                         });
@@ -313,44 +280,38 @@ $(document).ready(function () {
     });
 
 
-    $("#btn_confirm_product_update").click(function () {
+    $('#btn_confirm_service_update').click(function () {
 
-        var prod_id = $('#prod_id').val();
+        var serv_id = $('#serv_id').val();
 
         $.ajax({
 
-            url: '../controller/products/read_product.php',
+            url: '../controller/services/read_service.php',
             method: 'post',
             data: {
-                prod_id: prod_id
+                serv_id: serv_id
             },
             success: function (data) {
 
-                var product_row = JSON.parse(data);
-                var validate_prod_id = product_row['prod_id'] == $('#prod_id').val();
-                var validate_prod_name = product_row['prod_name'] == $('#prod_name')
-                    .val().toUpperCase();
-                var validate_prod_desc = product_row['prod_desc'] == $('#prod_desc')
-                    .val().toUpperCase();
-                var validate_prod_brand = product_row['prod_brand'] == $(
-                    '#prod_brand').val().toUpperCase();
-                var validate_prod_group = product_row['prod_group'] == $(
-                    '#prod_group').val().toUpperCase();
-                var validate_prod_cost = product_row['prod_cost'] ==
-                    brl_to_float($(
-                        '#prod_cost').val());
-                var validate_prod_markup = product_row['prod_markup'] == $(
-                    '#prod_markup').val();
-                var validate_prod_price = product_row['prod_price'] ==
-                    brl_to_float($(
-                        '#prod_price').val());
-                var validate_prod_unit = product_row['prod_unit'] == $(
-                    '#prod_unit').val();
+                var service_row = JSON.parse(data);
 
-                if (validate_prod_id && validate_prod_name && validate_prod_desc &&
-                    validate_prod_brand && validate_prod_group &&
-                    validate_prod_cost && validate_prod_markup &&
-                    validate_prod_price && validate_prod_unit) {
+                var validate_serv_id = service_row['serv_id'] == $('#serv_id').val();
+                var validate_serv_name = service_row['serv_name'] == $('#serv_name')
+                    .val().toUpperCase();
+                var validate_serv_desc = service_row['serv_desc'] == $('#serv_desc')
+                    .val().toUpperCase();
+                var validate_serv_ts = service_row['serv_ts'] == $('#serv_ts').val();
+                var validate_serv_ts_price = service_row['serv_ts_price'] ==
+                    brl_to_float($(
+                        '#serv_ts_price').val());
+                var validate_serv_price = service_row['serv_price'] ==
+                    brl_to_float($(
+                        '#serv_price').val());
+
+
+
+                if (validate_serv_id && validate_serv_name && validate_serv_desc &&
+                    validate_serv_ts && validate_serv_ts_price && validate_serv_price) {
                     var form_equals_db = true;
                 } else {
                     var form_equals_db = false;
@@ -363,112 +324,77 @@ $(document).ready(function () {
 
                 if (display == 'none' && !form_equals_db) {
 
-                    var prod_id = $('#prod_id').val();
-                    var prod_name = $('#prod_name').val().toUpperCase();
-                    var prod_brand = $('#prod_brand').val().toUpperCase();
-                    var prod_group = $('#prod_group').val().toUpperCase();
-                    var prod_cost = brl_to_float($('#prod_cost').val());
-                    var prod_markup = $('#prod_markup').val();
-                    var prod_price = brl_to_float($('#prod_price').val());
-                    var prod_unit = $('#prod_unit').val();
-                    var prod_desc = $('#prod_desc').val().toUpperCase();
+                    var serv_id = $('#serv_id').val();
+                    var serv_name = $('#serv_name').val().toUpperCase();
+                    var serv_ts = $('#serv_ts').val();
+                    var serv_ts_price = brl_to_float($('#serv_ts_price').val());
+                    var serv_price = brl_to_float($('#serv_price').val());
+                    var serv_desc = $('#serv_desc').val().toUpperCase();
                     var form_ok = true;
 
-                    if (prod_name) {
-                        document.getElementById('prod_name').style.boxShadow =
+                    if (serv_name) {
+                        document.getElementById('serv_name').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('prod_name').style.boxShadow =
+                        document.getElementById('serv_name').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
-                        $('#modal_confirm_update_product').modal('hide');
-                        $('#modal_edit_product').modal('show');
+                        $('#modal_confirm_update_service').modal('hide');
+                        $('#modal_edit_service').modal('show');
                     }
-                    if (prod_brand) {
-                        document.getElementById('prod_brand').style.boxShadow =
+                    if (serv_ts) {
+                        document.getElementById('serv_ts').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('prod_brand').style.boxShadow =
+                        document.getElementById('serv_ts').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
-                        $('#modal_confirm_update_product').modal('hide');
-                        $('#modal_edit_product').modal('show');
+                        $('#modal_confirm_update_service').modal('hide');
+                        $('#modal_edit_service').modal('show');
                     }
-                    if (prod_group) {
-                        document.getElementById('prod_group').style.boxShadow =
+                    if (serv_ts_price && isFloat(serv_ts_price)) {
+                        document.getElementById('serv_ts_price').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('prod_group').style.boxShadow =
+                        document.getElementById('serv_ts_price').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
-                        $('#modal_confirm_update_product').modal('hide');
-                        $('#modal_edit_product').modal('show');
+                        $('#modal_confirm_update_service').modal('hide');
+                        $('#modal_edit_service').modal('show');
                     }
-                    if (prod_cost && isFloat(prod_cost)) {
-                        document.getElementById('prod_cost').style.boxShadow =
+                    if (serv_price && isFloat(serv_price)) {
+                        document.getElementById('serv_price').style.boxShadow =
                             "0px 0px";
                     } else {
-                        document.getElementById('prod_cost').style.boxShadow =
+                        document.getElementById('serv_price').style.boxShadow =
                             "0 0 0 .2rem rgba(255,0,0,.25)";
                         form_ok = false;
-                        $('#modal_confirm_update_product').modal('hide');
-                        $('#modal_edit_product').modal('show');
-                    }
-                    if (prod_markup && isFloat(prod_markup)) {
-                        document.getElementById('prod_markup').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('prod_markup').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                        $('#modal_confirm_update_product').modal('hide');
-                        $('#modal_edit_product').modal('show');
-                    }
-                    if (prod_price && isFloat(prod_price)) {
-                        document.getElementById('prod_price').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('prod_price').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                        $('#modal_confirm_update_product').modal('hide');
-                        $('#modal_edit_product').modal('show');
-                    }
-                    if (prod_unit && prod_unit != 'Escolha...') {
-                        document.getElementById('prod_unit').style.boxShadow =
-                            "0px 0px";
-                    } else {
-                        document.getElementById('prod_unit').style.boxShadow =
-                            "0 0 0 .2rem rgba(255,0,0,.25)";
-                        form_ok = false;
-                        $('#modal_confirm_update_product').modal('hide');
-                        $('#modal_edit_product').modal('show');
+                        $('#modal_confirm_update_service').modal('hide');
+                        $('#modal_edit_service').modal('show');
                     }
 
                     if (form_ok) {
 
                         $.ajax({
 
-                            url: '../controller/products/update_product.php',
+                            url: '../controller/services/update_service.php',
                             method: 'post',
                             data: {
-                                prod_id: prod_id,
-                                prod_name: prod_name,
-                                prod_desc: prod_desc,
-                                prod_brand: prod_brand,
-                                prod_group: prod_group,
-                                prod_cost: prod_cost,
-                                prod_markup: prod_markup,
-                                prod_price: prod_price,
-                                prod_unit: prod_unit
+                                serv_id: serv_id,
+                                serv_name: serv_name,
+                                serv_desc: serv_desc,
+                                serv_ts: serv_ts,
+                                serv_ts_price: serv_ts_price,
+                                serv_price: serv_price
                             },
 
                             success: function (data) {
 
-                                $('#list-products').DataTable().ajax.reload();
-                                $('#modal_edit_product').modal('hide');
-                                $('#modal_confirm_update_product').modal('hide');
-                                $('#modal_update_product_success_message').modal('show');
+                                $('#list-services').DataTable().ajax.reload();
+                                $('#modal_edit_service').modal('hide');
+                                $('#modal_confirm_update_service').modal('hide');
+                                $('#modal_update_service_success_message').modal(
+                                    'show');
                             }
                         });
                     }
@@ -477,215 +403,115 @@ $(document).ready(function () {
         });
     });
 
-
-    function clean_modal_edit_product() {
-
-        document.getElementById('prod_name').style.boxShadow = "0px 0px";
-        document.getElementById('prod_brand').style.boxShadow = "0px 0px";
-        document.getElementById('prod_group').style.boxShadow = "0px 0px";
-        document.getElementById('prod_cost').style.boxShadow = "0px 0px";
-        document.getElementById('prod_markup').style.boxShadow = "0px 0px";
-        document.getElementById('prod_price').style.boxShadow = "0px 0px";
-        document.getElementById('prod_unit').style.boxShadow = "0px 0px";
-    };
-
-    function clean_modal_create_product() {
-        $('#prod_name_create').val('');
-        $('#prod_brand_create').val('');
-        $('#prod_group_create').val('');
-        $('#prod_cost_create').val('0,00');
-        $('#prod_markup_create').val('60');
-        $('#prod_price_create').val('0,00');
-        $('#prod_unit_create').val('Escolha...');
-        $('#prod_desc_create').val('');
-
-        document.getElementById('prod_name_create').style.boxShadow = "0px 0px";
-        document.getElementById('prod_brand_create').style.boxShadow = "0px 0px";
-        document.getElementById('prod_group_create').style.boxShadow = "0px 0px";
-        document.getElementById('prod_cost_create').style.boxShadow = "0px 0px";
-        document.getElementById('prod_markup_create').style.boxShadow = "0px 0px";
-        document.getElementById('prod_price_create').style.boxShadow = "0px 0px";
-        document.getElementById('prod_unit_create').style.boxShadow = "0px 0px";
-    };
-
-
-    function autocomplete_product_groups(input) {
-        $.ajax({
-
-            url: '../controller/products/read_product_groups.php',
-            method: 'post',
-            success: function (data) {
-
-                var groups = JSON.parse(data);
-                for (var i = 0; i < groups.length; i++) {
-                    groups[i] = groups[i].toString();
-                }
-                autocomplete(document.getElementById(input), groups);
-            }
-        });
-    };
-
-    function autocomplete_product_brands(input) {
-        $.ajax({
-
-            url: '../controller/products/read_product_brands.php',
-            method: 'post',
-            success: function (data) {
-
-                var brands = JSON.parse(data);
-                for (var i = 0; i < brands.length; i++) {
-                    brands[i] = brands[i].toString();
-                }
-                autocomplete(document.getElementById(input), brands);
-            }
-        });
-    };
-
-    $("#modal_create_product").on('hidden.bs.modal', function () {
-        clean_modal_create_product();
-        autocomplete_product_groups('prod_group_create');
-        autocomplete_product_brands('prod_brand_create');
-
-    });
-
-    $("#modal_create_product").on('shown.bs.modal', function () {
-        autocomplete_product_groups('prod_group_create');
-        autocomplete_product_brands('prod_brand_create');
+    $("#modal_create_service").on('hidden.bs.modal', function () {
+        clean_modal_create_service();
     });
 
 
-    $("#btn_create_product").click(function () {
+    $("#btn_create_service").click(function () {
 
-        var prod_name = $('#prod_name_create').val().toUpperCase();
-        var prod_brand = $('#prod_brand_create').val().toUpperCase();
-        var prod_group = $('#prod_group_create').val().toUpperCase();
-        var prod_cost = brl_to_float($('#prod_cost_create').val());
-        var prod_markup = $('#prod_markup_create').val();
-        var prod_price = brl_to_float($('#prod_price_create').val());
-        var prod_unit = $('#prod_unit_create').val();
-        var prod_desc = $('#prod_desc_create').val();
+        var serv_name = $('#serv_name_create').val().toUpperCase();
+        var serv_ts = $('#serv_ts_create').val();
+        var serv_ts_price = brl_to_float($('#serv_ts_price_create').val());
+        var serv_price = brl_to_float($('#serv_price_create').val());
+        var serv_desc = $('#serv_desc_create').val().toUpperCase();
         var form_ok = true;
 
 
-        if (prod_name) {
-            document.getElementById('prod_name_create').style.boxShadow = "0px 0px";
+        if (serv_name) {
+            document.getElementById('serv_name_create').style.boxShadow = "0px 0px";
         } else {
-            document.getElementById('prod_name_create').style.boxShadow =
+            document.getElementById('serv_name_create').style.boxShadow =
                 "0 0 0 .2rem rgba(255,0,0,.25)";
             form_ok = false;
         }
-        if (prod_brand) {
-            document.getElementById('prod_brand_create').style.boxShadow = "0px 0px";
+        if (serv_ts && serv_ts > 0) {
+            document.getElementById('serv_ts_create').style.boxShadow = "0px 0px";
         } else {
-            document.getElementById('prod_brand_create').style.boxShadow =
+            document.getElementById('serv_ts_create').style.boxShadow =
                 "0 0 0 .2rem rgba(255,0,0,.25)";
             form_ok = false;
         }
-        if (prod_group) {
-            document.getElementById('prod_group_create').style.boxShadow = "0px 0px";
+        if (serv_ts_price && isFloat(serv_ts_price)) {
+            document.getElementById('serv_ts_price_create').style.boxShadow = "0px 0px";
         } else {
-            document.getElementById('prod_group_create').style.boxShadow =
+            document.getElementById('serv_ts_price_create').style.boxShadow =
                 "0 0 0 .2rem rgba(255,0,0,.25)";
             form_ok = false;
         }
-        if (prod_cost && isFloat(prod_cost)) {
-            document.getElementById('prod_cost_create').style.boxShadow = "0px 0px";
+        if (serv_price && isFloat(serv_price)) {
+            document.getElementById('serv_price_create').style.boxShadow = "0px 0px";
         } else {
-            document.getElementById('prod_cost_create').style.boxShadow =
+            document.getElementById('serv_price_create').style.boxShadow =
                 "0 0 0 .2rem rgba(255,0,0,.25)";
             form_ok = false;
         }
-        if (prod_markup && isFloat(prod_markup)) {
-            document.getElementById('prod_markup_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('prod_markup_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (prod_price && isFloat(prod_price)) {
-            document.getElementById('prod_price_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('prod_price_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
-        if (prod_unit && prod_unit != 'Escolha...') {
-            document.getElementById('prod_unit_create').style.boxShadow = "0px 0px";
-        } else {
-            document.getElementById('prod_unit_create').style.boxShadow =
-                "0 0 0 .2rem rgba(255,0,0,.25)";
-            form_ok = false;
-        }
+
         if (form_ok) {
 
             $.ajax({
-                url: '../controller/products/create_product.php',
+                url: '../controller/services/create_service.php',
                 method: 'post',
                 data: {
-                    prod_name: prod_name,
-                    prod_brand: prod_brand,
-                    prod_group: prod_group,
-                    prod_cost: prod_cost,
-                    prod_markup: prod_markup,
-                    prod_price: prod_price,
-                    prod_unit: prod_unit,
-                    prod_desc: prod_desc
+                    serv_name: serv_name,
+                    serv_ts: serv_ts,
+                    serv_ts_price: serv_ts_price,
+                    serv_price: serv_price,
+                    serv_desc: serv_desc
                 },
                 success: function (data) {
-                    $('#list-products').DataTable().ajax.reload();
-                    $('#modal_create_product').modal('hide');
-                    $('#modal_create_product_success_message').modal('show');
-                    clean_modal_create_product();
+                    $('#list-services').DataTable().ajax.reload();
+                    $('#modal_create_service').modal('hide');
+                    $('#modal_create_service_success_message').modal('show');
+                    clean_modal_create_service();
                 }
             });
         }
     });
 
-
-    $('#prod_cost').click(function () {
+    $('#serv_ts').click(function () {
         selectAllText(jQuery(this))
     });
 
-    $('#prod_markup').click(function () {
+    $('#serv_ts_price').click(function () {
         selectAllText(jQuery(this))
     });
 
-    $('#prod_price').click(function () {
+    $('#serv_price').click(function () {
         selectAllText(jQuery(this))
     });
 
-    $('#prod_cost_create').click(function () {
+    $('#serv_ts_create').click(function () {
         selectAllText(jQuery(this))
     });
 
-    $('#prod_markup_create').click(function () {
+    $('#serv_ts_price_create').click(function () {
         selectAllText(jQuery(this))
     });
 
-    $('#prod_price_create').click(function () {
+    $('#serv_price_create').click(function () {
         selectAllText(jQuery(this))
     });
 
+    $("#btn_delete_service").click(function () {
 
-    $("#btn_delete_product").click(function () {
-
-        $('#modal_edit_product').modal('hide');
-        var prod_id = $('#prod_id').val();
+        $('#modal_edit_service').modal('hide');
+        var serv_id = $('#serv_id').val();
 
         $.ajax({
 
-            url: '../controller/products/read_product.php',
+            url: '../controller/services/read_service.php',
             method: 'post',
             data: {
-                prod_id: prod_id
+                serv_id: serv_id
             },
             success: function (data) {
 
-                var product_row = JSON.parse(data);
-                var selected_product = product_row['prod_name'];
-                $('#txt_delete_product').text(
-                    'Tem certeza que deseja excluir o produto \"' +
-                    selected_product + '\"?');
+                var service_row = JSON.parse(data);
+                var selected_service = service_row['serv_name'];
+                $('#txt_delete_service').text(
+                    'Tem certeza que deseja excluir o serviço \"' +
+                    selected_service + '\"?');
 
             }
         });
@@ -694,110 +520,107 @@ $(document).ready(function () {
     });
 
 
-    $("#prod_cost").keyup(function () {
 
-        var prod_cost = brl_to_float($("#prod_cost").val());
-        var prod_markup = $("#prod_markup").val();
-        var prod_price = prod_cost * ((prod_markup / 100) + 1);
 
-        isNaN(prod_price) ? $("#prod_price").val('0,00') : $(
-            "#prod_price").val(float_to_brl(prod_price));
+    $("#serv_ts_price").keyup(function () {
 
-        isNaN(prod_cost) ? $("#prod_cost").val('0,00') : $(
-            "#prod_cost").val(float_to_brl(parseFloat(prod_cost)));
+        var serv_ts_price = brl_to_float($("#serv_ts_price").val());
+        var serv_ts = $("#serv_ts").val();
+        var serv_price = serv_ts_price * serv_ts;
+
+        isNaN(serv_price) ? $("#serv_price").val('0,00') : $(
+            "#serv_price").val(float_to_brl(serv_price));
+
+        isNaN(serv_ts_price) ? $("#serv_ts_price").val('0,00') : $(
+            "#serv_ts_price").val(float_to_brl(parseFloat(serv_ts_price)));
     });
 
 
-    $("#prod_markup").keyup(function () {
+    $("#serv_ts").keyup(function () {
 
-        var prod_cost = brl_to_float($("#prod_cost").val());
-        var prod_markup = $("#prod_markup").val();
-        var prod_price = prod_cost * ((prod_markup / 100) + 1);
+        var serv_ts_price = brl_to_float($("#serv_ts_price").val());
+        var serv_ts = $("#serv_ts").val();
+        var serv_price = serv_ts_price * serv_ts;
 
-        isNaN(prod_markup) || prod_markup == '' ? $("#prod_markup").val('0') : $(
-            "#prod_markup").val(parseInt(prod_markup));
+        isNaN(serv_ts) || serv_ts == '' ? $("#serv_ts").val('0') : $(
+            "#serv_ts").val(parseInt(serv_ts));
 
-        isNaN(prod_price) ? $("#prod_price").val('0,00') : $(
-            "#prod_price").val(float_to_brl(prod_price));
+        isNaN(serv_price) ? $("#serv_price").val('0,00') : $(
+            "#serv_price").val(float_to_brl(serv_price));
     });
 
 
-    $("#prod_price").keyup(function () {
+    $("#serv_price").keyup(function () {
 
-        var prod_cost = brl_to_float($("#prod_cost").val());
-        var prod_price = $("#prod_price").val();
-        var price_toFloat = brl_to_float(prod_price);
-        var prod_cost_double = brl_to_float(prod_cost);
+        var serv_ts_price = brl_to_float($("#serv_ts_price").val());
+        var serv_price = $("#serv_price").val();
+        var price_toFloat = brl_to_float(serv_price);
+        var serv_ts_price_double = brl_to_float(serv_ts_price);
         var price_toBrl = float_to_brl(parseFloat(price_toFloat));
-        var prod_markup = ((price_toFloat / prod_cost_double) - 1) * 100;
+        var serv_ts = price_toFloat / serv_ts_price_double;
 
-        if (prod_markup < 1 || isNaN(prod_markup) || prod_markup ==
+        if (serv_ts < 1 || isNaN(serv_ts) || serv_ts ==
             Infinity) {
-            $("#prod_markup").val('0');
+            $("#serv_ts").val('0');
         } else {
-            $("#prod_markup").val(parseInt(prod_markup));
+            $("#serv_ts").val(parseInt(serv_ts));
         }
 
-        isNaN(parseFloat(price_toBrl)) ? $("#prod_price").val('0,00') : $(
-            "#prod_price").val(
+        isNaN(parseFloat(price_toBrl)) ? $("#serv_price").val('0,00') : $(
+            "#serv_price").val(
                 price_toBrl);
     });
 
 
-    $("#prod_cost_create").keyup(function () {
 
-        var prod_cost = brl_to_float($("#prod_cost_create").val());
-        var prod_markup = $("#prod_markup_create").val();
-        var prod_price = prod_cost * ((prod_markup / 100) + 1);
+    $("#serv_ts_price_create").keyup(function () {
 
-        isNaN(prod_price) ? $("#prod_price_create").val('0,00') : $(
-            "#prod_price_create").val(float_to_brl(prod_price));
+        var serv_ts_price_create = brl_to_float($("#serv_ts_price_create").val());
+        var serv_ts_create = $("#serv_ts_create").val();
+        var serv_price_create = serv_ts_price_create * serv_ts_create;
 
-        isNaN(prod_cost) ? $("#prod_cost_create").val('0,00') : $(
-            "#prod_cost_create").val(float_to_brl(parseFloat(prod_cost)));
+        isNaN(serv_price_create) ? $("#serv_price_create").val('0,00') : $(
+            "#serv_price_create").val(float_to_brl(serv_price_create));
+
+        isNaN(serv_ts_price_create) ? $("#serv_ts_price_create").val('0,00') : $(
+            "#serv_ts_price_create").val(float_to_brl(parseFloat(serv_ts_price_create)));
     });
 
 
-    $("#prod_markup_create").keyup(function () {
+    $("#serv_ts_create").keyup(function () {
 
-        var string_prod_cost = $("#prod_cost_create").val().toString();
+        var serv_ts_price_create = brl_to_float($("#serv_ts_price_create").val());
+        var serv_ts_create = $("#serv_ts_create").val();
+        var serv_price_create = serv_ts_price_create * serv_ts_create;
 
-        var x = string_prod_cost.length;
-        var prod_cost = brl_to_float($("#prod_cost_create").val());
-        var prod_markup = $("#prod_markup_create").val();
-        var prod_price = prod_cost * ((prod_markup / 100) + 1);
-        var prod_cost_double = brl_to_float(prod_cost);
+        isNaN(serv_ts_create) || serv_ts_create == '' ? $("#serv_ts_create").val('0') : $(
+            "#serv_ts_create").val(parseInt(serv_ts_create));
 
-        isNaN(prod_markup) || prod_markup == '' ? $("#prod_markup_create").val('0') : $(
-            "#prod_markup_create").val(parseInt(prod_markup));
-
-        isNaN(prod_price) ? $("#prod_price_create").val('0,00') : $(
-            "#prod_price_create").val(float_to_brl(prod_price));
-
+        isNaN(serv_price_create) ? $("#serv_price_create").val('0,00') : $(
+            "#serv_price_create").val(float_to_brl(serv_price_create));
     });
 
 
-    $("#prod_price_create").keyup(function () {
+    $("#serv_price_create").keyup(function () {
 
-        var prod_cost = brl_to_float($("#prod_cost_create").val());
-        var prod_price = $("#prod_price_create").val();
-
-        var price_toFloat = brl_to_float(prod_price);
-        var prod_cost_double = brl_to_float(prod_cost);
+        var serv_ts_price_create = brl_to_float($("#serv_ts_price_create").val());
+        var serv_price_create = $("#serv_price_create").val();
+        var price_toFloat = brl_to_float(serv_price_create);
+        var serv_ts_price_create_double = brl_to_float(serv_ts_price_create);
         var price_toBrl = float_to_brl(parseFloat(price_toFloat));
-        var prod_markup = ((price_toFloat / prod_cost_double) - 1) * 100;
+        var serv_ts_create = price_toFloat / serv_ts_price_create_double;
 
-        if (prod_markup < 1 || isNaN(prod_markup) || prod_markup ==
+        if (serv_ts_create < 1 || isNaN(serv_ts_create) || serv_ts_create ==
             Infinity) {
-            $("#prod_markup_create").val('0');
+            $("#serv_ts_create").val('0');
         } else {
-            $("#prod_markup_create").val(parseInt(prod_markup));
+            $("#serv_ts_create").val(parseInt(serv_ts_create));
         }
 
-        isNaN(parseFloat(price_toBrl)) ? $("#prod_price_create").val('0,00') : $(
-            "#prod_price_create").val(
+        isNaN(parseFloat(price_toBrl)) ? $("#serv_price_create").val('0,00') : $(
+            "#serv_price_create").val(
                 price_toBrl);
-
     });
+
 
 });
