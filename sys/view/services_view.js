@@ -61,21 +61,11 @@ $(document).ready(function () {
             data: data,
             success: function (data) {
 
-                if (data) {
-                    var error = data;
-                    var regExp = /Duplicate entry/;
-                    var name_already_used = regExp.test(error);
-                    if (name_already_used) {
-                        alert("Não é possível cadastrar dois serviços com o mesmo nome.");
-                    }
+                $('#list-services').DataTable().ajax.reload();
+                $('#modal_create_service').modal('hide');
+                $('#modal_create_service_success_message').modal('show');
+                clean_modal_create_service();
 
-                } else {
-
-                    $('#list-services').DataTable().ajax.reload();
-                    $('#modal_create_service').modal('hide');
-                    $('#modal_create_service_success_message').modal('show');
-                    clean_modal_create_service();
-                }
             }
         });
 
@@ -217,23 +207,11 @@ $(document).ready(function () {
 
             success: function (data) {
 
-                if (data) {
-                    var error = data;
-                    var regExp = /Duplicate entry/;
-                    var name_already_used = regExp.test(error);
-                    if (name_already_used) {
-                        $('#modal_update_service').modal('show');
-                        $('#modal_confirm_update_service').modal('hide');
-                        alert("Não é possível cadastrar dois serviços com o mesmo nome.");
-                    }
+                $('#list-services').DataTable().ajax.reload();
+                $('#modal_update_service').modal('hide');
+                $('#modal_confirm_update_service').modal('hide');
+                $('#modal_update_service_success_message').modal('show');
 
-                } else {
-
-                    $('#list-services').DataTable().ajax.reload();
-                    $('#modal_update_service').modal('hide');
-                    $('#modal_confirm_update_service').modal('hide');
-                    $('#modal_update_service_success_message').modal('show');
-                }
             }
         });
 
@@ -334,34 +312,22 @@ $(document).ready(function () {
     $("#serv_price_create").attr("pattern", "^((?!(^0\,00$)).)*$");
 
 
-
     $("#serv_ts_price").keyup(function () {
 
         var serv_ts_price = brl_to_float($("#serv_ts_price").val());
         var serv_ts = $("#serv_ts").val();
         var serv_price = serv_ts_price * serv_ts;
-
-        isNaN(serv_price) ? $("#serv_price").val('0,00') : $(
-            "#serv_price").val(float_to_brl(serv_price));
-
-        isNaN(serv_ts_price) ? $("#serv_ts_price").val('0,00') : $(
-            "#serv_ts_price").val(float_to_brl(parseFloat(serv_ts_price)));
+        $("#serv_price").val(float_to_brl(serv_price));
+        $("#serv_ts_price").val(float_to_brl(parseFloat(serv_ts_price)));
     });
-
 
     $("#serv_ts").keyup(function () {
 
         var serv_ts_price = brl_to_float($("#serv_ts_price").val());
         var serv_ts = $("#serv_ts").val();
         var serv_price = serv_ts_price * serv_ts;
-
-        isNaN(serv_ts) || serv_ts == '' ? $("#serv_ts").val('0') : $(
-            "#serv_ts").val(parseInt(serv_ts));
-
-        isNaN(serv_price) ? $("#serv_price").val('0,00') : $(
-            "#serv_price").val(float_to_brl(serv_price));
+        $("#serv_price").val(float_to_brl(serv_price));
     });
-
 
     $("#serv_price").keyup(function () {
 
@@ -373,34 +339,15 @@ $(document).ready(function () {
         var serv_ts = price_toFloat / serv_ts_price_double;
         $("#serv_ts").val(parseInt(serv_ts));
         $("#serv_price").val(price_toBrl);
-
-
-
-        // if (serv_ts < 1 || isNaN(serv_ts) || serv_ts ==
-        //     Infinity) {
-        //     $("#serv_ts").val('0');
-        // } else {
-        //     $("#serv_ts").val(parseInt(serv_ts));
-        // }
-
-        // isNaN(parseFloat(price_toBrl)) ? $("#serv_price").val('0,00') : $(
-        //     "#serv_price").val(
-        //         price_toBrl);
     });
-
-
 
     $("#serv_ts_price_create").keyup(function () {
 
         var serv_ts_price_create = brl_to_float($("#serv_ts_price_create").val());
         var serv_ts_create = $("#serv_ts_create").val();
         var serv_price_create = serv_ts_price_create * serv_ts_create;
-
-        isNaN(serv_price_create) ? $("#serv_price_create").val('0,00') : $(
-            "#serv_price_create").val(float_to_brl(serv_price_create));
-
-        isNaN(serv_ts_price_create) ? $("#serv_ts_price_create").val('0,00') : $(
-            "#serv_ts_price_create").val(float_to_brl(parseFloat(serv_ts_price_create)));
+        $("#serv_price_create").val(float_to_brl(serv_price_create));
+        $("#serv_ts_price_create").val(float_to_brl(parseFloat(serv_ts_price_create)));
     });
 
 
@@ -409,12 +356,7 @@ $(document).ready(function () {
         var serv_ts_price_create = brl_to_float($("#serv_ts_price_create").val());
         var serv_ts_create = $("#serv_ts_create").val();
         var serv_price_create = serv_ts_price_create * serv_ts_create;
-
-        isNaN(serv_ts_create) || serv_ts_create == '' ? $("#serv_ts_create").val('0') : $(
-            "#serv_ts_create").val(parseInt(serv_ts_create));
-
-        isNaN(serv_price_create) ? $("#serv_price_create").val('0,00') : $(
-            "#serv_price_create").val(float_to_brl(serv_price_create));
+        $("#serv_price_create").val(float_to_brl(serv_price_create));
     });
 
 
@@ -426,19 +368,33 @@ $(document).ready(function () {
         var serv_ts_price_create_double = brl_to_float(serv_ts_price_create);
         var price_toBrl = float_to_brl(parseFloat(price_toFloat));
         var serv_ts_create = price_toFloat / serv_ts_price_create_double;
-
-        if (serv_ts_create < 1 || isNaN(serv_ts_create) || serv_ts_create ==
-            Infinity) {
-            $("#serv_ts_create").val('0');
-        } else {
-            $("#serv_ts_create").val(parseInt(serv_ts_create));
-        }
-
-        isNaN(parseFloat(price_toBrl)) ? $("#serv_price_create").val('0,00') : $(
-            "#serv_price_create").val(
-                price_toBrl);
+        $("#serv_ts_create").val(parseInt(serv_ts_create));
+        $("#serv_price_create").val(price_toBrl);
     });
 
+    $('#serv_ts').click(function () {
+        selectAllText(jQuery(this))
+    });
+
+    $('#serv_ts_price').click(function () {
+        selectAllText(jQuery(this))
+    });
+
+    $('#serv_price').click(function () {
+        selectAllText(jQuery(this))
+    });
+
+    $('#serv_ts_create').click(function () {
+        selectAllText(jQuery(this))
+    });
+
+    $('#serv_ts_price_create').click(function () {
+        selectAllText(jQuery(this))
+    });
+
+    $('#serv_price_create').click(function () {
+        selectAllText(jQuery(this))
+    });
 
     clean_modal_create_service();
 

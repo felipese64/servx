@@ -491,6 +491,30 @@ $(document).ready(function () {
                 price_toBrl);
     });
 
+    $('#prod_cost').click(function () {
+        selectAllText(jQuery(this))
+    });
+
+    $('#prod_markup').click(function () {
+        selectAllText(jQuery(this))
+    });
+
+    $('#prod_price').click(function () {
+        selectAllText(jQuery(this))
+    });
+
+    $('#prod_cost_create').click(function () {
+        selectAllText(jQuery(this))
+    });
+
+    $('#prod_markup_create').click(function () {
+        selectAllText(jQuery(this))
+    });
+
+    $('#prod_price_create').click(function () {
+        selectAllText(jQuery(this))
+    });
+
     clean_modal_create_product();
 
 });

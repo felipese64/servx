@@ -39,16 +39,7 @@ class Services_dao
         $service->setServ_ts_price($reg['serv_ts_price']);
         $service->setServ_price($reg['serv_price']);
 
-
-        $serv_array['serv_id'] = $service->getServ_id();
-        $serv_array['serv_name'] = $service->getServ_name();
-        $serv_array['serv_desc'] = $service->getServ_desc();
-        $serv_array['serv_ts'] = $service->getServ_ts();
-        $serv_array['serv_ts_price'] = $service->getServ_ts_price();
-        $serv_array['serv_price'] = $service->getServ_price();
-
-
-        return $serv_array;
+        return $service;
     }
 
     public function updateService(Service $service)
@@ -79,4 +70,4 @@ class Services_dao
         $rs = mysqli_query($link, $sql);
     }
 };
-?>
+ 
