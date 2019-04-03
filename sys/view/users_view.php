@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Serviços</title>
+    <title>Usuários</title>
     <link href="../../apps/css/autocomplete.css" rel="stylesheet">
     <link href="../../apps/css/datatable-custom.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -33,7 +33,7 @@
 
 
     <script src="../../sys/lib/functions.js"></script>
-    <script src="services_view.js"></script>
+    <script src="users_view.js"></script>
     <script src="../../apps/js/jquery.mask.min.js"></script>
 
 
@@ -69,7 +69,7 @@
                         <a class="nav-link" href="products_view.php" role="button">Produtos</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#" role="button">Serviços</a>
+                        <a class="nav-link" href="services_view.php" role="button">Serviços</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button">Técnicos</a>
@@ -88,21 +88,19 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="panel_title">Serviços</h1>
+                <h1 class="panel_title">Usuários</h1>
             </div>
         </div>
     </div>
 
     <div class="container">
         <div class="table_panel">
-            <table id="list-services" class="display" style="width:100%">
+            <table id="list-users" class="display" style="width:100%">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nome</th>
-                        <th>Tempo Estimado(Min)</th>
-                        <th>Preço/Min(R$)</th>
-                        <th>Preço(R$)</th>
+                        <th>Login</th>
+                        <th>Perfil</th>
                     </tr>
                 </thead>
                 <tbody id="table_body"></tbody>
@@ -110,8 +108,8 @@
         </div>
     </div>
 
-    <!-- Modal Create service -->
-    <div class="modal" id="modal_create_service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- Modal Create User -->
+    <div class="modal" id="modal_create_user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -122,135 +120,132 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_create_service">
+                    <form id="form_create_user">
                         <div class="form-group">
                             <br />
                             <div class="row">
-                                <div class="col-md-12"><label for="serv_name_create">Nome
-                                    </label><input id="serv_name_create" name="serv_name" type="text"
+                                <div class="col-md-12"><label for="user_login_create">Nome
+                                    </label><input id="user_login_create" name="user_login" type="text"
                                         class="form-control" autocomplete="off" required></div>
 
                             </div>
 
                             <div class="row">
 
-                                <div class="col-md-4"><label for="serv_ts_create">Tempo Estimado(Min)
-                                    </label><input id="serv_ts_create" name="serv_ts" type="text" class="form-control"
-                                        value="60">
+                                <div class="col-md-4"><label for="user_password_create">Tempo Estimado(Min)
+                                    </label><input id="user_password_create" name="user_password" type="text"
+                                        class="form-control" value="60">
                                 </div>
-                                <div class="col-md-4"><label for="serv_ts_price_create">Preço/Min(R$)
-                                    </label><input id="serv_ts_price_create" name="serv_ts_price" type="text"
+                                <div class="col-md-4"><label for="user_profile_create">Preço/Min(R$)
+                                    </label><input id="user_profile_create" name="user_profile" type="text"
                                         class="form-control" value="1,00">
                                 </div>
-                                <div class="col-md-4"><label for="serv_price_create">Preço(R$) </label><input
-                                        id="serv_price_create" name="serv_price" type="text" class="form-control"
-                                        value="0,00"></div>
+                                <div class="col-md-4"></div>
 
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-12"><label for="serv_desc_create">Descrição </label><textarea
-                                        rows="3" name="serv_desc" id="serv_desc_create" cols="30" rows="10"
-                                        class="form-control" autocomplete="off"></textarea></div>
-                            </div>
+
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-danger mr-auto"
-                        id="btn_exit_creating_service">Sair</button>
-                    <button type="submit" form="form_create_service" class="btn btn-primary"
-                        id="btn_create_service">Salvar</button>
+                        id="btn_exit_creating_user">Sair</button>
+                    <button type="submit" form="form_create_user" class="btn btn-primary"
+                        id="btn_create_user">Salvar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /Modal Create service -->
+    <!-- /Modal Create User -->
 
-    <!-- Modal Update service -->
-    <div class="modal" id="modal_update_service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- Modal Update User -->
+    <div class="modal" id="modal_update_user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Editar</h5>
-                    <button type="button" class="close" id="btn_close_service_update" data-dismiss="modal"
+                    <button type="button" class="close" id="btn_close_user_update" data-dismiss="modal"
                         aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_update_service">
+                    <form id="form_update_user">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-2"><label for="serv_id">ID </label><input id="serv_id" name="serv_id"
+                                <div class="col-md-2"><label for="user_id">ID </label><input id="user_id" name="user_id"
                                         type="text" class="form-control" style="pointer-events: none;" readonly></div>
-                                <div class="col-md-10"></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12"><label for="serv_name">Nome
-                                    </label><input id="serv_name" name="serv_name" type="text" class="form-control"
+                                <div class="col-md-6"><label for="user_login">Login
+                                    </label><input id="user_login" name="user_login" type="text" class="form-control"
                                         autocomplete="off" required>
                                 </div>
 
+
                             </div>
 
                             <div class="row">
 
-                                <div class="col-md-4"><label for="serv_ts">Tempo Estimado(Min)
-                                    </label><input id="serv_ts" name="serv_ts" type="text" class="form-control">
+
+                                <div class="col-md-6"><label for="user_password">Senha</label><input id="user_password"
+                                        name="user_password" type="text" class="form-control">
                                 </div>
-                                <div class="col-md-4"><label for="serv_ts_price">Preço/Min(R$) </label><input
-                                        id="serv_ts_price" name="serv_ts_price" type="text" class="form-control">
-                                </div>
-                                <div class="col-md-4"><label for="serv_price">Preço(R$) </label><input id="serv_price"
-                                        name="serv_price" type="text" class="form-control"></div>
+
 
                             </div>
+
                             <div class="row">
-                                <div class="col-md-12"><label for="serv_desc">Descrição </label><textarea rows="3"
-                                        name="serv_desc" id="serv_desc" cols="30" rows="10" class="form-control"
-                                        autocomplete="off"></textarea></div>
+
+
+                                <div class="col-md-6"><label for="user_profile">Perfil </label><input id="user_profile"
+                                        name="user_profile" type="text" class="form-control">
+                                </div>
+
                             </div>
+
+
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger mr-auto" id="btn_delete_service">Excluir</button>
-                    <button type="submit" form="form_update_service" class="btn btn-primary"
-                        id="btn_update_service">Salvar</button>
+                    <button type="button" class="btn btn-danger mr-auto" id="btn_delete_user">Excluir</button>
+                    <button type="submit" form="form_update_user" class="btn btn-primary"
+                        id="btn_update_user">Salvar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /Modal Update service -->
+    <!-- /Modal Update User -->
 
-    <!-- Modal Delete service -->
+    <!-- Modal Delete User -->
     <div class="modal" tabindex="-1" role="dialog" id="modal_confirm_delete">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Excluir Servico</h5>
-                    <button type="button" class="close btn_cancel_service_deletion" data-dismiss="modal"
+                    <h5 class="modal-title">Excluir Usuário</h5>
+                    <button type="button" class="close btn_cancel_user_deletion" data-dismiss="modal"
                         aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="txt_delete_service">Tem certeza que deseja excluir o serviço?</p>
+                    <p id="txt_delete_user">Tem certeza que deseja excluir o usuário?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="btn_confirm_service_deletion">Excluir</button>
-                    <button type="button" class="btn btn-primary btn_cancel_service_deletion"
+                    <button type="button" class="btn btn-danger" id="btn_confirm_user_deletion">Excluir</button>
+                    <button type="button" class="btn btn-primary btn_cancel_user_deletion"
                         data-dismiss="modal">Voltar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Delete service -->
+    <!-- Modal Delete User -->
 
-    <!-- Modal Confirm Update service -->
-    <div class="modal" tabindex="-1" role="dialog" id="modal_confirm_update_service">
+    <!-- Modal Confirm Update User -->
+    <div class="modal" tabindex="-1" role="dialog" id="modal_confirm_update_user">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -260,20 +255,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="txt_update_service">Deseja salvar as alterações?</p>
+                    <p id="txt_update_user">Deseja salvar as alterações?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" form="form_update_service" class="btn btn-primary"
-                        id="btn_confirm_service_update">Salvar</button>
+                    <button type="submit" form="form_update_user" class="btn btn-primary"
+                        id="btn_confirm_user_update">Salvar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Confirm Update service -->
+    <!-- Modal Confirm Update User -->
 
-    <!-- Modal Update service Success -->
-    <div class="modal" tabindex="-1" role="dialog" id="modal_update_service_success_message">
+    <!-- Modal Update User Success -->
+    <div class="modal" tabindex="-1" role="dialog" id="modal_update_user_success_message">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -283,40 +278,40 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="txt_update_service">Servico atualizado com sucesso!</p>
+                    <p id="txt_update_user">Usuário atualizado com sucesso!</p>
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary" id="modal_close_update_service_success_message"
+                    <button type="button" class="btn btn-primary" id="modal_close_update_user_success_message"
                         data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Update service Success -->
+    <!-- Modal Update User Success -->
 
-    <!-- Modal Create service Success -->
-    <div class="modal" tabindex="-1" role="dialog" id="modal_create_service_success_message">
+    <!-- Modal Create User Success -->
+    <div class="modal" tabindex="-1" role="dialog" id="modal_create_user_success_message">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Novo Servico</h5>
+                    <h5 class="modal-title">Novo Usuário</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Servico criado com sucesso!</p>
+                    <p>Usuário criado com sucesso!</p>
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary" id="modal_close_create_service_success_message"
+                    <button type="button" class="btn btn-primary" id="modal_close_create_user_success_message"
                         data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Create service Success -->
+    <!-- Modal Create User Success -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
         integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">

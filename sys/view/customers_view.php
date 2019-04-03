@@ -75,7 +75,7 @@
                         <a class="nav-link" href="#" role="button">Técnicos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">Usuários</a>
+                        <a class="nav-link" href="users_view.php" role="button">Usuários</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Sair<span class="sr-only">(current)</span></a>

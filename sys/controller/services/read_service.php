@@ -20,6 +20,4 @@ $serv_array['serv_price'] = number_format($service->getServ_price(), 2, ',', '.'
 
 echo json_encode($serv_array);
 
-// return $serv_array;
-//echo json_encode($servicesDao->readService($service));
  

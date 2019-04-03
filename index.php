@@ -62,7 +62,7 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">Usuários</a>
+                        <a class="nav-link" href="sys\view\users_view.php" role="button">Usuários</a>
                     </li>
 
                     <li class="nav-item">
@@ -133,7 +133,7 @@
             </div>
 
             <div class="col-sm-2">
-                <a href="#">
+                <a href="sys\view\users_view.php">
                     <div class="panel_button">
                         <h2 class="fas fa-user"></h2><br />
                         <h2 class="icon_description">Usuários</h2>
