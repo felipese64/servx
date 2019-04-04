@@ -120,20 +120,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
-
-
-
-
-
-
-
-
-
-
                     <form id="form_create_user">
                         <div class="form-group">
-
                             <div class="row">
                                 <div class="col-md-6"><label for="user_login_create">Login
                                     </label><input id="user_login_create" name="user_login" type="text"
@@ -145,42 +133,20 @@
                                         <option>user</option>
                                     </select>
                                 </div>
-
                             </div>
-
                             <div class="row">
-
-
                                 <div class="col-md-6"><label for="user_password_create">Senha</label><input
                                         id="user_password_create" name="user_password" type="password"
                                         class="form-control" autocomplete="off" required>
                                 </div>
-
                                 <div class="col-md-6"><label for="user_password_confirmation_create">Senha (outra
                                         vez)</label><input id="user_password_confirmation_create"
                                         name="user_password_confirmation" type="password" class="form-control"
                                         autocomplete="off" required>
                                 </div>
-
-
                             </div>
-
-
-
                         </div>
                     </form>
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-danger mr-auto"
@@ -223,28 +189,18 @@
                                         <option>user</option>
                                     </select>
                                 </div>
-
                             </div>
-
                             <div class="row">
-
-
                                 <div class="col-md-6"><label for="user_password">Nova Senha</label><input
                                         id="user_password" name="user_password" type="password" class="form-control"
                                         autocomplete="off" required>
                                 </div>
-
                                 <div class="col-md-6"><label for="user_password_confirmation">Nova Senha (outra
                                         vez)</label><input id="user_password_confirmation"
                                         name="user_password_confirmation" type="password" class="form-control"
                                         autocomplete="off" required>
                                 </div>
-
-
                             </div>
-
-
-
                         </div>
                     </form>
                 </div>
@@ -282,28 +238,33 @@
     </div>
     <!-- Modal Delete User -->
 
-    <!-- Modal Confirm Update User -->
-    <div class="modal" tabindex="-1" role="dialog" id="modal_confirm_update_user">
+    <!-- Modal Confirm Password -->
+    <div class="modal" tabindex="-1" role="dialog" id="modal_confirm_password">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Salvar Alterações</h5>
+                    <h5 class="modal-title">Confirmar senha</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="txt_update_user">Deseja salvar as alterações?</p>
+                    <form id="form_confirm_password">
+                        <input id="user_id_confirm_password" name="user_id" type="hidden">
+                        <label for="confirm_user_password">Senha</label><input type="password" class="form-control"
+                            name="user_password" id="confirm_user_password">
+                    </form>
+
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" form="form_update_user" class="btn btn-primary"
-                        id="btn_confirm_user_update">Salvar</button>
+                    <button type="submit" form="form_confirm_password" class="btn btn-primary"
+                        id="btn_confirm_password">Enviar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Confirm Update User -->
+    <!-- Modal Confirm Password -->
 
     <!-- Modal Update User Success -->
     <div class="modal" tabindex="-1" role="dialog" id="modal_update_user_success_message">

@@ -98,24 +98,83 @@ $(document).ready(function () {
 
         var data = table.row(this).data();
         var user_id = data[0];
+        $('#user_id_confirm_password').val(user_id);
+        $('#modal_confirm_password').modal('show');
+
+    });
+
+
+
+
+
+
+
+    $('#form_confirm_password').on('submit', function (e) {
+        e.preventDefault();
+        var data = $("#form_confirm_password").serialize();
+        alert(data);
 
         $.ajax({
 
-            url: '../controller/users/read_user.php',
+            url: '../controller/users/confirm_user.php',
             method: 'post',
             data: {
-                user_id: user_id
+                data: data
             },
             success: function (data) {
 
-                insert_data_on_modal_update_user(data);
-                //alert(data);
+                alert(data);
 
-                $('#modal_update_user').modal('show');
 
             }
         });
+
+
+
+
+
+
+        // $.ajax({
+
+        //     url: '../controller/users/read_user.php',
+        //     method: 'post',
+        //     data: {
+        //         user_id: user_id
+        //     },
+        //     success: function (data) {
+
+        //         insert_data_on_modal_update_user(data);
+        //         $('#modal_update_user').modal('show');
+
+        //     }
+        // });
+
+
+
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     function insert_data_on_modal_update_user(data) {
 
@@ -159,17 +218,17 @@ $(document).ready(function () {
     });
 
 
-    $('#btn_confirm_user_update').click(function () {
+    // $('#btn_confirm_user_update').click(function () {
 
-        form = document.getElementById("form_update_user");
+    //     form = document.getElementById("form_update_user");
 
-        if (!form.reportValidity()) {
+    //     if (!form.reportValidity()) {
 
-            $('#modal_update_user').modal('show');
-            $('#modal_confirm_update_user').modal('hide');
-        }
+    //         $('#modal_update_user').modal('show');
+    //         $('#modal_confirm_update_user').modal('hide');
+    //     }
 
-    });
+    // });
 
     // $("#modal_update_user").on('hide.bs.modal', function () {
 
@@ -193,7 +252,7 @@ $(document).ready(function () {
 
                 $('#list-users').DataTable().ajax.reload();
                 $('#modal_update_user').modal('hide');
-                $('#modal_confirm_update_user').modal('hide');
+                //$('#modal_confirm_update_user').modal('hide');
                 $('#modal_update_user_success_message').modal('show');
                 $('#user_password').val('');
                 $('#user_password_confirmation').val('');
@@ -206,7 +265,7 @@ $(document).ready(function () {
 
     enter_to_send_form('modal_update_user', 'btn_update_user');
     enter_to_send_form('modal_update_user_success_message', 'modal_close_update_user_success_message');
-    enter_to_send_form('modal_confirm_update_user', 'btn_confirm_user_update');
+    //enter_to_send_form('modal_confirm_update_user', 'btn_confirm_user_update');
 
     //--------------------------------------------DELETE----------------------------------------------------------
 
