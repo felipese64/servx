@@ -130,12 +130,12 @@
                                 <div class="col-md-4"><label id="label_customer_name_create"
                                         for="customer_name_create">Nome
                                     </label><input id="customer_name_create" name="customer_name" type="text"
-                                        class="form-control" autocomplete="off" required></div>
+                                        class="form-control uppercase" autocomplete="off" required></div>
 
                                 <div class="col-md-4"><label id="label_customer_trade_name_create"
                                         for="customer_trade_name_create">Nome Fantasia/Apelido
                                     </label><input id="customer_trade_name_create" name="customer_trade_name"
-                                        type="text" class="form-control" autocomplete="off"></div>
+                                        type="text" class="form-control uppercase" autocomplete="off"></div>
 
 
                                 <div class="col-md-2"><label for="customer_telephone_create">Telefone
@@ -151,7 +151,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="customer_email_create">E-mail </label><input
                                         id="customer_email_create" name="customer_email" type="email"
-                                        class="form-control" autocomplete="off"></div>
+                                        class="form-control uppercase" autocomplete="off"></div>
 
 
                                 <div class="col-md-3"><label for="customer_natural_legal_create">Tipo </label><select
@@ -174,14 +174,14 @@
                             <div class=" row">
                                 <div class="col-md-4"><label for="customer_address_create">Endereço
                                     </label><input id="customer_address_create" name="customer_address" type="text"
-                                        class="form-control" autocomplete="off" required></div>
+                                        class="form-control uppercase" autocomplete="off" required></div>
                                 <div class="col-md-1"><label for="customer_address_number_create">Nº
                                     </label><input id="customer_address_number_create" name="customer_address_number"
                                         type="text" class="form-control" required>
                                 </div>
                                 <div class="col-md-2"><label for="customer_zone_create">Bairro </label><input
-                                        id="customer_zone_create" name="customer_zone" type="text" class="form-control"
-                                        autocomplete="off" required>
+                                        id="customer_zone_create" name="customer_zone" type="text"
+                                        class="form-control uppercase" autocomplete="off" required>
                                 </div>
 
 
@@ -205,7 +205,7 @@
                             <div class="row">
                                 <div class="col-md-6"><label for="customer_address_complements_create">Complemento
                                     </label><input id="customer_address_complements_create"
-                                        name="customer_address_complements" type="text" class="form-control"
+                                        name="customer_address_complements" type="text" class="form-control uppercase"
                                         autocomplete="off"></div>
 
 
@@ -229,7 +229,7 @@
                             <div class="row">
                                 <div class="col-md-12"><label for="customer_obs_create">Observações
                                     </label><textarea rows="1" name="customer_obs" id="customer_obs_create" cols="30"
-                                        rows="10" class="form-control" autocomplete="off"></textarea></div>
+                                        rows="10" class="form-control uppercase" autocomplete="off"></textarea></div>
                             </div>
                         </div>
                     </form>
@@ -271,11 +271,11 @@
                             <div class="row">
                                 <div class="col-md-4"><label id="label_customer_name" for="customer_name">Nome
                                     </label><input id="customer_name" name="customer_name" type="text"
-                                        class="form-control" autocomplete="off" required></div>
+                                        class="form-control uppercase" autocomplete="off" required></div>
                                 <div class="col-md-4"><label id="label_customer_trade_name"
                                         for="customer_trade_name">Nome Fantasia/Apelido
                                     </label><input id="customer_trade_name" name="customer_trade_name" type="text"
-                                        class="form-control" autocomplete="off"></div>
+                                        class="form-control uppercase" autocomplete="off"></div>
                                 <div class="col-md-2"><label for="customer_telephone">Telefone
                                     </label><input id="customer_telephone" name="customer_telephone" type="tel"
                                         class="form-control" required></div>
@@ -285,8 +285,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="customer_email">E-mail </label><input
-                                        id="customer_email" name="customer_email" type="email" class="form-control"
-                                        autocomplete="off">
+                                        id="customer_email" name="customer_email" type="email"
+                                        class="form-control uppercase" autocomplete="off">
                                 </div>
                                 <div class="col-md-3"><label for="customer_natural_legal">Tipo </label><select
                                         id="customer_natural_legal" name="customer_natural_legal" class="form-control">
@@ -304,13 +304,13 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="customer_address">Endereço
                                     </label><input id="customer_address" name="customer_address" type="text"
-                                        class="form-control" autocomplete="off" required></div>
+                                        class="form-control uppercase" autocomplete="off" required></div>
                                 <div class="col-md-1"><label for="customer_address_number">Nº
                                     </label><input id="customer_address_number" name="customer_address_number"
                                         type="text" class="form-control" required></div>
                                 <div class="col-md-2"><label for="customer_zone">Bairro </label><input
-                                        id="customer_zone" name="customer_zone" type="text" class="form-control"
-                                        autocomplete="off" required>
+                                        id="customer_zone" name="customer_zone" type="text"
+                                        class="form-control uppercase" autocomplete="off" required>
                                 </div>
                                 <div class="col-md-2"><label for="customer_address_type">Tipo de endereço
                                     </label><select id="customer_address_type" name="customer_address_type"
@@ -328,7 +328,7 @@
                             <div class="row">
                                 <div class="col-md-6"><label for="customer_address_complements">Complemento
                                     </label><input id="customer_address_complements" name="customer_address_complements"
-                                        type="text" class="form-control" autocomplete="off"></div>
+                                        type="text" class="form-control uppercase" autocomplete="off"></div>
 
                                 <div class="col-md-3"><label for="customer_city">Cidade
                                     </label>
@@ -349,8 +349,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12"><label for="customer_obs">Observações </label><textarea rows="1"
-                                        name="customer_obs" id="customer_obs" cols="30" rows="10" class="form-control"
-                                        autocomplete="off"></textarea></div>
+                                        name="customer_obs" id="customer_obs" cols="30" rows="10"
+                                        class="form-control uppercase" autocomplete="off"></textarea></div>
                             </div>
                         </div>
                     </form>

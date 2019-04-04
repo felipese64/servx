@@ -128,7 +128,7 @@
                             <div class="row">
                                 <div class="col-md-12"><label for="serv_name_create">Nome
                                     </label><input id="serv_name_create" name="serv_name" type="text"
-                                        class="form-control" autocomplete="off" required></div>
+                                        class="form-control uppercase" autocomplete="off" required></div>
 
                             </div>
 
@@ -151,7 +151,7 @@
                             <div class="row">
                                 <div class="col-md-12"><label for="serv_desc_create">Descrição </label><textarea
                                         rows="3" name="serv_desc" id="serv_desc_create" cols="30" rows="10"
-                                        class="form-control" autocomplete="off"></textarea></div>
+                                        class="form-control uppercase" autocomplete="off"></textarea></div>
                             </div>
                         </div>
                     </form>
@@ -189,8 +189,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12"><label for="serv_name">Nome
-                                    </label><input id="serv_name" name="serv_name" type="text" class="form-control"
-                                        autocomplete="off" required>
+                                    </label><input id="serv_name" name="serv_name" type="text"
+                                        class="form-control uppercase" autocomplete="off" required>
                                 </div>
 
                             </div>
@@ -209,8 +209,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12"><label for="serv_desc">Descrição </label><textarea rows="3"
-                                        name="serv_desc" id="serv_desc" cols="30" rows="10" class="form-control"
-                                        autocomplete="off"></textarea></div>
+                                        name="serv_desc" id="serv_desc" cols="30" rows="10"
+                                        class="form-control uppercase" autocomplete="off"></textarea></div>
                             </div>
                         </div>
                     </form>

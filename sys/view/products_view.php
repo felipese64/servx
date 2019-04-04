@@ -126,13 +126,13 @@
                             <div class="row">
                                 <div class="col-md-6"><label for="prod_name">Nome
                                     </label><input id="prod_name_create" name="prod_name" type="text"
-                                        class="form-control" autocomplete="off" required></div>
+                                        class="form-control uppercase" autocomplete="off" required></div>
                                 <div class="col-md-3 autocomplete"><label for="prod_brand">Marca </label><input
-                                        id="prod_brand_create" name="prod_brand" type="text" class="form-control"
-                                        autocomplete="off" required></div>
+                                        id="prod_brand_create" name="prod_brand" type="text"
+                                        class="form-control uppercase" autocomplete="off" required></div>
                                 <div class="col-md-3"><label for="prod_group">Grupo </label><input
-                                        id="prod_group_create" name="prod_group" type="text" class="form-control"
-                                        autocomplete="off" required></div>
+                                        id="prod_group_create" name="prod_group" type="text"
+                                        class="form-control uppercase" autocomplete="off" required></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3"><label for="prod_cost">Custo (R$) </label><input
@@ -157,7 +157,7 @@
                             <div class="row">
                                 <div class="col-md-12"><label for="prod_desc">Descrição </label><textarea rows="3"
                                         name="prod_desc" id="prod_desc_create" cols="30" rows="10"
-                                        class="form-control"></textarea></div>
+                                        class="form-control uppercase"></textarea></div>
                             </div>
                         </div>
                     </form>
@@ -195,13 +195,16 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6"><label for="prod_name">Nome </label><input id="prod_name"
-                                        name="prod_name" type="text" class="form-control" autocomplete="off" required>
+                                        name="prod_name" type="text" class="form-control uppercase" autocomplete="off"
+                                        required>
                                 </div>
                                 <div class="col-md-3"><label for="prod_brand">Marca </label><input id="prod_brand"
-                                        name="prod_brand" type="text" class="form-control" autocomplete="off" required>
+                                        name="prod_brand" type="text" class="form-control uppercase" autocomplete="off"
+                                        required>
                                 </div>
                                 <div class="col-md-3"><label for="prod_group">Grupo </label><input id="prod_group"
-                                        name="prod_group" type="text" class="form-control" autocomplete="off" required>
+                                        name="prod_group" type="text" class="form-control uppercase" autocomplete="off"
+                                        required>
                                 </div>
                             </div>
                             <div class="row">
@@ -225,7 +228,7 @@
                             <div class="row">
                                 <div class="col-md-12"><label for="prod_desc">Descrição </label><textarea rows="3"
                                         name="prod_desc" id="prod_desc" cols="30" rows="10"
-                                        class="form-control"></textarea></div>
+                                        class="form-control uppercase"></textarea></div>
                             </div>
                         </div>
                     </form>

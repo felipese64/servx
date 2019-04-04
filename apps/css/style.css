@@ -18,7 +18,7 @@ label{
     font-size: 0.9rem;
 }
 
-input, textarea{
+.uppercase{
 
     text-transform: uppercase;
 }

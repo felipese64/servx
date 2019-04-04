@@ -120,33 +120,67 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
+
+
+
+
+
+
+
+
+
+
                     <form id="form_create_user">
                         <div class="form-group">
-                            <br />
+
                             <div class="row">
-                                <div class="col-md-12"><label for="user_login_create">Nome
+                                <div class="col-md-6"><label for="user_login_create">Login
                                     </label><input id="user_login_create" name="user_login" type="text"
-                                        class="form-control" autocomplete="off" required></div>
+                                        class="form-control" autocomplete="off" required>
+                                </div>
+                                <div class="col-md-6"><label for="user_profile_create">Perfil </label> <select
+                                        class="form-control" id="user_profile_create" name="user_profile">
+                                        <option>admin</option>
+                                        <option>user</option>
+                                    </select>
+                                </div>
 
                             </div>
 
                             <div class="row">
 
-                                <div class="col-md-4"><label for="user_password_create">Tempo Estimado(Min)
-                                    </label><input id="user_password_create" name="user_password" type="text"
-                                        class="form-control" value="60">
+
+                                <div class="col-md-6"><label for="user_password_create">Senha</label><input
+                                        id="user_password_create" name="user_password" type="password"
+                                        class="form-control" autocomplete="off" required>
                                 </div>
-                                <div class="col-md-4"><label for="user_profile_create">Preço/Min(R$)
-                                    </label><input id="user_profile_create" name="user_profile" type="text"
-                                        class="form-control" value="1,00">
+
+                                <div class="col-md-6"><label for="user_password_confirmation_create">Senha (outra
+                                        vez)</label><input id="user_password_confirmation_create"
+                                        name="user_password_confirmation" type="password" class="form-control"
+                                        autocomplete="off" required>
                                 </div>
-                                <div class="col-md-4"></div>
+
 
                             </div>
+
 
 
                         </div>
                     </form>
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-danger mr-auto"
@@ -176,35 +210,39 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-2"><label for="user_id">ID </label><input id="user_id" name="user_id"
-                                        type="text" class="form-control" style="pointer-events: none;" readonly></div>
+                                        type="text" class="form-control" style="pointer-events: none" readonly></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6"><label for="user_login">Login
                                     </label><input id="user_login" name="user_login" type="text" class="form-control"
                                         autocomplete="off" required>
                                 </div>
-
+                                <div class="col-md-6"><label for="user_profile">Perfil </label> <select
+                                        class="form-control" id="user_profile" name="user_profile">
+                                        <option>admin</option>
+                                        <option>user</option>
+                                    </select>
+                                </div>
 
                             </div>
 
                             <div class="row">
 
 
-                                <div class="col-md-6"><label for="user_password">Senha</label><input id="user_password"
-                                        name="user_password" type="text" class="form-control">
+                                <div class="col-md-6"><label for="user_password">Nova Senha</label><input
+                                        id="user_password" name="user_password" type="password" class="form-control"
+                                        autocomplete="off" required>
+                                </div>
+
+                                <div class="col-md-6"><label for="user_password_confirmation">Nova Senha (outra
+                                        vez)</label><input id="user_password_confirmation"
+                                        name="user_password_confirmation" type="password" class="form-control"
+                                        autocomplete="off" required>
                                 </div>
 
 
                             </div>
 
-                            <div class="row">
-
-
-                                <div class="col-md-6"><label for="user_profile">Perfil </label><input id="user_profile"
-                                        name="user_profile" type="text" class="form-control">
-                                </div>
-
-                            </div>
 
 
                         </div>

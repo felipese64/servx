@@ -1,13 +1,10 @@
 <?php 
-
 class user
 {
-
     private $user_id;
     private $user_login;
     private $user_password;
-    private $user_profile; 
-
+    private $user_profile;
     /**
      * Get the value of user_id
      */
@@ -15,7 +12,6 @@ class user
     {
         return $this->user_id;
     }
-
     /**
      * Set the value of user_id
      *
@@ -24,10 +20,8 @@ class user
     public function setUser_id($user_id)
     {
         $this->user_id = $user_id;
-
         return $this;
     }
-
     /**
      * Get the value of user_login
      */
@@ -35,7 +29,6 @@ class user
     {
         return $this->user_login;
     }
-
     /**
      * Set the value of user_login
      *
@@ -44,10 +37,8 @@ class user
     public function setUser_login($user_login)
     {
         $this->user_login = $user_login;
-
         return $this;
     }
-
     /**
      * Get the value of user_password
      */
@@ -55,7 +46,6 @@ class user
     {
         return $this->user_password;
     }
-
     /**
      * Set the value of user_password
      *
@@ -64,10 +54,8 @@ class user
     public function setUser_password($user_password)
     {
         $this->user_password = $user_password;
-
         return $this;
     }
-
     /**
      * Get the value of user_profile
      */
@@ -75,7 +63,6 @@ class user
     {
         return $this->user_profile;
     }
-
     /**
      * Set the value of user_profile
      *
@@ -84,8 +71,6 @@ class user
     public function setUser_profile($user_profile)
     {
         $this->user_profile = $user_profile;
-
         return $this;
     }
 };
- 

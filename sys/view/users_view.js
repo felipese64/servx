@@ -38,8 +38,7 @@ $(document).ready(function () {
         var changed = false;
 
         user_row['user_id'] == $('#user_id').val() ? 0 : changed = true;
-        user_row['user_login'] == $('#user_login').val().toUpperCase() ? 0 : changed = true;
-        user_row['user_password'] == $('#user_password').val().toUpperCase() ? 0 : changed = true;
+        user_row['user_login'] == $('#user_login').val() ? 0 : changed = true;
         user_row['user_profile'] == $('#user_profile').val() ? 0 : changed = true;
 
         return changed;
@@ -120,11 +119,14 @@ $(document).ready(function () {
 
     function insert_data_on_modal_update_user(data) {
 
+        $('#user_password').val('');
+        $('#user_password_confirmation').val('');
+        document.getElementById("form_update_user").reset();
+
         var user_row = JSON.parse(data);
 
         $('#user_id').val(user_row['user_id']);
         $('#user_login').val(user_row['user_login']);
-        $('#user_password').val(user_row['user_password']);
         $('#user_profile').val(user_row['user_profile']);
 
     }
@@ -147,7 +149,7 @@ $(document).ready(function () {
 
                 var form_changed = form_update_user_changed(data);
 
-                if (form_changed && !$(modal_confirm_delete).hasClass('show')) {
+                if ((form_changed && !$(modal_confirm_delete).hasClass('show')) || $('#user_password').val()) {
 
                     send_form_update_user();
 
@@ -169,28 +171,13 @@ $(document).ready(function () {
 
     });
 
-    $("#modal_update_user").on('hide.bs.modal', function () {
+    // $("#modal_update_user").on('hide.bs.modal', function () {
 
-        var user_id = $('#user_id').val();
+    //     $('#user_password').val('');
+    //     $('#user_password_confirmation').val('');
+    //     document.getElementById("form_update_user").reset();
 
-        $.ajax({
-
-            url: '../controller/users/read_user.php',
-            method: 'post',
-            data: {
-                user_id: user_id
-            },
-            success: function (data) {
-
-                var form_changed = form_update_user_changed(data);
-
-                if (form_changed && !$(modal_confirm_delete).hasClass('show')) {
-
-                    $('#modal_confirm_update_user').modal('show');
-                }
-            }
-        });
-    });
+    // });
 
     function send_form_update_user() {
 
@@ -208,6 +195,9 @@ $(document).ready(function () {
                 $('#modal_update_user').modal('hide');
                 $('#modal_confirm_update_user').modal('hide');
                 $('#modal_update_user_success_message').modal('show');
+                $('#user_password').val('');
+                $('#user_password_confirmation').val('');
+                document.getElementById("form_update_user").reset();
 
             }
         });
@@ -235,10 +225,10 @@ $(document).ready(function () {
             success: function (data) {
 
                 var user_row = JSON.parse(data);
-                var selected_user_name = user_row['user_login'];
+                var selected_user_login = user_row['user_login'];
                 $('#txt_delete_user').text(
                     'Tem certeza que deseja excluir o usuário \"' +
-                    selected_user_name + '\"?');
+                    selected_user_login + '\"?');
 
             }
         });
@@ -278,34 +268,27 @@ $(document).ready(function () {
 
     //--------------------------------------------OTHERS----------------------------------------------------------
 
+    $("#user_login").attr("title", "De 5 a 15 caracteres alfanuméricos");
+    $("#user_password").attr("title", "De 5 a 15 caracteres alfanuméricos");
+    $("#user_password_confirmation").attr("title", "As duas senhas devem ser idênticas");
 
-    // $('#user_profile').mask('000.000,00', { reverse: true });
-    // $('#serv_price').mask('000.000,00', { reverse: true });
-    // $('#serv_ts').mask('0000');
+    $("#user_login").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{5,15}");
+    $("#user_password").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{5,15}");
+    $("#user_password").keyup(function () {
+        var pattern = this.value;
+        $("#user_password_confirmation").attr("pattern", pattern);
+    });
 
-    // $("#user_login").attr("title", "Até 60 caracteres alfanuméricos");
-    // $("#user_profile").attr("title", "Caracteres numéricos");
-    // $("#serv_ts").attr("title", "Caracteres numéricos");
-    // $("#serv_price").attr("title", "Caracteres numéricos");
+    $("#user_login_create").attr("title", "De 5 a 15 caracteres alfanuméricos");
+    $("#user_password_create").attr("title", "De 5 a 15 caracteres alfanuméricos");
+    $("#user_password_confirmation_create").attr("title", "As duas senhas devem ser idênticas");
 
-    // $("#user_login").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{1,60}");
-    // $("#user_profile").attr("pattern", "^((?!(^0\,00$)).)*$");
-    // $("#serv_ts").attr("pattern", "^((?!(^0$)).)*$");
-    // $("#serv_price").attr("pattern", "^((?!(^0\,00$)).)*$");
-
-    // $('#user_profile_create').mask('000.000,00', { reverse: true });
-    // $('#serv_price_create').mask('000.000,00', { reverse: true });
-    // $('#serv_ts_create').mask('0000');
-
-    // $("#user_login_create").attr("title", "Até 60 caracteres alfanuméricos");
-    // $("#user_profile_create").attr("title", "Caracteres numéricos");
-    // $("#serv_ts_create").attr("title", "Caracteres numéricos");
-    // $("#serv_price_create").attr("title", "Caracteres numéricos");
-
-    // $("#user_login_create").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{1,60}");
-    // $("#user_profile_create").attr("pattern", "^((?!(^0\,00$)).)*$");
-    // $("#serv_ts_create").attr("pattern", "^((?!(^0$)).)*$");
-    // $("#serv_price_create").attr("pattern", "^((?!(^0\,00$)).)*$");
+    $("#user_login_create").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{5,15}");
+    $("#user_password_create").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{5,15}");
+    $("#user_password_create").keyup(function () {
+        var pattern = this.value;
+        $("#user_password_confirmation_create").attr("pattern", pattern);
+    });
 
 
 });
