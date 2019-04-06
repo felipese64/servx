@@ -252,7 +252,7 @@
                     <form id="form_confirm_password">
                         <input id="user_id_confirm_password" name="user_id" type="hidden">
                         <label for="confirm_user_password">Senha</label><input type="password" class="form-control"
-                            name="user_password" id="confirm_user_password">
+                            name="user_password" id="confirm_user_password" required>
                     </form>
 
                 </div>

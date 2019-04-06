@@ -6,7 +6,7 @@
 @Versão: 1.0.0.
 @Autor: Felipe Eckert (felipesiec@gmail.com)
 Esse sistema contém diversas funcões. Entre elas:
-	01: CADASTRO DE USUÁRIOS.(EM ANDAMENTO)
+	01: CADASTRO DE USUÁRIOS.(CONCLUÍDO)
 	02: CADASTRO DE CLIENTES.(CONCLUÍDO)
 	03: CADASTRO DE PRODUTOS.(CONCLUÍDO)
 	04: CADASTRO DE SERVIÇOS.(CONCLUÍDO)

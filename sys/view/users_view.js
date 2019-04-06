@@ -103,77 +103,47 @@ $(document).ready(function () {
 
     });
 
-
-
-
-
-
-
     $('#form_confirm_password').on('submit', function (e) {
         e.preventDefault();
         var data = $("#form_confirm_password").serialize();
-        alert(data);
+        var user_id = $('#user_id_confirm_password').val();
 
         $.ajax({
 
             url: '../controller/users/confirm_user.php',
             method: 'post',
-            data: {
-                data: data
-            },
+            data: data,
             success: function (data) {
 
-                alert(data);
+                if (data == true) {
+                    show_modal_update_user(user_id);
+                } else {
+                    document.getElementById("confirm_user_password").setCustomValidity("Senha Incorreta");
+                    document.getElementById("confirm_user_password").reportValidity();
+                }
+            }
+        });
+    });
 
+
+    function show_modal_update_user(user_id) {
+
+        $.ajax({
+
+            url: '../controller/users/read_user.php',
+            method: 'post',
+            data: {
+                user_id: user_id
+            },
+            success: function (data) {
+                $('#modal_confirm_password').modal('hide');
+                insert_data_on_modal_update_user(data);
+                $('#modal_update_user').modal('show');
 
             }
         });
 
-
-
-
-
-
-        // $.ajax({
-
-        //     url: '../controller/users/read_user.php',
-        //     method: 'post',
-        //     data: {
-        //         user_id: user_id
-        //     },
-        //     success: function (data) {
-
-        //         insert_data_on_modal_update_user(data);
-        //         $('#modal_update_user').modal('show');
-
-        //     }
-        // });
-
-
-
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
     function insert_data_on_modal_update_user(data) {
@@ -189,6 +159,11 @@ $(document).ready(function () {
         $('#user_profile').val(user_row['user_profile']);
 
     }
+
+    $('#modal_confirm_password').on('hide.bs.modal', function () {
+        document.getElementById("form_confirm_password").reset();
+    });
+
 
     //--------------------------------------------UPDATE----------------------------------------------------------
 
@@ -217,27 +192,6 @@ $(document).ready(function () {
         });
     });
 
-
-    // $('#btn_confirm_user_update').click(function () {
-
-    //     form = document.getElementById("form_update_user");
-
-    //     if (!form.reportValidity()) {
-
-    //         $('#modal_update_user').modal('show');
-    //         $('#modal_confirm_update_user').modal('hide');
-    //     }
-
-    // });
-
-    // $("#modal_update_user").on('hide.bs.modal', function () {
-
-    //     $('#user_password').val('');
-    //     $('#user_password_confirmation').val('');
-    //     document.getElementById("form_update_user").reset();
-
-    // });
-
     function send_form_update_user() {
 
         var data = $("#form_update_user").serialize();
@@ -252,7 +206,6 @@ $(document).ready(function () {
 
                 $('#list-users').DataTable().ajax.reload();
                 $('#modal_update_user').modal('hide');
-                //$('#modal_confirm_update_user').modal('hide');
                 $('#modal_update_user_success_message').modal('show');
                 $('#user_password').val('');
                 $('#user_password_confirmation').val('');
@@ -265,7 +218,6 @@ $(document).ready(function () {
 
     enter_to_send_form('modal_update_user', 'btn_update_user');
     enter_to_send_form('modal_update_user_success_message', 'modal_close_update_user_success_message');
-    //enter_to_send_form('modal_confirm_update_user', 'btn_confirm_user_update');
 
     //--------------------------------------------DELETE----------------------------------------------------------
 
@@ -329,10 +281,15 @@ $(document).ready(function () {
 
     $("#user_login").attr("title", "De 5 a 15 caracteres alfanuméricos");
     $("#user_password").attr("title", "De 5 a 15 caracteres alfanuméricos");
+    $("#user_password").attr("title", "De 5 a 15 caracteres alfanuméricos");
     $("#user_password_confirmation").attr("title", "As duas senhas devem ser idênticas");
+    $("#confirm_user_password").keydown(function () {
+        document.getElementById("confirm_user_password").setCustomValidity("");
+    });
 
     $("#user_login").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{5,15}");
     $("#user_password").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{5,15}");
+    $("#confirm_user_password").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{5,15}");
     $("#user_password").keyup(function () {
         var pattern = this.value;
         $("#user_password_confirmation").attr("pattern", pattern);
@@ -348,6 +305,4 @@ $(document).ready(function () {
         var pattern = this.value;
         $("#user_password_confirmation_create").attr("pattern", pattern);
     });
-
-
 });
