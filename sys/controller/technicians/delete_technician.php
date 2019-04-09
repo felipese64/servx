@@ -1,13 +1,11 @@
-<?php 
+<?php
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/lib/db.class.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/dao/Services_dao.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/model/Service.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/dao/Technicians_dao.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/model/Technician.php');
 
-$serv_id = $_POST['serv_id'];
-$service = new Service();
-$servicesDao = new Services_dao();
-$service->setServ_id($serv_id);
-$servicesDao->deleteService($service);
-
-?>
+$technician_id = $_POST['technician_id'];
+$technician = new Technician();
+$techniciansDao = new Technicians_dao();
+$technician->setTechnician_id($technician_id);
+$techniciansDao->deleteTechnician($technician);

@@ -72,7 +72,7 @@
                         <a class="nav-link" href="services_view.php" role="button">Serviços</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">Técnicos</a>
+                        <a class="nav-link" href="technicians_view.php" role="button">Técnicos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="users_view.php" role="button">Usuários</a>

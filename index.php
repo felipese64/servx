@@ -57,7 +57,7 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">Técnicos</a>
+                        <a class="nav-link" href="sys\view\technicians_view.php" role="button">Técnicos</a>
                     </li>
 
 
@@ -124,7 +124,7 @@
             </div>
 
             <div class="col-sm-2">
-                <a href="#">
+                <a href="sys\view\technicians_view.php">
                     <div class="panel_button">
                         <h2 class="fas fa-toolbox"></h2><br />
                         <h2 class="icon_description">Técnicos</h2>

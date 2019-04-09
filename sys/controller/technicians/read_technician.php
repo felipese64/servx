@@ -1,23 +1,19 @@
-<?php 
+<?php
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/lib/db.class.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/dao/Services_dao.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/model/Service.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/dao/Technicians_dao.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/model/Technician.php');
 
-$serv_id = $_POST['serv_id'];
-$service = new Service();
-$servicesDao = new Services_dao();
+$technician_id = $_POST['technician_id'];
+$technician = new Technician();
+$techniciansDao = new Technicians_dao();
 
-$service->setServ_id($serv_id);
-$service = $servicesDao->readService($service);
+$technician->setTechnician_id($technician_id);
+$technician = $techniciansDao->readTechnician($technician);
 
-$serv_array['serv_id'] = $service->getServ_id();
-$serv_array['serv_name'] = $service->getServ_name();
-$serv_array['serv_desc'] = $service->getServ_desc();
-$serv_array['serv_ts'] = $service->getServ_ts();
-$serv_array['serv_ts_price'] = number_format($service->getServ_ts_price(), 2, ',', '.');
-$serv_array['serv_price'] = number_format($service->getServ_price(), 2, ',', '.');
+$technician_array['technician_id'] = $technician->getTechnician_id();
+$technician_array['technician_name'] = $technician->getTechnician_name();
+$technician_registry_date = strtotime($technician->getTechnician_registry_date());
+$technician_array['technician_registry_date'] = date('d-m-Y', $technician_registry_date);
 
-echo json_encode($serv_array);
-
- 
+echo json_encode($technician_array);
