@@ -37,7 +37,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">OS</a>
+                        <a class="nav-link" href="sys\view\os_view.php" role="button">OS</a>
                     </li>
 
 
@@ -87,7 +87,7 @@
 
 
             <div class="col-sm-2">
-                <a href="#">
+                <a href="sys\view\os_view.php">
                     <div class="panel_button">
                         <h2 class="fas fa-file-alt"></h2><br />
                         <h2 class="icon_description">OS</h2>

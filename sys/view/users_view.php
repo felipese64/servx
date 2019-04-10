@@ -60,7 +60,7 @@
                         <a class="nav-link" href="../../index.php">Início<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">OS</a>
+                        <a class="nav-link" href="os_view.php" role="button">OS</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="customers_view.php" role="button">Clientes</a>

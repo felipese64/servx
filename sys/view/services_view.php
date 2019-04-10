@@ -9,7 +9,8 @@
     <link href="../../apps/css/autocomplete.css" rel="stylesheet">
     <link href="../../apps/css/datatable-custom.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <link href="../../apps/css/style.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js">
@@ -47,7 +48,8 @@
 
             <h1 class="logo">Serv<span class="x_logo">X</span></h1>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -58,7 +60,7 @@
                         <a class="nav-link" href="../../index.php">Início<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">OS</a>
+                        <a class="nav-link" href="os_view.php" role="button">OS</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="customers_view.php" role="button">Clientes</a>
@@ -109,7 +111,8 @@
     </div>
 
     <!-- Modal Create service -->
-    <div class="modal" id="modal_create_service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal" id="modal_create_service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -123,31 +126,40 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-12"><label for="serv_name_create">Nome
-                                    </label><input id="serv_name_create" name="serv_name" type="text" class="form-control uppercase" autocomplete="off" required></div>
+                                    </label><input id="serv_name_create" name="serv_name" type="text"
+                                        class="form-control uppercase" autocomplete="off" required></div>
 
                             </div>
 
                             <div class="row">
 
                                 <div class="col-md-4"><label for="serv_ts_create">Tempo Estimado(Min)
-                                    </label><input id="serv_ts_create" name="serv_ts" type="text" class="form-control" value="60">
+                                    </label><input id="serv_ts_create" name="serv_ts" type="text" class="form-control"
+                                        value="60">
                                 </div>
                                 <div class="col-md-4"><label for="serv_ts_price_create">Preço/Min(R$)
-                                    </label><input id="serv_ts_price_create" name="serv_ts_price" type="text" class="form-control" value="1,00">
+                                    </label><input id="serv_ts_price_create" name="serv_ts_price" type="text"
+                                        class="form-control" value="1,00">
                                 </div>
-                                <div class="col-md-4"><label for="serv_price_create">Preço(R$) </label><input id="serv_price_create" name="serv_price" type="text" class="form-control" value="0,00"></div>
+                                <div class="col-md-4"><label for="serv_price_create">Preço(R$) </label><input
+                                        id="serv_price_create" name="serv_price" type="text" class="form-control"
+                                        value="0,00"></div>
 
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12"><label for="serv_desc_create">Descrição </label><textarea rows="3" name="serv_desc" id="serv_desc_create" cols="30" rows="10" class="form-control uppercase" autocomplete="off"></textarea></div>
+                                <div class="col-md-12"><label for="serv_desc_create">Descrição </label><textarea
+                                        rows="3" name="serv_desc" id="serv_desc_create" cols="30" rows="10"
+                                        class="form-control uppercase" autocomplete="off"></textarea></div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-danger mr-auto" id="btn_exit_creating_service">Sair</button>
-                    <button type="submit" form="form_create_service" class="btn btn-primary" id="btn_create_service">Salvar</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger mr-auto"
+                        id="btn_exit_creating_service">Sair</button>
+                    <button type="submit" form="form_create_service" class="btn btn-primary"
+                        id="btn_create_service">Salvar</button>
                 </div>
             </div>
         </div>
@@ -155,12 +167,14 @@
     <!-- /Modal Create service -->
 
     <!-- Modal Update service -->
-    <div class="modal" id="modal_update_service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal" id="modal_update_service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Editar</h5>
-                    <button type="button" class="close" id="btn_close_service_update" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" id="btn_close_service_update" data-dismiss="modal"
+                        aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -168,11 +182,13 @@
                     <form id="form_update_service">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-2"><label for="serv_id">ID </label><input id="serv_id" name="serv_id" type="text" class="form-control" style="pointer-events: none;" readonly></div>
+                                <div class="col-md-2"><label for="serv_id">ID </label><input id="serv_id" name="serv_id"
+                                        type="text" class="form-control" style="pointer-events: none;" readonly></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12"><label for="serv_name">Nome
-                                    </label><input id="serv_name" name="serv_name" type="text" class="form-control uppercase" autocomplete="off" required>
+                                    </label><input id="serv_name" name="serv_name" type="text"
+                                        class="form-control uppercase" autocomplete="off" required>
                                 </div>
 
                             </div>
@@ -182,20 +198,25 @@
                                 <div class="col-md-4"><label for="serv_ts">Tempo Estimado(Min)
                                     </label><input id="serv_ts" name="serv_ts" type="text" class="form-control">
                                 </div>
-                                <div class="col-md-4"><label for="serv_ts_price">Preço/Min(R$) </label><input id="serv_ts_price" name="serv_ts_price" type="text" class="form-control">
+                                <div class="col-md-4"><label for="serv_ts_price">Preço/Min(R$) </label><input
+                                        id="serv_ts_price" name="serv_ts_price" type="text" class="form-control">
                                 </div>
-                                <div class="col-md-4"><label for="serv_price">Preço(R$) </label><input id="serv_price" name="serv_price" type="text" class="form-control"></div>
+                                <div class="col-md-4"><label for="serv_price">Preço(R$) </label><input id="serv_price"
+                                        name="serv_price" type="text" class="form-control"></div>
 
                             </div>
                             <div class="row">
-                                <div class="col-md-12"><label for="serv_desc">Descrição </label><textarea rows="3" name="serv_desc" id="serv_desc" cols="30" rows="10" class="form-control uppercase" autocomplete="off"></textarea></div>
+                                <div class="col-md-12"><label for="serv_desc">Descrição </label><textarea rows="3"
+                                        name="serv_desc" id="serv_desc" cols="30" rows="10"
+                                        class="form-control uppercase" autocomplete="off"></textarea></div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger mr-auto" id="btn_delete_service">Excluir</button>
-                    <button type="submit" form="form_update_service" class="btn btn-primary" id="btn_update_service">Salvar</button>
+                    <button type="submit" form="form_update_service" class="btn btn-primary"
+                        id="btn_update_service">Salvar</button>
                 </div>
             </div>
         </div>
@@ -208,7 +229,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Excluir Servico</h5>
-                    <button type="button" class="close btn_cancel_service_deletion" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close btn_cancel_service_deletion" data-dismiss="modal"
+                        aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -217,7 +239,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" id="btn_confirm_service_deletion">Excluir</button>
-                    <button type="button" class="btn btn-primary btn_cancel_service_deletion" data-dismiss="modal">Voltar</button>
+                    <button type="button" class="btn btn-primary btn_cancel_service_deletion"
+                        data-dismiss="modal">Voltar</button>
                 </div>
             </div>
         </div>
@@ -238,7 +261,8 @@
                     <p id="txt_update_service">Deseja salvar as alterações?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" form="form_update_service" class="btn btn-primary" id="btn_confirm_service_update">Salvar</button>
+                    <button type="submit" form="form_update_service" class="btn btn-primary"
+                        id="btn_confirm_service_update">Salvar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
                 </div>
             </div>
@@ -261,7 +285,8 @@
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary" id="modal_close_update_service_success_message" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="modal_close_update_service_success_message"
+                        data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
@@ -283,16 +308,19 @@
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary" id="modal_close_create_service_success_message" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="modal_close_create_service_success_message"
+                        data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- Modal Create service Success -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
     </script>
 
 </body>
