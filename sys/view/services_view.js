@@ -91,7 +91,6 @@ $(document).ready(function () {
     });
 
 
-    enter_to_send_form('modal_create_service', 'btn_create_service');
     enter_to_send_form('modal_create_service_success_message', 'modal_close_create_service_success_message');
 
 
@@ -217,7 +216,6 @@ $(document).ready(function () {
 
     }
 
-    enter_to_send_form('modal_update_service', 'btn_update_service');
     enter_to_send_form('modal_update_service_success_message', 'modal_close_update_service_success_message');
     enter_to_send_form('modal_confirm_update_service', 'btn_confirm_service_update');
 

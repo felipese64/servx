@@ -58,11 +58,21 @@ $(document).ready(function () {
             data: data,
             success: function (data) {
 
-                $('#list-users').DataTable().ajax.reload();
-                $('#modal_create_user').modal('hide');
-                $('#modal_create_user_success_message').modal('show');
-                clean_modal_create_user();
+                if (data) {
+                    var error = data;
+                    var regExp = /Duplicate entry/;
+                    var name_already_used = regExp.test(error);
+                    if (name_already_used) {
+                        alert("Não é possível cadastrar dois usuários com o mesmo nome.");
+                    }
 
+                } else {
+
+                    $('#list-users').DataTable().ajax.reload();
+                    $('#modal_create_user').modal('hide');
+                    $('#modal_create_user_success_message').modal('show');
+                    clean_modal_create_user();
+                }
             }
         });
 
@@ -88,7 +98,6 @@ $(document).ready(function () {
     });
 
 
-    enter_to_send_form('modal_create_user', 'btn_create_user');
     enter_to_send_form('modal_create_user_success_message', 'modal_close_create_user_success_message');
 
 
@@ -161,6 +170,7 @@ $(document).ready(function () {
     }
 
     $('#modal_confirm_password').on('hide.bs.modal', function () {
+        document.getElementById("confirm_user_password").setCustomValidity("");
         document.getElementById("form_confirm_password").reset();
     });
 
@@ -204,19 +214,28 @@ $(document).ready(function () {
 
             success: function (data) {
 
-                $('#list-users').DataTable().ajax.reload();
-                $('#modal_update_user').modal('hide');
-                $('#modal_update_user_success_message').modal('show');
-                $('#user_password').val('');
-                $('#user_password_confirmation').val('');
-                document.getElementById("form_update_user").reset();
+                if (data) {
+                    var error = data;
+                    var regExp = /Duplicate entry/;
+                    var name_already_used = regExp.test(error);
+                    if (name_already_used) {
+                        alert("Não é possível cadastrar dois usuários com o mesmo nome.");
+                    }
 
+                } else {
+
+                    $('#list-users').DataTable().ajax.reload();
+                    $('#modal_update_user').modal('hide');
+                    $('#modal_update_user_success_message').modal('show');
+                    $('#user_password').val('');
+                    $('#user_password_confirmation').val('');
+                    document.getElementById("form_update_user").reset();
+                }
             }
         });
 
     }
 
-    enter_to_send_form('modal_update_user', 'btn_update_user');
     enter_to_send_form('modal_update_user_success_message', 'modal_close_update_user_success_message');
 
     //--------------------------------------------DELETE----------------------------------------------------------

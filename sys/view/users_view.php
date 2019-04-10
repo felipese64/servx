@@ -68,13 +68,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="products_view.php" role="button">Produtos</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="services_view.php" role="button">Serviços</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="technicians_view.php" role="button">Técnicos</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="users_view.php" role="button">Usuários</a>
                     </li>
                     <li class="nav-item">

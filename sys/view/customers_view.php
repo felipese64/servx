@@ -179,7 +179,7 @@
                                     </label><input id="customer_address_number_create" name="customer_address_number"
                                         type="text" class="form-control" required>
                                 </div>
-                                <div class="col-md-2"><label for="customer_zone_create">Bairro </label><input
+                                <div class="col-md-3"><label for="customer_zone_create">Bairro </label><input
                                         id="customer_zone_create" name="customer_zone" type="text"
                                         class="form-control uppercase" autocomplete="off" required>
                                 </div>
@@ -203,7 +203,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6"><label for="customer_address_complements_create">Complemento
+                                <div class="col-md-7"><label for="customer_address_complements_create">Complemento
                                     </label><input id="customer_address_complements_create"
                                         name="customer_address_complements" type="text" class="form-control uppercase"
                                         autocomplete="off"></div>
@@ -308,7 +308,7 @@
                                 <div class="col-md-1"><label for="customer_address_number">Nº
                                     </label><input id="customer_address_number" name="customer_address_number"
                                         type="text" class="form-control" required></div>
-                                <div class="col-md-2"><label for="customer_zone">Bairro </label><input
+                                <div class="col-md-3"><label for="customer_zone">Bairro </label><input
                                         id="customer_zone" name="customer_zone" type="text"
                                         class="form-control uppercase" autocomplete="off" required>
                                 </div>
@@ -326,7 +326,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label for="customer_address_complements">Complemento
+                                <div class="col-md-7"><label for="customer_address_complements">Complemento
                                     </label><input id="customer_address_complements" name="customer_address_complements"
                                         type="text" class="form-control uppercase" autocomplete="off"></div>
 

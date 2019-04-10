@@ -12,6 +12,7 @@ class Technicians_dao
         $technician_name = $technician->getTechnician_name();
         $sql = "INSERT INTO `servx`.`tbtechnicians` (`technician_name`) VALUES ('$technician_name')";
         $rs = mysqli_query($link, $sql);
+        echo (mysqli_error($link));
     }
 
     public function readTechnician(Technician $technician)
@@ -42,6 +43,7 @@ class Technicians_dao
 
         $sql = "UPDATE `servx`.`tbtechnicians` SET `technician_name`= '$technician_name', `technician_registry_date`= '$technician_registry_date' WHERE `technician_id`='$technician_id'";
         $rs = mysqli_query($link, $sql);
+        echo (mysqli_error($link));
     }
 
 

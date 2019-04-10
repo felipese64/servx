@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/lib/db.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/model/User.php');
 class Users_dao
@@ -18,6 +18,7 @@ class Users_dao
         $sql = "INSERT INTO `servx`.`tbusers` (`user_login`, `user_password`, `user_profile`) VALUES ('$user_login', '$user_password', '$user_profile')";
 
         $rs = mysqli_query($link, $sql);
+        echo (mysqli_error($link));
     }
 
     public function readUser(User $user)
@@ -50,6 +51,7 @@ class Users_dao
 
         $sql = "UPDATE `servx`.`tbusers` SET `user_login`= '$user_login', `user_password`= '$user_password', `user_profile`= '$user_profile' WHERE `user_id`='$user_id'";
         $rs = mysqli_query($link, $sql);
+        echo (mysqli_error($link));
     }
 
 
@@ -63,4 +65,3 @@ class Users_dao
         $rs = mysqli_query($link, $sql);
     }
 };
- 

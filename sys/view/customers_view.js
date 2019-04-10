@@ -143,7 +143,6 @@ $(document).ready(function () {
 
     });
 
-    enter_to_send_form('modal_create_customer', 'btn_create_customer');
     enter_to_send_form('modal_create_customer_success_message', 'modal_close_create_customer_success_message');
 
 
@@ -320,7 +319,6 @@ $(document).ready(function () {
 
     };
 
-    enter_to_send_form('modal_update_customer', 'btn_update_customer');
     enter_to_send_form('modal_update_customer_success_message', 'modal_close_update_customer_success_message');
     enter_to_send_form('modal_confirm_update_customer', 'btn_confirm_customer_update');
 

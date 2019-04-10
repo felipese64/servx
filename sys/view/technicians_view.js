@@ -58,11 +58,21 @@ $(document).ready(function () {
             data: data,
             success: function (data) {
 
-                $('#list-technicians').DataTable().ajax.reload();
-                $('#modal_create_technician').modal('hide');
-                $('#modal_create_technician_success_message').modal('show');
-                clean_modal_create_technician();
+                if (data) {
+                    var error = data;
+                    var regExp = /Duplicate entry/;
+                    var name_already_used = regExp.test(error);
+                    if (name_already_used) {
+                        alert("Não é possível cadastrar dois técnicos com o mesmo nome.");
+                    }
 
+                } else {
+
+                    $('#list-technicians').DataTable().ajax.reload();
+                    $('#modal_create_technician').modal('hide');
+                    $('#modal_create_technician_success_message').modal('show');
+                    clean_modal_create_technician();
+                }
             }
         });
 
@@ -88,7 +98,6 @@ $(document).ready(function () {
     });
 
 
-    enter_to_send_form('modal_create_technician', 'btn_create_technician');
     enter_to_send_form('modal_create_technician_success_message', 'modal_close_create_technician_success_message');
 
 
@@ -201,17 +210,26 @@ $(document).ready(function () {
 
             success: function (data) {
 
-                $('#list-technicians').DataTable().ajax.reload();
-                $('#modal_update_technician').modal('hide');
-                $('#modal_confirm_update_technician').modal('hide');
-                $('#modal_update_technician_success_message').modal('show');
+                if (data) {
+                    var error = data;
+                    var regExp = /Duplicate entry/;
+                    var name_already_used = regExp.test(error);
+                    if (name_already_used) {
+                        alert("Não é possível cadastrar dois técnicos com o mesmo nome.");
+                    }
 
+                } else {
+
+                    $('#list-technicians').DataTable().ajax.reload();
+                    $('#modal_update_technician').modal('hide');
+                    $('#modal_confirm_update_technician').modal('hide');
+                    $('#modal_update_technician_success_message').modal('show');
+                }
             }
         });
 
     }
 
-    enter_to_send_form('modal_update_technician', 'btn_update_technician');
     enter_to_send_form('modal_update_technician_success_message', 'modal_close_update_technician_success_message');
     enter_to_send_form('modal_confirm_update_technician', 'btn_confirm_technician_update');
 
@@ -275,35 +293,10 @@ $(document).ready(function () {
 
     //--------------------------------------------OTHERS----------------------------------------------------------
 
-
-
-    // $('#serv_ts_price').mask('000.000,00', { reverse: true });
-    // $('#serv_price').mask('000.000,00', { reverse: true });
-    // $('#serv_ts').mask('0000');
-
-    // $("#technician_name").attr("title", "Até 60 caracteres alfanuméricos");
-    // $("#serv_ts_price").attr("title", "Caracteres numéricos");
-    // $("#serv_ts").attr("title", "Caracteres numéricos");
-    // $("#serv_price").attr("title", "Caracteres numéricos");
-
-    // $("#technician_name").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{1,60}");
-    // $("#serv_ts_price").attr("pattern", "^((?!(^0\,00$)).)*$");
-    // $("#serv_ts").attr("pattern", "^((?!(^0$)).)*$");
-    // $("#serv_price").attr("pattern", "^((?!(^0\,00$)).)*$");
-
-    // $('#serv_ts_price_create').mask('000.000,00', { reverse: true });
-    // $('#serv_price_create').mask('000.000,00', { reverse: true });
-    // $('#serv_ts_create').mask('0000');
-
-    // $("#technician_name_create").attr("title", "Até 60 caracteres alfanuméricos");
-    // $("#serv_ts_price_create").attr("title", "Caracteres numéricos");
-    // $("#serv_ts_create").attr("title", "Caracteres numéricos");
-    // $("#serv_price_create").attr("title", "Caracteres numéricos");
-
-    // $("#technician_name_create").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{1,60}");
-    // $("#serv_ts_price_create").attr("pattern", "^((?!(^0\,00$)).)*$");
-    // $("#serv_ts_create").attr("pattern", "^((?!(^0$)).)*$");
-    // $("#serv_price_create").attr("pattern", "^((?!(^0\,00$)).)*$");
+    $("#technician_name").attr("title", "Até 30 caracteres alfanuméricos");
+    $("#technician_name").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{1,30}");
+    $("#technician_name_create").attr("title", "Até 30 caracteres alfanuméricos");
+    $("#technician_name_create").attr("pattern", "[A-Za-zÀ-ú0-9-.,_ ]{1,30}");
 
     clean_modal_create_technician();
 

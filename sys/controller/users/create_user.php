@@ -10,4 +10,4 @@ $usersDao = new Users_dao();
 $user->setUser_login($_POST['user_login']);
 $user->setUser_password(password_hash($_POST['user_password'], PASSWORD_DEFAULT));
 $user->setUser_profile($_POST['user_profile']);
-$usersDao->createUser($user);
+echo $usersDao->createUser($user);

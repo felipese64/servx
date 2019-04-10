@@ -8,4 +8,4 @@ $technician = new Technician();
 $techniciansDao = new Technicians_dao();
 
 $technician->setTechnician_name((mb_strtoupper($_POST['technician_name'], 'UTF-8')));
-$techniciansDao->createTechnician($technician);
+echo $techniciansDao->createTechnician($technician);
