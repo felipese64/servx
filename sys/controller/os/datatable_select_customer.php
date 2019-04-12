@@ -1,6 +1,7 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/lib/db.class.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/servx/sys/lib/functions.php');
 
 $objDb = new db();
 $link = $objDb->mysql_connect();
@@ -11,25 +12,25 @@ $requestData = $_REQUEST;
 //Indice da coluna na tabela visualizar resultado => nome da coluna no banco de dados
 $columns = array(
 
-    0 => 'os_id',
-    1 => 'os_date',
-    2 => 'os_status',
-    3 => 'customer_name',
-    4 => 'customer_address'
+    0 => 'customer_id',
+    1 => 'customer_name',
+    2 => 'customer_address',
+    3 => 'customer_telephone',
+    4 => 'customer_cellphone',
 );
 
 //Obtendo registros de número total sem qualquer pesquisa
-$sql = "select * from tbos as os join tbcustomers as cust where os.customer_id = cust.customer_id;";
+$sql = "SELECT * FROM tbcustomers";
 $tb_results = mysqli_query($link, $sql);
 $rows_number = mysqli_num_rows($tb_results);
 
 //Obter os dados a serem apresentados
-$search_result = "select * from tbos as os join tbcustomers as cust where os.customer_id = cust.customer_id and 1=1";
+$search_result = "SELECT * FROM tbcustomers WHERE 1=1";
 if (!empty($requestData['search']['value'])) {   // se houver um parâmetro de pesquisa, $requestData['search']['value'] contém o parâmetro de pesquisa
-    $search_result .= " AND ( os_date LIKE '%" . $requestData['search']['value'] . "%' ";
-    $search_result .= " OR os_status LIKE '%" . $requestData['search']['value'] . "%' ";
-    $search_result .= " OR customer_name LIKE '%" . $requestData['search']['value'] . "%' ";
-    $search_result .= " OR customer_address LIKE '%" . $requestData['search']['value'] . "%' )";
+    $search_result .= " AND ( customer_name LIKE '%" . $requestData['search']['value'] . "%' ";
+    $search_result .= " OR customer_address LIKE '%" . $requestData['search']['value'] . "%' ";
+    $search_result .= " OR customer_telephone LIKE '%" . $requestData['search']['value'] . "%' ";
+    $search_result .= " OR customer_cellphone LIKE '%" . $requestData['search']['value'] . "%' )";
 }
 
 $rs = mysqli_query($link, $search_result);
@@ -42,12 +43,12 @@ $rs = mysqli_query($link, $search_result);
 $tb_data = array();
 while ($tb_row = mysqli_fetch_array($rs)) {
     $data = array();
-    $data[] = $tb_row["os_id"];
-    $os_registry_date = strtotime($tb_row["os_date"]);
-    $data[] = date('d-m-Y', $os_registry_date);
-    $data[] = $tb_row["os_status"];
+    $data[] = $tb_row["customer_id"];
     $data[] = $tb_row["customer_name"];
     $data[] = $tb_row["customer_address"];
+    $data[] = mask($tb_row["customer_telephone"], "(##) ####-####");
+    $data[] = mask($tb_row["customer_cellphone"], "(##) #####-####");
+
     $tb_data[] = $data;
 }
 

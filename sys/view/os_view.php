@@ -1,4 +1,4 @@
-<?php; ?>
+<? php; ?>
 <!doctype html>
 <html lang="pt-br">
 
@@ -86,31 +86,32 @@
         </div>
     </nav>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="panel_title">Ordens de Serviço</h1>
+    <div id="os_view_content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="panel_title">Ordens de Serviço</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="table_panel">
+                <table id="list-os" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>OS</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Cliente</th>
+                            <th>Endereço</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_body"></tbody>
+                </table>
             </div>
         </div>
     </div>
-
-    <div class="container">
-        <div class="table_panel">
-            <table id="list-os" class="display" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>OS</th>
-                        <th>Data</th>
-                        <th>Status</th>
-                        <th>Cliente</th>
-                        <th>Endereço</th>
-                    </tr>
-                </thead>
-                <tbody id="table_body"></tbody>
-            </table>
-        </div>
-    </div>
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
         integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
