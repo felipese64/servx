@@ -20,12 +20,12 @@ $(document).ready(function () {
     function add_button_create_os() {
 
         $('#list-os_filter').prepend(
-            '<button type="button" class="btn btn-primary btn_open_create_modal" id="btn_open_create_os_modal">Abrir OS</button>'
+            '<button type="button" class="btn btn-primary btn_open_create_modal" id="btn_open_create_os">Abrir OS</button>'
         );
 
 
 
-        $('#btn_open_create_os_modal').click(function () {
+        $('#btn_open_create_os').click(function () {
 
             $("#os_view_content").load("os_select_customer_view.php", function () {
                 load_select_customer_section();
@@ -59,7 +59,7 @@ $(document).ready(function () {
         function add_button_exit_select_customer() {
 
             $('#select-customer_filter').prepend(
-                '<button type="button" class="btn btn-primary" id="button_exit_select_customer">Voltar</button>'
+                '<button type="button" class="btn btn-primary btn_open_create_modal" id="button_exit_select_customer">Voltar</button>'
             );
 
             $('#button_exit_select_customer').click(function () {
@@ -80,9 +80,16 @@ $(document).ready(function () {
 
 
 
-            alert('customer_id=' + customer_id)
+            //alert('customer_id=' + customer_id)
             //agora cria uma os e preenche uma tela
             //como enviar o id? nao enviar. faz o request e so manda os dados
+            //create OS
+            //load form OS com dados do ID X
+            //window.location = "os_create_view.php";
+            $("#os_view_content").load("os_create_view.php", function () {
+                $('#customer_name').val(customer_id);
+            });
+            //customer_name
 
             // $.ajax({
 
@@ -116,6 +123,10 @@ $(document).ready(function () {
 
 
         alert('os_id=' + os_id)
+
+
+
+
 
         // $.ajax({
 
